@@ -17,17 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>归档: 2019/2 | maple</title>
-  <meta name="keywords" content="JAVA">
-<meta property="og:type" content="website">
-<meta property="og:title" content="maple博客">
-<meta property="og:url" content="https://conjurermaple.github.io/archives/2019/02/index.html">
+  <title>深入Spring笔记(一) | maple</title>
+  <meta name="description" content="Spring特征1、轻量级：可以实现零配置开发、API使用简单 2、面向Bean：只需要编写非常普通的bean、不需要去实现接口或者继承一个类 3、松耦合：充分利用AOP思想，可以先自己开发自己的，后面再进行结合 4、无缝集成其他主流框架，如Mybatis、Hibernate 5、Spring中运用了很多设计模式，将他们运用的淋漓尽致 Spring为什么会存在简化开发是Spring的宗旨  采取了">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入Spring笔记(一)">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/02/24/深入Spring-一/index.html">
 <meta property="og:site_name" content="maple博客">
+<meta property="og:description" content="Spring特征1、轻量级：可以实现零配置开发、API使用简单 2、面向Bean：只需要编写非常普通的bean、不需要去实现接口或者继承一个类 3、松耦合：充分利用AOP思想，可以先自己开发自己的，后面再进行结合 4、无缝集成其他主流框架，如Mybatis、Hibernate 5、Spring中运用了很多设计模式，将他们运用的淋漓尽致 Spring为什么会存在简化开发是Spring的宗旨  采取了">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-24T12:22:53.757Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="maple博客">
+<meta name="twitter:title" content="深入Spring笔记(一)">
+<meta name="twitter:description" content="Spring特征1、轻量级：可以实现零配置开发、API使用简单 2、面向Bean：只需要编写非常普通的bean、不需要去实现接口或者继承一个类 3、松耦合：充分利用AOP思想，可以先自己开发自己的，后面再进行结合 4、无缝集成其他主流框架，如Mybatis、Hibernate 5、Spring中运用了很多设计模式，将他们运用的淋漓尽致 Spring为什么会存在简化开发是Spring的宗旨  采取了">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/archives/2019/02/index.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/02/24/深入Spring-一/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -332,99 +336,228 @@
 
   
   
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring特征"><span class="toc-number">1.</span> <span class="toc-text">Spring特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring为什么会存在"><span class="toc-number">2.</span> <span class="toc-text">Spring为什么会存在</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring核心概念"><span class="toc-number">3.</span> <span class="toc-text">Spring核心概念</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
 <main class="main" role="main">
-  	<article class="content article article-archives article-type-list" itemscope>
-	    <header class="article-header">
-	      <h1 itemprop="title">归档: 2019/2</h1>
-	      <p class="text-muted">共 6 篇文章</p>
-	    </header>
-	    <div class="article-body">
-	      
+  <div class="content">
+  <article id="post-深入Spring-一" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
   
+    <h1 class="article-title" itemprop="name">
+      深入Spring笔记(一)
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/02/24/深入Spring-一/" class="article-date">
+	  <time datetime="2019-02-24T12:15:09.000Z" itemprop="datePublished">2019-02-24</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Spring/">Spring</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Spring/">Spring</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/02/24/深入Spring-一/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="Spring特征"><a href="#Spring特征" class="headerlink" title="Spring特征"></a>Spring特征</h3><pre><code>1、轻量级：可以实现零配置开发、API使用简单
+2、面向Bean：只需要编写非常普通的bean、不需要去实现接口或者继承一个类
+3、松耦合：充分利用AOP思想，可以先自己开发自己的，后面再进行结合
+4、无缝集成其他主流框架，如Mybatis、Hibernate
+5、Spring中运用了很多设计模式，将他们运用的淋漓尽致
+</code></pre><h3 id="Spring为什么会存在"><a href="#Spring为什么会存在" class="headerlink" title="Spring为什么会存在"></a>Spring为什么会存在</h3><pre><code>简化开发是Spring的宗旨
+
+采取了以下策略：
+    1、基于POJO的轻量级和最小侵入性（代码嵌套引用）编程
+    2、通过依赖注入和面向接口松耦合
+    3、基于切面和惯性进行声明式编程
+    4、通过切面和模板减少样板式代码
+</code></pre><h3 id="Spring核心概念"><a href="#Spring核心概念" class="headerlink" title="Spring核心概念"></a>Spring核心概念</h3><pre><code>1、控制反转
+    传统方式是需要手动去new对象，有了spring只需要在类中声明成员变量，实例化交给spring去做
+2、IOC容器
+    用来装bean的，创建bean后，存入IOC容器管理
+3、依赖注入
+    前提：创建bean并且放入IOC容器；即依赖注入依赖于IOC容器
+    用到对象时，比如调用方法，spring会将创建的bean注入到声明的成员变量
+    对象与对象之间的依赖关系
+
+    注入方式：
+            set注入
+            自动注入
+                @Autowired按类型注入
+                @Autowired按名称注入
+            构造注入
+
+4、面向切面（AOP）
+    先把一个模块拆了，分别开发，发布的时候，再组装运行
+    一个切面就是一个规则
+    主要就是指定规则（对接的规则）
+</code></pre>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://conjurermaple.github.io/2019/02/24/深入Spring-一/" title="深入Spring笔记(一)" target="_blank" rel="external">https://conjurermaple.github.io/2019/02/24/深入Spring-一/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://conjurermaple.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://conjurermaple.github.io/" target="_blank"><span class="text-dark">maple</span><small class="ml-1x">Java &amp; Other</small></a></h3>
+        <div>拼命努力的人，生活不会辜负你。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
   
     
+  <section id="comments">
+  	
+           
     
-      
-      
-      <section class="panel panel-default b-no">
-        <div class="panel-heading" role="tab">
-          <h3 class="panel-title">
-            <a data-toggle="collapse" href="#collapse2019" aria-expanded="true">
-              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
-              2019
-            </a>
-            <!-- <a href="/archives/2019" class="archive-year">2019</a> -->
-          </h3>
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2019/02/24/Jquery-Ajax-Servlet实现省市二级联动/" title="Jquery+Ajax+Servlet实现省市二级联动"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div id="collapse2019" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2019">
-        <div class="panel-body">
-          <div class="collection">
-    
-    
-<a href="/2019/02/24/深入Spring-一/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-02-24T12:15:09.000Z" itemprop="datePublished">2019-02-24</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 深入Spring笔记(一)
-</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-  
-    
-    
-    
-<a href="/2019/02/24/Jquery-Ajax-Servlet实现省市二级联动/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-02-24T10:19:27.000Z" itemprop="datePublished">2019-02-24</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Jquery+Ajax+Servlet实现省市二级联动
-</a>
 
-
-  
-    
-    
-    
-<a href="/2019/02/24/Jquery核心操作/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-02-24T01:52:48.000Z" itemprop="datePublished">2019-02-24</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Jquery核心操作
-</a>
-
-
-  
-    
-    
-    
-<a href="/2019/02/23/Ajax结合json案例学习/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-02-23T12:07:14.000Z" itemprop="datePublished">2019-02-23</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Ajax结合json案例学习
-</a>
-
-
-  
-    
-    
-    
-<a href="/2019/02/22/JDK原生API解析XML/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-02-22T05:50:31.000Z" itemprop="datePublished">2019-02-22</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> JDK原生API解析XML
-</a>
-
-
-  
-    
-    
-    
-<a href="/2019/02/22/Dom4j解析XML/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2019-02-22T05:14:50.000Z" itemprop="datePublished">2019-02-22</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Dom4j解析XML
-</a>
-
-
-  
-  
-    </div></div></div></section>
-  
-
-	    </div>
-  	</article>
-  	 	
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -479,6 +612,33 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '383f19b856237c034a38',
+    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
+    repo: 'conjurermaple.github.io',
+    owner: 'ConjurerMaple',
+    admin: ['ConjurerMaple'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
 
 
 
