@@ -17,24 +17,23 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Dom4j解析XML | maple</title>
-  <meta name="description" content="加入dom4j包  12345678910/**	 * @throws Exception	 * 获取Document	 */	@Test	public void test1() throws Exception &amp;#123;		SAXReader reader = new SAXReader();		Document document = reader.read(file);		System.o">
-<meta name="keywords" content="JAVA">
+  <title>Easyui学习笔记(一) | maple</title>
+  <meta name="description" content="EasyUI认识(1)    是一组基于jQuery的UI插件集合;(2)    而jQuery EasyUI的目标就是帮助web开发者更轻松的打造出功能丰富并且美观的UI界面。(3)    学习的时候，成本不大，知识点JS+HTML+CSS+jquery(4)    开发者不需要编写复杂的JavaScript，也不需要对css样式有深入的了解，开发者只有需要了解一些简单的html标签。(5)">
+<meta name="keywords" content="前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dom4j解析XML">
-<meta property="og:url" content="https://conjurermaple.github.io/2019/02/22/Dom4j解析XML/index.html">
+<meta property="og:title" content="Easyui学习笔记(一)">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/02/27/Easyui学习笔记-一/index.html">
 <meta property="og:site_name" content="maple博客">
-<meta property="og:description" content="加入dom4j包  12345678910/**	 * @throws Exception	 * 获取Document	 */	@Test	public void test1() throws Exception &amp;#123;		SAXReader reader = new SAXReader();		Document document = reader.read(file);		System.o">
+<meta property="og:description" content="EasyUI认识(1)    是一组基于jQuery的UI插件集合;(2)    而jQuery EasyUI的目标就是帮助web开发者更轻松的打造出功能丰富并且美观的UI界面。(3)    学习的时候，成本不大，知识点JS+HTML+CSS+jquery(4)    开发者不需要编写复杂的JavaScript，也不需要对css样式有深入的了解，开发者只有需要了解一些简单的html标签。(5)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://conjurermaple.github.io/2019/02/22/Dom4j解析XML/20181228130208300.png">
-<meta property="og:image" content="https://conjurermaple.github.io/2019/02/22/Dom4j解析XML/20181228125519619.png">
-<meta property="og:updated_time" content="2019-02-22T05:55:59.528Z">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/02/27/Easyui学习笔记-一/dir.png">
+<meta property="og:updated_time" content="2019-02-27T13:40:06.202Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dom4j解析XML">
-<meta name="twitter:description" content="加入dom4j包  12345678910/**	 * @throws Exception	 * 获取Document	 */	@Test	public void test1() throws Exception &amp;#123;		SAXReader reader = new SAXReader();		Document document = reader.read(file);		System.o">
-<meta name="twitter:image" content="https://conjurermaple.github.io/2019/02/22/Dom4j解析XML/20181228130208300.png">
+<meta name="twitter:title" content="Easyui学习笔记(一)">
+<meta name="twitter:description" content="EasyUI认识(1)    是一组基于jQuery的UI插件集合;(2)    而jQuery EasyUI的目标就是帮助web开发者更轻松的打造出功能丰富并且美观的UI界面。(3)    学习的时候，成本不大，知识点JS+HTML+CSS+jquery(4)    开发者不需要编写复杂的JavaScript，也不需要对css样式有深入的了解，开发者只有需要了解一些简单的html标签。(5)">
+<meta name="twitter:image" content="https://conjurermaple.github.io/2019/02/27/Easyui学习笔记-一/dir.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/2019/02/22/Dom4j解析XML/index.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/02/27/Easyui学习笔记-一/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -343,21 +342,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      
-    </nav>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyUI认识"><span class="toc-number">1.</span> <span class="toc-text">EasyUI认识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyUI学习方式"><span class="toc-number">2.</span> <span class="toc-text">EasyUI学习方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyUI-目录结构"><span class="toc-number">3.</span> <span class="toc-text">EasyUI 目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyUI简单使用"><span class="toc-number">4.</span> <span class="toc-text">EasyUI简单使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyUI创建组件"><span class="toc-number">5.</span> <span class="toc-text">EasyUI创建组件</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">是你面板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyUI创建组件-1"><span class="toc-number">1.</span> <span class="toc-text">EasyUI创建组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用方法"><span class="toc-number">2.</span> <span class="toc-text">调用方法</span></a></li></ol>
+    </li></nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Dom4j解析XML" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Easyui学习笔记-一" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Dom4j解析XML
+      Easyui学习笔记(一)
     </h1>
   
 
@@ -365,20 +364,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/02/22/Dom4j解析XML/" class="article-date">
-	  <time datetime="2019-02-22T05:14:50.000Z" itemprop="datePublished">2019-02-22</time>
+	<a href="/2019/02/27/Easyui学习笔记-一/" class="article-date">
+	  <time datetime="2019-02-27T13:09:55.000Z" itemprop="datePublished">2019-02-27</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/JAVA/">JAVA</a>
+	<a class="article-tag-link" href="/tags/前端/">前端</a>
   </span>
 
 
@@ -391,20 +390,34 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/02/22/Dom4j解析XML/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/02/27/Easyui学习笔记-一/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p><img src="/2019/02/22/Dom4j解析XML/20181228130208300.png" alt="作者：maple"><br>加入dom4j包</p>
-<p><img src="/2019/02/22/Dom4j解析XML/20181228125519619.png" alt="作者：Z-AI"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 * 获取Document</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		SAXReader reader = <span class="keyword">new</span> SAXReader();</span><br><span class="line">		Document document = reader.read(file);</span><br><span class="line">		System.out.println(document);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 * 取出第二个联系人的名字</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		SAXReader reader = <span class="keyword">new</span> SAXReader();</span><br><span class="line">		Document document = reader.read(file);</span><br><span class="line">		<span class="comment">//获取根节点</span></span><br><span class="line">		Element rootElement = document.getRootElement();</span><br><span class="line">		<span class="comment">//拿到所有的linkman</span></span><br><span class="line">		List&lt;Element&gt; linkmanList = rootElement.elements(<span class="string">"linkman"</span>);</span><br><span class="line">		<span class="comment">//拿到第二个联系人</span></span><br><span class="line">		Element linkman = linkmanList.get(<span class="number">1</span>);</span><br><span class="line">		</span><br><span class="line">	<span class="comment">/*	Element name = linkman.element("name");</span></span><br><span class="line"><span class="comment">		String text = name.getText();*/</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//拿到name的值</span></span><br><span class="line">		System.out.println(linkman.elementText(<span class="string">"name"</span>));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 * 修改第一个联系人的地址</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		SAXReader reader = <span class="keyword">new</span> SAXReader();</span><br><span class="line">		Document document = reader.read(file);</span><br><span class="line">		Element rootElement = document.getRootElement();</span><br><span class="line">		List&lt;Element&gt; linkmanList = rootElement.elements(<span class="string">"linkman"</span>);</span><br><span class="line">		Element linkman = linkmanList.get(<span class="number">0</span>);</span><br><span class="line">		Element address = linkman.element(<span class="string">"address"</span>);</span><br><span class="line">		address.setText(<span class="string">"南充"</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 *   // lets write to a file</span></span><br><span class="line"><span class="comment">        XMLWriter writer = new XMLWriter(</span></span><br><span class="line"><span class="comment">            new FileWriter( "output.xml" )</span></span><br><span class="line"><span class="comment">        );</span></span><br><span class="line"><span class="comment">        writer.write( document );</span></span><br><span class="line"><span class="comment">        writer.close();</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">		 * */</span></span><br><span class="line">		<span class="comment">//同步</span></span><br><span class="line">		FileWriter fileWriter = <span class="keyword">new</span> FileWriter(file);</span><br><span class="line">		XMLWriter writer = <span class="keyword">new</span> XMLWriter(fileWriter);</span><br><span class="line">	    writer.write(document);</span><br><span class="line">	    writer.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 * 增加一个联系人</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		SAXReader saxReader = <span class="keyword">new</span> SAXReader();</span><br><span class="line">		Document document = saxReader.read(file);</span><br><span class="line">		Element rootElement = document.getRootElement();</span><br><span class="line">		Element linkman = rootElement.addElement(<span class="string">"linkman"</span>);</span><br><span class="line">		Element name = linkman.addElement(<span class="string">"name"</span>);</span><br><span class="line">		name.setText(<span class="string">"小米"</span>);</span><br><span class="line">		Element email = linkman.addElement(<span class="string">"email"</span>);</span><br><span class="line">		email.setText(<span class="string">"1920347@qq.com"</span>);</span><br><span class="line">		Element address = linkman.addElement(<span class="string">"address"</span>);</span><br><span class="line">		address.setText(<span class="string">"高新区"</span>);</span><br><span class="line">		Element group = linkman.addElement(<span class="string">"group"</span>);</span><br><span class="line">		group.setText(<span class="string">"小米科技有限公司"</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">new</span> OutputFormat();</span><br><span class="line">		<span class="comment">//同步</span></span><br><span class="line">		OutputFormat format = OutputFormat.createPrettyPrint();</span><br><span class="line">		FileWriter fileWriter = <span class="keyword">new</span> FileWriter(file);</span><br><span class="line">		XMLWriter xmlWriter = <span class="keyword">new</span> XMLWriter(fileWriter,format);</span><br><span class="line">		xmlWriter.write(document);</span><br><span class="line">		xmlWriter.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 * 删除第三个联系人</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		SAXReader saxReader = <span class="keyword">new</span> SAXReader();</span><br><span class="line">		Document document = saxReader.read(file);</span><br><span class="line">		Element rootElement = document.getRootElement();</span><br><span class="line">		List&lt;Element&gt; linkmanList = rootElement.elements(<span class="string">"linkman"</span>);</span><br><span class="line">		Element linkman = linkmanList.get(<span class="number">2</span>);</span><br><span class="line">		linkman.getParent().remove(linkman);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//同步</span></span><br><span class="line">		FileWriter fileWriter = <span class="keyword">new</span> FileWriter(file);</span><br><span class="line">		XMLWriter xmlWriter = <span class="keyword">new</span> XMLWriter(fileWriter);</span><br><span class="line">		xmlWriter.write(document);</span><br><span class="line">		xmlWriter.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="EasyUI认识"><a href="#EasyUI认识" class="headerlink" title="EasyUI认识"></a>EasyUI认识</h3><p>(1)    是一组基于jQuery的UI插件集合;<br>(2)    而jQuery EasyUI的目标就是帮助web开发者更轻松的打造出功能丰富并且美观的UI界面。<br>(3)    学习的时候，成本不大，知识点JS+HTML+CSS+jquery<br>(4)    开发者不需要编写复杂的JavaScript，也不需要对css样式有深入的了解，开发者只有需要了解一些简单的html标签。<br>(5)    学习方法 copy</p>
+<h3 id="EasyUI学习方式"><a href="#EasyUI学习方式" class="headerlink" title="EasyUI学习方式"></a>EasyUI学习方式</h3><p>查API<br>复制拷贝+修改</p>
+<h3 id="EasyUI-目录结构"><a href="#EasyUI-目录结构" class="headerlink" title="EasyUI 目录结构"></a>EasyUI 目录结构</h3><p><img src="/2019/02/27/Easyui学习笔记-一/dir.png" alt="作者：maple"><br>demo :web案例</p>
+<p>demo-mobile:移动端案例</p>
+<p>locale:本地化（汉化包）</p>
+<p>plugins:easyui所有插件</p>
+<p>src:插件的源码，如果买了商业授权就有全部源码</p>
+<p>themes：主题（皮肤），存放css,img</p>
+<p>changlog.txt:升级日志</p>
+<p>easyloader.js:内部实现了一个js加载器，根据应用的<br>需求加载js文件，而不是一次性加载所有文件；</p>
+<p>jquery.easyui.min.js:所有插件集的压缩文件</p>
+<p>jquery.min.js : easyui当前版本兼容的jquery库</p>
+<h3 id="EasyUI简单使用"><a href="#EasyUI简单使用" class="headerlink" title="EasyUI简单使用"></a>EasyUI简单使用</h3><p>引入easyui需要的js和css；可参考jQuery EasyUI 1.5 版 API 中文版.exe/文档说明。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- easyui的样式主题文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"/easyui/themes/default/easyui.css"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- easyui的系统图标--&gt;</span>   </span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"/easyui/themes/icon.css"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- easyui依赖的jquery库--&gt;</span>   </span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/easyui/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- easyui的插件库--&gt;</span>      </span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/easyui/jquery.easyui.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- easyui的汉化包 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/easyui/locale/easyui-lang-zh_CN.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="EasyUI创建组件"><a href="#EasyUI创建组件" class="headerlink" title="EasyUI创建组件"></a>EasyUI创建组件</h3><p>(1)HTML创建组件<br>&lt;标签 class=”easyui-组件名”<br>组件配置title=“xxx”<br>data-options=”title:’xxx’”&gt;&lt;/标签&gt;</p>
+<p>还是调用js来完成:$(“#p”).panel({json参数});</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">	 使用html创建easyui组件(最简单方式)</span></span><br><span class="line"><span class="comment">		class = "easyui-panel" 作用: 告诉easyui需要把div转化为easyui组件.</span></span><br><span class="line"><span class="comment">		style 作用: 设置组件宽高和其他样式.</span></span><br><span class="line"><span class="comment">		title,iconCls,collapsible 组件属性: 告诉easyui如何创建这个组件.</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"p1"</span> <span class="attr">class</span>=<span class="string">"easyui-panel"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">style</span>=<span class="string">"width: 400px; height: 400px; padding: 10px; color: red; font-weight: bold; font-size: 18px;"</span> <span class="attr">title</span>=<span class="string">"我的面板"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">iconCls</span>=<span class="string">"icon-ok"</span> <span class="attr">collapsible</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>内容xxxx<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>(2)JS创建组件</p>
+<p><script type="text/javascript"><br>    $(function() {<br>        //获取p2标签,把他变成easyui面板组件.<br>        $(“#p2”).panel({<br>            //面板属性<br>            title : “你的面板”,<br>            iconCls : “icon-no”<br>        });<br>    });<br></script></p>
+<div id="p2" style="width: 400px; height: 400px; padding: 10px; color: red; font-weight: bold; font-size: 18px;"><br>    <h1>是你面板</h1><br></div>
 
+<h3 id="EasyUI创建组件-1"><a href="#EasyUI创建组件-1" class="headerlink" title="EasyUI创建组件"></a>EasyUI创建组件</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$('选择器').名字();//没有传递参数</span><br><span class="line">$('选择器').名字(&#123;key1:value,key2:value&#125;);//传递json参数</span><br></pre></td></tr></table></figure>
+<h3 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$('选择器').名字('方法名',参数);</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
@@ -413,7 +426,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://conjurermaple.github.io/2019/02/22/Dom4j解析XML/" title="Dom4j解析XML" target="_blank" rel="external">https://conjurermaple.github.io/2019/02/22/Dom4j解析XML/</a>
+      <a href="https://conjurermaple.github.io/2019/02/27/Easyui学习笔记-一/" title="Easyui学习笔记(一)" target="_blank" rel="external">https://conjurermaple.github.io/2019/02/27/Easyui学习笔记-一/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -459,10 +472,10 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2019/02/22/JDK原生API解析XML/" title="JDK原生API解析XML"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
     
+    <li class="next">
+      <a href="/2019/02/26/jquery高级/" title="jquery高级"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
     
     
     <li class="toggle-toc">
