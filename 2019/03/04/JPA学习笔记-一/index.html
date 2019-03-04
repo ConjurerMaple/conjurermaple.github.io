@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>JPA学习笔记(一) | maple</title>
+  <meta name="description" content="一.JPA认识1.1 什么是JPA JPA:(Java Persistence API) ORM的规范 JPA是规范,Hibernate是它的实现(不唯一,但最好) 最底层的操作还是JDBC(引入驱动包)  1.2 什么是ORM o(对象,java面向对象) r(关系,关系型数据库) m(映射)  1.3 JPA与JDBC的区别 JPA(hibernate)的底层还是JDBC  JPA开发效率高(">
+<meta name="keywords" content="框架篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JPA学习笔记(一)">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/03/04/JPA学习笔记-一/index.html">
+<meta property="og:site_name" content="maple博客">
+<meta property="og:description" content="一.JPA认识1.1 什么是JPA JPA:(Java Persistence API) ORM的规范 JPA是规范,Hibernate是它的实现(不唯一,但最好) 最底层的操作还是JDBC(引入驱动包)  1.2 什么是ORM o(对象,java面向对象) r(关系,关系型数据库) m(映射)  1.3 JPA与JDBC的区别 JPA(hibernate)的底层还是JDBC  JPA开发效率高(">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/03/04/JPA学习笔记-一/1.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/03/04/JPA学习笔记-一/2.png">
+<meta property="og:updated_time" content="2019-03-04T13:42:34.508Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JPA学习笔记(一)">
+<meta name="twitter:description" content="一.JPA认识1.1 什么是JPA JPA:(Java Persistence API) ORM的规范 JPA是规范,Hibernate是它的实现(不唯一,但最好) 最底层的操作还是JDBC(引入驱动包)  1.2 什么是ORM o(对象,java面向对象) r(关系,关系型数据库) m(映射)  1.3 JPA与JDBC的区别 JPA(hibernate)的底层还是JDBC  JPA开发效率高(">
+<meta name="twitter:image" content="https://conjurermaple.github.io/2019/03/04/JPA学习笔记-一/1.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/04/JPA学习笔记-一/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://conjurermaple.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">maple</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java &amp; Other</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Chengdu, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架篇/">框架篇</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架篇/">框架篇</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 13.5px;">JAVA</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/前端/" style="font-size: 14px;">前端</a> <a href="/tags/框架篇/" style="font-size: 13px;">框架篇</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/04/JPA学习笔记-一/" class="title">JPA学习笔记(一)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-04T13:04:35.000Z" itemprop="datePublished">2019-03-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/前端/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/01/EasyUI学习笔记（二）——综合案例/" class="title">EasyUI学习笔记（二）——综合案例</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-01T03:04:20.000Z" itemprop="datePublished">2019-03-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/前端/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/02/27/Easyui学习笔记-一/" class="title">Easyui学习笔记(一)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-02-27T13:09:55.000Z" itemprop="datePublished">2019-02-27</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/前端/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/02/26/jquery高级/" class="title">jquery高级</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-02-26T08:34:21.000Z" itemprop="datePublished">2019-02-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/前端/">前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/02/26/js进阶-高级/" class="title">js进阶(高级)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-02-26T08:04:58.000Z" itemprop="datePublished">2019-02-26</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-JPA认识"><span class="toc-number">1.</span> <span class="toc-text">一.JPA认识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-什么是JPA"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 什么是JPA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-什么是ORM"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 什么是ORM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-JPA与JDBC的区别"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 JPA与JDBC的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-HelloWorld"><span class="toc-number">2.</span> <span class="toc-text">二.HelloWorld</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-创建maven项目"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 创建maven项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-pom-xml"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 pom.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-引入persistence-xml"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 引入persistence.xml</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-使用工具生成-META-INF-persistence-xml"><span class="toc-number">2.3.1.</span> <span class="toc-text">2.3.1 使用工具生成 META-INF\persistence.xml</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4准备domain对象"><span class="toc-number">2.4.</span> <span class="toc-text">2.4准备domain对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-基本功能测试"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 基本功能测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-CRUD"><span class="toc-number">3.</span> <span class="toc-text">三. CRUD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-添加"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 添加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-修改"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-删除"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-查询一条数据"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 查询一条数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-查询所有"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 查询所有</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-建表策略"><span class="toc-number">4.</span> <span class="toc-text">四. 建表策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-create-drop"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 create-drop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-create"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 create</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-updates"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 updates</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-validate"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 validate</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-重要API认识"><span class="toc-number">5.</span> <span class="toc-text">五. 重要API认识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-Persistence"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 Persistence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-EntityManagerFactory"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 EntityManagerFactory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-EntityManager"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 EntityManager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-EntityTransaction"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 EntityTransaction</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六-映射细节"><span class="toc-number">6.</span> <span class="toc-text">六. 映射细节</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Column"><span class="toc-number">6.1.</span> <span class="toc-text">@Column</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lob"><span class="toc-number">6.2.</span> <span class="toc-text">@Lob</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transient"><span class="toc-number">6.3.</span> <span class="toc-text">Transient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Temporal"><span class="toc-number">6.4.</span> <span class="toc-text">Temporal</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-JPA学习笔记-一" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JPA学习笔记(一)
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/03/04/JPA学习笔记-一/" class="article-date">
+	  <time datetime="2019-03-04T13:04:35.000Z" itemprop="datePublished">2019-03-04</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/04/JPA学习笔记-一/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="一-JPA认识"><a href="#一-JPA认识" class="headerlink" title="一.JPA认识"></a>一.JPA认识</h2><h3 id="1-1-什么是JPA"><a href="#1-1-什么是JPA" class="headerlink" title="1.1 什么是JPA"></a>1.1 什么是JPA</h3><ul>
+<li>JPA:(Java Persistence API) ORM的规范</li>
+<li>JPA是规范,Hibernate是它的实现(不唯一,但最好)</li>
+<li>最底层的操作还是JDBC(引入驱动包)</li>
+</ul>
+<h3 id="1-2-什么是ORM"><a href="#1-2-什么是ORM" class="headerlink" title="1.2 什么是ORM"></a>1.2 什么是ORM</h3><blockquote>
+<p>o(对象,java面向对象) r(关系,关系型数据库) m(映射)</p>
+</blockquote>
+<h3 id="1-3-JPA与JDBC的区别"><a href="#1-3-JPA与JDBC的区别" class="headerlink" title="1.3 JPA与JDBC的区别"></a>1.3 JPA与JDBC的区别</h3><blockquote>
+<p>JPA(hibernate)的底层还是JDBC</p>
+<ul>
+<li>JPA开发效率高(JPA代码简单)</li>
+<li>JPA运行效率低(jdbc高:更接近低层)</li>
+<li>JPA兼容各种数据库(方便移植)</li>
+<li>JPA有内置缓存(性能在一定程度上还是有优化)</li>
+<li>具体的东西请百度</li>
+</ul>
+</blockquote>
+<h2 id="二-HelloWorld"><a href="#二-HelloWorld" class="headerlink" title="二.HelloWorld"></a>二.HelloWorld</h2><h3 id="2-1-创建maven项目"><a href="#2-1-创建maven项目" class="headerlink" title="2.1 创建maven项目"></a>2.1 创建maven项目</h3><h3 id="2-2-pom-xml"><a href="#2-2-pom-xml" class="headerlink" title="2.2 pom.xml"></a>2.2 pom.xml</h3><ul>
+<li>导包(hibernate核心包,JPA支持包,驱动包,测试包)</li>
+<li>JDK1.8插件配置支持</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.itsource<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jpademo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>jpaday01<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--导包:hibernate的包 ,hibernate对于JPA的支持包,数据库驱动包,junit测试包--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--hibernate的核心包--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.8.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--hiberante对于jpa的支持包--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-entitymanager<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.8.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--数据库驱动包--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.21<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--junit测试包--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--设置咱们项目的JDK版本--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-3-引入persistence-xml"><a href="#2-3-引入persistence-xml" class="headerlink" title="2.3 引入persistence.xml"></a>2.3 引入persistence.xml</h3><h4 id="2-3-1-使用工具生成-META-INF-persistence-xml"><a href="#2-3-1-使用工具生成-META-INF-persistence-xml" class="headerlink" title="2.3.1 使用工具生成 META-INF\persistence.xml"></a>2.3.1 使用工具生成 META-INF\persistence.xml</h4><blockquote>
+<p>也可以手动创建</p>
+</blockquote>
+<p><img src="/2019/03/04/JPA学习笔记-一/1.png" alt="作者：maple"></p>
+<p>调整结构如下</p>
+<p><img src="/2019/03/04/JPA学习笔记-一/2.png" alt="作者：maple"></p>
+<ul>
+<li>persistence.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">    <span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">persistence</span> <span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/persistence"</span> <span class="attr">version</span>=<span class="string">"2.0"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        咱们这个配置是要连接数据库的(jpa支持咱们连接多个数据库)</span></span><br><span class="line"><span class="comment">        persistence-unit:持久化单元(可能有多个，每一个对应一个数据库)</span></span><br><span class="line"><span class="comment">            name:取个名称(随便取)</span></span><br><span class="line"><span class="comment">            transaction(事务,同生共死)-type(类型)</span></span><br><span class="line"><span class="comment">                RESOURCE_LOCAL：本地的事务</span></span><br><span class="line"><span class="comment">                JTA: 分布式系统要使用的事务</span></span><br><span class="line"><span class="comment">        基本的数据库连接配置(四大金刚)</span></span><br><span class="line"><span class="comment">         properties:属性(所有属性都可以在下面的文件中找到)</span></span><br><span class="line"><span class="comment">            resources\源码包\hibernate-release-4.3.8.Final\project\etc\hibernate.properties</span></span><br><span class="line"><span class="comment">       --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">persistence-unit</span> <span class="attr">name</span>=<span class="string">"cn.itsource.jpa"</span> <span class="attr">transaction-type</span>=<span class="string">"RESOURCE_LOCAL"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--连接数据库的四个基本属性--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.driver_class"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql:///jpa"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.username"</span> <span class="attr">value</span>=<span class="string">"root"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.password"</span> <span class="attr">value</span>=<span class="string">"root"</span> /&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 配置方言(数据库兼容):你要操作的是什么数据库,根据不同的方言拼接不同的SQL</span></span><br><span class="line"><span class="comment">                    InnoDB:支持事务,支持外键   MyISAM:不支持事务，不支持外键(属性高)</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.dialect"</span> <span class="attr">value</span>=<span class="string">"org.hibernate.dialect.MySQLDialect"</span> /&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--配置建表策略(自动化帮我们创建相应的表)--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.hbm2ddl.auto"</span> <span class="attr">value</span>=<span class="string">"create"</span> /&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--可以看到SQL的展示--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.show_sql"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--可以看到SQL的展示(漂亮一点)--&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--&lt;property name="hibernate.format_sql" value="true" /&gt;--&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">persistence-unit</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">persistence</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-4准备domain对象"><a href="#2-4准备domain对象" class="headerlink" title="2.4准备domain对象"></a>2.4准备domain对象</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//告诉JPA:这个类是要做实体化的</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Entity</span>:我是一个实体类，JPA快来管我</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Table</span>(name = "t_employee"):我和哪些张是有关系的</span></span><br><span class="line"><span class="comment"> *   如果不写，他就认为你有一个表叫:Employee</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.persistence.Entity;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.GeneratedValue;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Id;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Table;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"t_employee"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Id</span>:代表我是一个主键</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@GeneratedValue</span>:我们认为主键是自增的</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//getter,setter省略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-基本功能测试"><a href="#2-5-基本功能测试" class="headerlink" title="2.5 基本功能测试"></a>2.5 基本功能测试</h3><ul>
+<li>Persistence -&gt; EntityManagerFactory -&gt; EntityManager -&gt; crud</li>
+</ul>
+<blockquote>
+<p> EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(“jpa”);<br>            EntityManager entityManager = entityManagerFactory.createEntityManager();</p>
+<ul>
+<li>注意点:增删改需要事务 EntityManager可以拿到一个事务</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 在JPA中,所以增删改都需要我们去提交事务</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//拿到EntityManagerFactory(传入持久化单元的名称)</span></span><br><span class="line">EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(<span class="string">"cn.itsource.jpa"</span>);</span><br><span class="line"><span class="comment">//拿出到实体管理对象</span></span><br><span class="line">EntityManager entityManager = entityManagerFactory.createEntityManager();</span><br><span class="line"><span class="comment">//拿出一个事务 EntityManager里面有一个事务(只能拿到一个事务)</span></span><br><span class="line"><span class="comment">//开始事务</span></span><br><span class="line">entityManager.getTransaction().begin();</span><br><span class="line"><span class="comment">//persist:持久化(保存一条数据)</span></span><br><span class="line">entityManager.persist(employee);</span><br><span class="line"><span class="comment">//提交事务</span></span><br><span class="line">entityManager.getTransaction().commit();</span><br><span class="line"><span class="comment">//关闭资源</span></span><br><span class="line">entityManager.close();</span><br><span class="line">entityManagerFactory.close();</span><br></pre></td></tr></table></figure>
+<h2 id="三-CRUD"><a href="#三-CRUD" class="headerlink" title="三. CRUD"></a>三. CRUD</h2><blockquote>
+<p>工具类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//帮咱们拿到一个EntityManager对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JpaUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> EntityManagerFactory factory;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//加载时运行，且只运行一次</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            factory = Persistence.createEntityManagerFactory(<span class="string">"cn.itsource.jpa"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//直接拿到EntityManager对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> EntityManager <span class="title">getEntityManager</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createEntityManager();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-1-添加"><a href="#3-1-添加" class="headerlink" title="3.1 添加"></a>3.1 添加</h3><blockquote>
+<p>entityManager.persist(employee);</p>
+</blockquote>
+<h3 id="3-2-修改"><a href="#3-2-修改" class="headerlink" title="3.2 修改"></a>3.2 修改</h3><blockquote>
+<p>entityManager.merge(employee);</p>
+</blockquote>
+<h3 id="3-3-删除"><a href="#3-3-删除" class="headerlink" title="3.3 删除"></a>3.3 删除</h3><blockquote>
+<p>先查询，再判断，最后删除<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> Employee employee = entityManager.find(Employee.class, id);</span><br><span class="line"><span class="keyword">if</span>(employee!=<span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="comment">//这里要求咱们传一个对象进去</span></span><br><span class="line">    entityManager.remove(employee);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="3-4-查询一条数据"><a href="#3-4-查询一条数据" class="headerlink" title="3.4 查询一条数据"></a>3.4 查询一条数据</h3><blockquote>
+<p>传类型与id</p>
+</blockquote>
+<p>  entityManager.find(Employee.class,id);</p>
+<h3 id="3-5-查询所有"><a href="#3-5-查询所有" class="headerlink" title="3.5 查询所有"></a>3.5 查询所有</h3><blockquote>
+<p>query对象(entityManager创建) jpql:面向对象的查询语言</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">entityManager = JpaUtil.getEntityManager();</span><br><span class="line"><span class="comment">//使用查询对象，写JPQL：像SQL,但是更加简单(面向对象)</span></span><br><span class="line"><span class="comment">//1.准备JPQL 不要写* ,from后面是一个类</span></span><br><span class="line"><span class="comment">//String jpql = "select o from cn.itsource.jpa.domain.Employee o";</span></span><br><span class="line"><span class="comment">// String jpql = "select o from Employee o";</span></span><br><span class="line">String jpql = <span class="string">"from Employee"</span>;</span><br><span class="line"><span class="comment">//2.根据JPQL拿到查询对象</span></span><br><span class="line">Query query = entityManager.createQuery(jpql);</span><br><span class="line"><span class="comment">//3.返回所有数据</span></span><br><span class="line"><span class="keyword">return</span> query.getResultList();</span><br></pre></td></tr></table></figure>
+<h2 id="四-建表策略"><a href="#四-建表策略" class="headerlink" title="四. 建表策略"></a>四. 建表策略</h2><p>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;property name=&quot;hibernate.hbm2ddl.auto&quot; value=&quot;create&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-1-create-drop"><a href="#4-1-create-drop" class="headerlink" title="4.1 create-drop"></a>4.1 create-drop</h3><blockquote>
+<p>先删除-&gt; 再创建 -&gt; 用完(EntityManagerFactory关闭)再删(测试)</p>
+</blockquote>
+<h3 id="4-2-create"><a href="#4-2-create" class="headerlink" title="4.2 create"></a>4.2 create</h3><blockquote>
+<p>先删除-&gt; 再创建(测试)</p>
+</blockquote>
+<h3 id="4-3-updates"><a href="#4-3-updates" class="headerlink" title="4.3 updates"></a>4.3 updates</h3><ul>
+<li>没有表就创建，有就修改</li>
+<li>修改字段只增不减(不改类型) </li>
+</ul>
+<h3 id="4-4-validate"><a href="#4-4-validate" class="headerlink" title="4.4 validate"></a>4.4 validate</h3><blockquote>
+<p>验证功能(只验证domain中写好的属性),如果domain类没有，数据库中有这个字段，不会验证</p>
+</blockquote>
+<h2 id="五-重要API认识"><a href="#五-重要API认识" class="headerlink" title="五. 重要API认识"></a>五. 重要API认识</h2><h3 id="5-1-Persistence"><a href="#5-1-Persistence" class="headerlink" title="5.1 Persistence"></a>5.1 Persistence</h3><ul>
+<li>解析相应的核心配置文件</li>
+<li>创建EntityManagerFactory对象</li>
+</ul>
+<h3 id="5-2-EntityManagerFactory"><a href="#5-2-EntityManagerFactory" class="headerlink" title="5.2 EntityManagerFactory"></a>5.2 EntityManagerFactory</h3><ul>
+<li>重(连接池,二级缓存,所有实体关系，预编译的SQL/JPQL)</li>
+<li>线程安全 (1:1:1) 1个应用程序，1个EntityManagerFactory，1个数据库</li>
+<li>创建 EntityManager对象</li>
+</ul>
+<h3 id="5-3-EntityManager"><a href="#5-3-EntityManager" class="headerlink" title="5.3 EntityManager"></a>5.3 EntityManager</h3><ul>
+<li>轻(连接,一级缓存)</li>
+<li>线程不安全</li>
+<li>完成CRUD</li>
+<li>什么是一级缓存命中?<br>同一个EntityManagerFactory,同一个EntityManager,同一个OID</li>
+<li>OID是什么样子的? </li>
+</ul>
+<p>类的全限定名#id   如cn.itsource.jpa.domain.Employee#1</p>
+<h3 id="5-4-EntityTransaction"><a href="#5-4-EntityTransaction" class="headerlink" title="5.4 EntityTransaction"></a>5.4 EntityTransaction</h3><p>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;persistence-unit name=&quot;jpa&quot; transaction-type=&quot;RESOURCE_LOCAL&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>EntityManager只有这一个事务</li>
+<li>如果多个系统/多个数据库 -&gt; transaction-type=”JTA”</li>
+</ul>
+<h2 id="六-映射细节"><a href="#六-映射细节" class="headerlink" title="六. 映射细节"></a>六. 映射细节</h2><h3 id="Column"><a href="#Column" class="headerlink" title="@Column"></a>@Column</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   name = <span class="string">"username"</span>：对应的列名</span><br><span class="line">     length=<span class="number">2</span> :长度</span><br><span class="line">     nullable = <span class="keyword">false</span>:该字符不能为空</span><br><span class="line">     unique = <span class="keyword">true</span>：唯一</span><br><span class="line"><span class="meta">@Column</span>(name = <span class="string">"username"</span>,length = <span class="number">20</span>,nullable = <span class="keyword">false</span>,unique = <span class="keyword">true</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Lob"><a href="#Lob" class="headerlink" title="@Lob"></a>@Lob</h3><blockquote>
+<p>大文本(装很多数据)</p>
+</blockquote>
+<h3 id="Transient"><a href="#Transient" class="headerlink" title="Transient"></a>Transient</h3><blockquote>
+<p>临时属性(JPA不会管理这个属性)</p>
+</blockquote>
+<h3 id="Temporal"><a href="#Temporal" class="headerlink" title="Temporal"></a>Temporal</h3><blockquote>
+<p>TemporalType.TIMESTAMP:年月日,时分秒</p>
+</blockquote>
+<blockquote>
+<p>TemporalType.DATE:年月日</p>
+</blockquote>
+<blockquote>
+<p>TemporalType.TIME:时分秒</p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://conjurermaple.github.io/2019/03/04/JPA学习笔记-一/" title="JPA学习笔记(一)" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/04/JPA学习笔记-一/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://conjurermaple.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://conjurermaple.github.io/" target="_blank"><span class="text-dark">maple</span><small class="ml-1x">Java &amp; Other</small></a></h3>
+        <div>拼命努力的人，生活不会辜负你。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2019/03/01/EasyUI学习笔记（二）——综合案例/" title="EasyUI学习笔记（二）——综合案例"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Blog by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '383f19b856237c034a38',
+    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
+    repo: 'conjurermaple.github.io',
+    owner: 'ConjurerMaple',
+    admin: ['ConjurerMaple'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+
+
+
+
+</body>
+</html>
