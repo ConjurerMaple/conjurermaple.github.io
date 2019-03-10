@@ -17,25 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>JDK原生API解析XML | maple</title>
-  <meta name="description" content="1234567891011121314151617181920212223242526272829303132/**	 * @throws Exception	 * 修改某个节点的元素内容	 * 将第一个联系人的address的值改为重庆	 */	@Test	public void test2() throws Exception &amp;#123;		//获取DocumentBuilderFac">
-<meta name="keywords" content="JAVA">
+  <title>JPA学习笔记(四) | maple</title>
+  <meta name="description" content="一. JPQL的认识与使用 JPA的查询语句(面向对象的) 关键字和SQL是一样的 使用的类和属性(区分大小写) 如果获取的是多个值 List&amp;lt;Object[]&amp;gt; 关连的法则(1.不写on 2.前面对象的别名.属性) 模糊查询JPQL中写? , 设置值 %name%  二. JPA的分页 支持所有数据库（根据方言类决定）  设置从第几条数据开始 query.setFirstResult">
+<meta name="keywords" content="框架篇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JDK原生API解析XML">
-<meta property="og:url" content="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/index.html">
+<meta property="og:title" content="JPA学习笔记(四)">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/03/09/JPA学习笔记-四/index.html">
 <meta property="og:site_name" content="maple博客">
-<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132/**	 * @throws Exception	 * 修改某个节点的元素内容	 * 将第一个联系人的address的值改为重庆	 */	@Test	public void test2() throws Exception &amp;#123;		//获取DocumentBuilderFac">
+<meta property="og:description" content="一. JPQL的认识与使用 JPA的查询语句(面向对象的) 关键字和SQL是一样的 使用的类和属性(区分大小写) 如果获取的是多个值 List&amp;lt;Object[]&amp;gt; 关连的法则(1.不写on 2.前面对象的别名.属性) 模糊查询JPQL中写? , 设置值 %name%  二. JPA的分页 支持所有数据库（根据方言类决定）  设置从第几条数据开始 query.setFirstResult">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/20181228124756383.png">
-<meta property="og:image" content="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/2018122813030697.png">
-<meta property="og:image" content="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/20181228125152407.png">
-<meta property="og:updated_time" content="2019-02-22T05:53:54.248Z">
+<meta property="og:updated_time" content="2019-03-10T13:46:54.557Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JDK原生API解析XML">
-<meta name="twitter:description" content="1234567891011121314151617181920212223242526272829303132/**	 * @throws Exception	 * 修改某个节点的元素内容	 * 将第一个联系人的address的值改为重庆	 */	@Test	public void test2() throws Exception &amp;#123;		//获取DocumentBuilderFac">
-<meta name="twitter:image" content="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/20181228124756383.png">
+<meta name="twitter:title" content="JPA学习笔记(四)">
+<meta name="twitter:description" content="一. JPQL的认识与使用 JPA的查询语句(面向对象的) 关键字和SQL是一样的 使用的类和属性(区分大小写) 如果获取的是多个值 List&amp;lt;Object[]&amp;gt; 关连的法则(1.不写on 2.前面对象的别名.属性) 模糊查询JPQL中写? , 设置值 %name%  二. JPA的分页 支持所有数据库（根据方言类决定）  设置从第几条数据开始 query.setFirstResult">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/index.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/09/JPA学习笔记-四/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -344,21 +340,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-JPQL的认识与使用"><span class="toc-number">1.</span> <span class="toc-text">一. JPQL的认识与使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-JPA的分页"><span class="toc-number">2.</span> <span class="toc-text">二. JPA的分页</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-原生SQL的操作"><span class="toc-number">3.</span> <span class="toc-text">三. 原生SQL的操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四-事务隔离与锁"><span class="toc-number">4.</span> <span class="toc-text">四. 事务隔离与锁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五-一对一-了解"><span class="toc-number">5.</span> <span class="toc-text">五. 一对一(了解)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六-注意"><span class="toc-number">6.</span> <span class="toc-text">六. 注意</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-JDK原生API解析XML" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-JPA学习笔记-四" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      JDK原生API解析XML
+      JPA学习笔记(四)
     </h1>
   
 
@@ -366,20 +362,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/02/22/JDK原生API解析XML/" class="article-date">
-	  <time datetime="2019-02-22T05:50:31.000Z" itemprop="datePublished">2019-02-22</time>
+	<a href="/2019/03/09/JPA学习笔记-四/" class="article-date">
+	  <time datetime="2019-03-09T12:22:56.000Z" itemprop="datePublished">2019-03-09</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
+    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/JAVA/">JAVA</a>
+	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
   </span>
 
 
@@ -392,18 +388,73 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/02/22/JDK原生API解析XML/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/09/JPA学习笔记-四/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p><img src="/2019/02/22/JDK原生API解析XML/20181228124756383.png" alt="作者：maple"></p>
-<p><img src="/2019/02/22/JDK原生API解析XML/2018122813030697.png" alt="作者：maple"></p>
-<p><img src="/2019/02/22/JDK原生API解析XML/20181228125152407.png" alt="作者：maple"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 * 修改某个节点的元素内容</span></span><br><span class="line"><span class="comment">	 * 将第一个联系人的address的值改为重庆</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">//获取DocumentBuilderFactory</span></span><br><span class="line">		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();</span><br><span class="line">		<span class="comment">//获取解析器</span></span><br><span class="line">		DocumentBuilder builder = builderFactory.newDocumentBuilder();</span><br><span class="line">		<span class="comment">//将内存中的XML解析为Document对象</span></span><br><span class="line">		Document dom = builder.parse(file);</span><br><span class="line">		<span class="comment">//拿到根节点</span></span><br><span class="line">		Element root = dom.getDocumentElement();</span><br><span class="line">		<span class="comment">//拿到第一个联系人</span></span><br><span class="line">		Element linkman = (Element) root.getElementsByTagName(<span class="string">"linkman"</span>).item(<span class="number">0</span>);</span><br><span class="line">		<span class="comment">//拿到第一个address</span></span><br><span class="line">		Node address = linkman.getElementsByTagName(<span class="string">"address"</span>).item(<span class="number">0</span>);</span><br><span class="line">		<span class="comment">//此时只是将内存中的数据更改了，没有做同步</span></span><br><span class="line">		address.setTextContent(<span class="string">"重庆"</span>);</span><br><span class="line">		<span class="comment">//同步</span></span><br><span class="line">		TransformerFactory transformerFactory = TransformerFactory.newInstance();</span><br><span class="line">		<span class="comment">//拿到转换器</span></span><br><span class="line">		Transformer transformer = transformerFactory.newTransformer();</span><br><span class="line">		<span class="comment">//拿到内存里面的数据</span></span><br><span class="line">		Source domSource = <span class="keyword">new</span> DOMSource(dom);</span><br><span class="line">		<span class="comment">//拿到磁盘上的文件</span></span><br><span class="line">		Result result = <span class="keyword">new</span> StreamResult(file);</span><br><span class="line">		transformer.transform(domSource, result);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 * 增加一个联系人</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Document dom = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);</span><br><span class="line">		<span class="comment">//获取根节点</span></span><br><span class="line">		Element root = dom.getDocumentElement();</span><br><span class="line">		<span class="comment">//创建linkman节点</span></span><br><span class="line">		Element linkman = dom.createElement(<span class="string">"linkman"</span>);</span><br><span class="line">		linkman.setAttribute(<span class="string">"id"</span>, <span class="string">"3"</span>);</span><br><span class="line">		root.appendChild(linkman);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//创建name</span></span><br><span class="line">		Element name = dom.createElement(<span class="string">"name"</span>);</span><br><span class="line">		name.setTextContent(<span class="string">"小米"</span>);</span><br><span class="line">		linkman.appendChild(name);</span><br><span class="line">		<span class="comment">//创建email</span></span><br><span class="line">		Element email = dom.createElement(<span class="string">"email"</span>);</span><br><span class="line">		email.setTextContent(<span class="string">"192033344@qq.com"</span>);</span><br><span class="line">		linkman.appendChild(email);</span><br><span class="line">		<span class="comment">//创建address</span></span><br><span class="line">		Element address = dom.createElement(<span class="string">"address"</span>);</span><br><span class="line">		address.setTextContent(<span class="string">"成都高新区"</span>);</span><br><span class="line">		linkman.appendChild(address);</span><br><span class="line">		<span class="comment">//创建group</span></span><br><span class="line">		Element group = dom.createElement(<span class="string">"group"</span>);</span><br><span class="line">		group.setTextContent(<span class="string">"小米科技有限公司"</span>);</span><br><span class="line">		linkman.appendChild(group);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//同步</span></span><br><span class="line">		TransformerFactory transformerFactory = TransformerFactory.newInstance();</span><br><span class="line">		Transformer transformer = transformerFactory.newTransformer();</span><br><span class="line">		Source source = <span class="keyword">new</span> DOMSource(dom);</span><br><span class="line">		Result result = <span class="keyword">new</span> StreamResult(file);</span><br><span class="line">		transformer.transform(source, result);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除第三个联系人</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);</span><br><span class="line">		Element root = document.getDocumentElement();</span><br><span class="line">		Node linkman = root.getElementsByTagName(<span class="string">"linkman"</span>).item(<span class="number">2</span>);</span><br><span class="line">		linkman.getParentNode().removeChild(linkman);</span><br><span class="line">		</span><br><span class="line">		Transformer transformer = TransformerFactory.newInstance().newTransformer();</span><br><span class="line">		Source source = <span class="keyword">new</span> DOMSource(document);</span><br><span class="line">		Result result = <span class="keyword">new</span> StreamResult(file);</span><br><span class="line">		transformer.transform(source, result);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="一-JPQL的认识与使用"><a href="#一-JPQL的认识与使用" class="headerlink" title="一. JPQL的认识与使用"></a>一. JPQL的认识与使用</h1><ul>
+<li>JPA的查询语句(面向对象的)</li>
+<li>关键字和SQL是一样的</li>
+<li>使用的类和属性(区分大小写)</li>
+<li>如果获取的是多个值 List&lt;Object[]&gt;</li>
+<li>关连的法则(1.不写on 2.前面对象的别名.属性)</li>
+<li>模糊查询JPQL中写? , 设置值 %name%</li>
+</ul>
+<h1 id="二-JPA的分页"><a href="#二-JPA的分页" class="headerlink" title="二. JPA的分页"></a>二. JPA的分页</h1><blockquote>
+<p>支持所有数据库（根据方言类决定）</p>
+<ul>
+<li>设置从第几条数据开始 query.setFirstResult(0)</li>
+<li>设置每页条数 query.setMaxResults(5)</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">EntityManager entityManager = JpaUtil.getEntityManager();</span><br><span class="line">   //query:查询对象</span><br><span class="line">   Query query = entityManager.createQuery(&quot;from Employee&quot;);</span><br><span class="line">   //query.setFirstResult(5);</span><br><span class="line">   //query.setMaxResults(5);</span><br><span class="line">   query.setFirstResult(15).setMaxResults(5);</span><br><span class="line">   List&lt;Employee&gt; list = query.getResultList();</span><br><span class="line"></span><br><span class="line">   list.forEach(e -&gt; System.out.println(e));</span><br><span class="line">   entityManager.close();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>拿出到总条数</p>
+<ul>
+<li>如果确定有且只有一个数据,使用 getSingleResult</li>
+<li>类型是Long(hibernate3.X是Integer)</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">EntityManager entityManager = JpaUtil.getEntityManager();</span><br><span class="line">//query:查询对象</span><br><span class="line">// 这条SQL百之百确认只会查到一个数据</span><br><span class="line">Query query = entityManager.createQuery(&quot;select count(o) from Employee o&quot;);</span><br><span class="line"></span><br><span class="line">//Single:单个 这里拿到的是Long类型</span><br><span class="line">//  hibernate3.X的版本都使用的Integer</span><br><span class="line">Long count = (Long)query.getSingleResult();</span><br><span class="line">System.out.println(count);</span><br><span class="line">entityManager.close();</span><br></pre></td></tr></table></figure>
+<h1 id="三-原生SQL的操作"><a href="#三-原生SQL的操作" class="headerlink" title="三. 原生SQL的操作"></a>三. 原生SQL的操作</h1><ul>
+<li>执行SQL,但是需要手动封装对象</li>
+<li>entityManager.createNativeQuery(sql)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> String sql = &quot;select * from employee&quot;;</span><br><span class="line">EntityManager entityManager = JpaUtil.getEntityManager();</span><br><span class="line">//query:查询对象 Native:原生</span><br><span class="line">Query query = entityManager.createNativeQuery(sql);</span><br><span class="line"></span><br><span class="line">List&lt;Object[]&gt; list = query.getResultList();</span><br><span class="line">list.forEach(objs -&gt; &#123;</span><br><span class="line">    System.out.println(Arrays.asList(objs));</span><br><span class="line">&#125;);</span><br><span class="line">entityManager.close();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>执行SQL,但是需要自动封装对象</li>
+<li>entityManager.createNativeQuery(sql,Employee.class);<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String sql = &quot;select * from employee&quot;;</span><br><span class="line">   EntityManager entityManager = JpaUtil.getEntityManager();</span><br><span class="line">   //query:查询对象 Native:原生</span><br><span class="line">   Query query = entityManager.createNativeQuery(sql,Employee.class);</span><br><span class="line"></span><br><span class="line">   List&lt;Employee&gt; list = query.getResultList();</span><br><span class="line">   list.forEach(e -&gt; System.out.println(e));</span><br><span class="line"></span><br><span class="line">   entityManager.close();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="四-事务隔离与锁"><a href="#四-事务隔离与锁" class="headerlink" title="四. 事务隔离与锁"></a>四. 事务隔离与锁</h1><ul>
+<li>一定要自己去控制中间表的表名与列名</li>
+<li>正常操作都没有问题(尽量不要使用级联)</li>
+<li>双向保证表名列名是一致的</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @JoinTable:对中间表进行设置</span><br><span class="line"> *  name = &quot;t_user_role&quot;:中间表的名称</span><br><span class="line"> *  joinColumns = @JoinColumn(name = &quot;user_id&quot;):修改当前表对应的列名</span><br><span class="line"> *  inverseJoinColumns = @JoinColumn(name = &quot;role_id&quot;):对面那张表的列名</span><br><span class="line"> */</span><br><span class="line">@ManyToMany</span><br><span class="line">@JoinTable(name = &quot;t_user_role&quot;</span><br><span class="line">        ,joinColumns = @JoinColumn(name = &quot;user_id&quot;)</span><br><span class="line">        ,inverseJoinColumns = @JoinColumn(name = &quot;role_id&quot;))</span><br><span class="line">private List&lt;Role&gt; roles = new ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<h1 id="五-一对一-了解"><a href="#五-一对一-了解" class="headerlink" title="五. 一对一(了解)"></a>五. 一对一(了解)</h1><ul>
+<li>共享主键(扩展性不强,不建议使用)</li>
+<li>唯一外键(扩展性强,建议使用)</li>
+<li>外键在哪边,哪边就是从表</li>
+</ul>
+<blockquote>
+<p>  QQ:主表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Entity</span><br><span class="line">public class QQ &#123;</span><br><span class="line">  @Id</span><br><span class="line">  @GeneratedValue</span><br><span class="line">  private Long id;</span><br><span class="line">  private String number;</span><br><span class="line">  // 一对一,一个qq号码对应一个qq空间</span><br><span class="line">  @OneToOne(mappedBy=&quot;qq&quot;)</span><br><span class="line">  private QQZone zone;</span><br><span class="line">｝</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>QQZone:从表</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Entity</span><br><span class="line">public class QQZone &#123;</span><br><span class="line">  @Id</span><br><span class="line">  @GeneratedValue</span><br><span class="line">  private Long id;</span><br><span class="line">  private String name;</span><br><span class="line">  // 一对一,一个qq空间输入一个qq号码</span><br><span class="line">  // 默认值optional = true表示qq_id可以为空;反之。。。</span><br><span class="line">  @OneToOne(optional = false)</span><br><span class="line">  // unique=true确保了一对一关系</span><br><span class="line">  @JoinColumn(name = &quot;qq_id&quot;, unique = true)</span><br><span class="line">  private QQ qq;</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
+<h1 id="六-注意"><a href="#六-注意" class="headerlink" title="六. 注意"></a>六. 注意</h1><ul>
+<li>单向多对一,一对多,双向多对一,一对多,表结构完成一样</li>
+<li>单向一对多性能差(不用)</li>
+<li>声明的时候都用接口</li>
+<li>集合先new出来(以免以后代码麻烦)</li>
+<li>JPA，集合默认懒加载</li>
+<li>想要性能好，先保存一方后保存多方</li>
+<li>先配置单向(业务需要再配置双向) 8.不要toString()，- 互相调用容易内存溢出</li>
+</ul>
 
       
     </div>
@@ -413,7 +464,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/" title="JDK原生API解析XML" target="_blank" rel="external">https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/</a>
+      <a href="https://conjurermaple.github.io/2019/03/09/JPA学习笔记-四/" title="JPA学习笔记(四)" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/09/JPA学习笔记-四/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -460,12 +511,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2019/02/23/Ajax结合json案例学习/" title="Ajax结合json案例学习"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2019/03/10/Spring学习笔记-二/" title="Spring学习笔记(二)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2019/02/22/Dom4j解析XML/" title="Dom4j解析XML"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/03/07/JPA学习笔记-三/" title="JPA学习笔记(三)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

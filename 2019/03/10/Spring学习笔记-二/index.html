@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>Spring学习笔记(二) | maple</title>
+  <meta name="description" content="一. Spring的复习与导包1.1 什么是Spring 轻量级的DI/IOC与AOP的容器框架! BeanFactory与ApplicationContext的区别?   ApplicationContext是BeanFactory的子接口，扩展了他的功能 ApplicationContext在加载xml时就会初始化bean，BeanFactory使用bean的时候才创建  1.2导包 Spri">
+<meta name="keywords" content="框架篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring学习笔记(二)">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/03/10/Spring学习笔记-二/index.html">
+<meta property="og:site_name" content="maple博客">
+<meta property="og:description" content="一. Spring的复习与导包1.1 什么是Spring 轻量级的DI/IOC与AOP的容器框架! BeanFactory与ApplicationContext的区别?   ApplicationContext是BeanFactory的子接口，扩展了他的功能 ApplicationContext在加载xml时就会初始化bean，BeanFactory使用bean的时候才创建  1.2导包 Spri">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-10T14:10:48.393Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring学习笔记(二)">
+<meta name="twitter:description" content="一. Spring的复习与导包1.1 什么是Spring 轻量级的DI/IOC与AOP的容器框架! BeanFactory与ApplicationContext的区别?   ApplicationContext是BeanFactory的子接口，扩展了他的功能 ApplicationContext在加载xml时就会初始化bean，BeanFactory使用bean的时候才创建  1.2导包 Spri">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/10/Spring学习笔记-二/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://conjurermaple.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">maple</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java &amp; Other</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Chengdu, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架篇/">框架篇</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架篇/">框架篇</a><span class="tag-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 13.33px;">JAVA</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/前端/" style="font-size: 14px;">前端</a> <a href="/tags/框架篇/" style="font-size: 13.67px;">框架篇</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/10/Spring学习笔记-二/" class="title">Spring学习笔记(二)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-10T13:48:30.000Z" itemprop="datePublished">2019-03-10</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/09/JPA学习笔记-四/" class="title">JPA学习笔记(四)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-09T12:22:56.000Z" itemprop="datePublished">2019-03-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/07/JPA学习笔记-三/" class="title">JPA学习笔记(三)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-07T12:30:15.000Z" itemprop="datePublished">2019-03-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/06/JPA学习笔记-二/" class="title">JPA学习笔记(二)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-06T06:47:12.000Z" itemprop="datePublished">2019-03-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/04/JPA学习笔记-一/" class="title">JPA学习笔记(一)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-04T13:04:35.000Z" itemprop="datePublished">2019-03-04</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-Spring的复习与导包"><span class="toc-number">1.</span> <span class="toc-text">一. Spring的复习与导包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-什么是Spring"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 什么是Spring</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2导包"><span class="toc-number">1.2.</span> <span class="toc-text">1.2导包</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-构造器注入"><span class="toc-number">2.</span> <span class="toc-text">二. 构造器注入</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-根据下标进行引入"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 根据下标进行引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-根据名称进行引入"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 根据名称进行引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-根据类型进行引入"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 根据类型进行引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-自动进行引入"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 自动进行引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-在其它的bean的方式"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 在其它的bean的方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-属性注入"><span class="toc-number">3.</span> <span class="toc-text">三. 属性注入</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-普通属性"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 普通属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-集合"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-数组与properties"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 数组与properties</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四-XML的自动注入-了解即可"><span class="toc-number">4.</span> <span class="toc-text">四. XML的自动注入(了解即可)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五-全注解-重要"><span class="toc-number">5.</span> <span class="toc-text">五. 全注解(重要)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-扫描相应的包"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 扫描相应的包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-在相应的类上加注解"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 在相应的类上加注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-如果出现多个bean类型一样怎么办？"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 如果出现多个bean类型一样怎么办？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六-代理模式"><span class="toc-number">6.</span> <span class="toc-text">六 代理模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七-Spring的AOP"><span class="toc-number">7.</span> <span class="toc-text">七. Spring的AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-XML版本"><span class="toc-number">7.1.</span> <span class="toc-text">7.1  XML版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-注解版"><span class="toc-number">7.2.</span> <span class="toc-text">7.2 注解版</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Spring学习笔记-二" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring学习笔记(二)
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/03/10/Spring学习笔记-二/" class="article-date">
+	  <time datetime="2019-03-10T13:48:30.000Z" itemprop="datePublished">2019-03-10</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/10/Spring学习笔记-二/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="一-Spring的复习与导包"><a href="#一-Spring的复习与导包" class="headerlink" title="一. Spring的复习与导包"></a>一. Spring的复习与导包</h1><h2 id="1-1-什么是Spring"><a href="#1-1-什么是Spring" class="headerlink" title="1.1 什么是Spring"></a>1.1 什么是Spring</h2><ul>
+<li>轻量级的DI/IOC与AOP的容器框架!<blockquote>
+<p>BeanFactory与ApplicationContext的区别?</p>
+</blockquote>
+</li>
+<li>ApplicationContext是BeanFactory的子接口，扩展了他的功能</li>
+<li>ApplicationContext在加载xml时就会初始化bean，BeanFactory使用bean的时候才创建</li>
+</ul>
+<h2 id="1-2导包"><a href="#1-2导包" class="headerlink" title="1.2导包"></a>1.2导包</h2><blockquote>
+<p>Spring需要的包</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!--Spring的核心包--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.2.5.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!--Context包--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-context&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.2.5.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!--aop的包--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.2.5.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!--切面的一个包(织入)--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.8.8&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Spring的测试包 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-test&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.2.5.RELEASE&lt;/version&gt;</span><br><span class="line">    &lt;!--scope:范围,只能在test包中使用--&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!--junit的测试支持--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.12&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>引入一些插件与资源</p>
+</blockquote>
+<ul>
+<li>需要去读到java中的xml文件(默认不会编译)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">                &lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">    &lt;resources&gt;</span><br><span class="line">        &lt;resource&gt;</span><br><span class="line">            &lt;directory&gt;src/main/java&lt;/directory&gt;</span><br><span class="line">            &lt;includes&gt;</span><br><span class="line">                &lt;include&gt;**/*.xml&lt;/include&gt;</span><br><span class="line">            &lt;/includes&gt;</span><br><span class="line">        &lt;/resource&gt;</span><br><span class="line">        &lt;resource&gt;</span><br><span class="line">            &lt;directory&gt;src/test/java&lt;/directory&gt;</span><br><span class="line">            &lt;includes&gt;</span><br><span class="line">                &lt;include&gt;**/*.xml&lt;/include&gt;</span><br><span class="line">            &lt;/includes&gt;</span><br><span class="line">        &lt;/resource&gt;</span><br><span class="line">    &lt;/resources&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="二-构造器注入"><a href="#二-构造器注入" class="headerlink" title="二. 构造器注入"></a>二. 构造器注入</h1><ul>
+<li>标签: constructor-arg</li>
+<li>属性 index/name/type = 下标/名称/类型</li>
+<li>属性 value/ref = 普通的值/引用</li>
+</ul>
+<h2 id="2-1-根据下标进行引入"><a href="#2-1-根据下标进行引入" class="headerlink" title="2.1 根据下标进行引入"></a>2.1 根据下标进行引入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;myBean&quot; class=&quot;cn.itsource._02_constructor.MyBean&quot;&gt;</span><br><span class="line">    &lt;constructor-arg index=&quot;0&quot; value=&quot;小莫&quot; /&gt;</span><br><span class="line">    &lt;constructor-arg index=&quot;1&quot; value=&quot;99&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-根据名称进行引入"><a href="#2-2-根据名称进行引入" class="headerlink" title="2.2 根据名称进行引入"></a>2.2 根据名称进行引入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;myBean&quot; class=&quot;cn.itsource._02_constructor.MyBean&quot;&gt;</span><br><span class="line">    &lt;constructor-arg name=&quot;name&quot; value=&quot;小莫&quot; /&gt;</span><br><span class="line">    &lt;constructor-arg name=&quot;age&quot; value=&quot;99&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-根据类型进行引入"><a href="#2-3-根据类型进行引入" class="headerlink" title="2.3 根据类型进行引入"></a>2.3 根据类型进行引入</h2><blockquote>
+<p>不能出现重复类型</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;myBean&quot; class=&quot;cn.itsource._02_constructor.MyBean&quot;&gt;</span><br><span class="line">    &lt;constructor-arg type=&quot;java.lang.String&quot; value=&quot;小莫&quot; /&gt;</span><br><span class="line">    &lt;constructor-arg type=&quot;java.lang.Integer&quot; value=&quot;99&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-4-自动进行引入"><a href="#2-4-自动进行引入" class="headerlink" title="2.4 自动进行引入"></a>2.4 自动进行引入</h2><blockquote>
+<p>顺序是不允许修改的</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;myBean&quot; class=&quot;cn.itsource._02_constructor.MyBean&quot;&gt;</span><br><span class="line">    &lt;constructor-arg value=&quot;小莫&quot; /&gt;</span><br><span class="line">    &lt;constructor-arg value=&quot;99&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-5-在其它的bean的方式"><a href="#2-5-在其它的bean的方式" class="headerlink" title="2.5 在其它的bean的方式"></a>2.5 在其它的bean的方式</h2><blockquote>
+<p>外部bean是可以重复使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;otherBean&quot; class=&quot;cn.itsource._02_constructor.OtherBean&quot;&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    </span><br><span class="line">&lt;bean id=&quot;myBean&quot; class=&quot;cn.itsource._02_constructor.MyBean&quot;&gt;</span><br><span class="line">    &lt;!-- 外部bean --&gt;</span><br><span class="line">    &lt;constructor-arg index=0 ref=&quot;otherBean&quot; /&gt;</span><br><span class="line">    &lt;!-- 内部bean --&gt;</span><br><span class="line">    &lt;constructor-arg index=&quot;2&quot;&gt;</span><br><span class="line">        &lt;bean class=&quot;cn.itsource._02_constructor.OtherBean&quot; /&gt;</span><br><span class="line">    &lt;/constructor-arg&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="三-属性注入"><a href="#三-属性注入" class="headerlink" title="三. 属性注入"></a>三. 属性注入</h1><h2 id="3-1-普通属性"><a href="#3-1-普通属性" class="headerlink" title="3.1 普通属性"></a>3.1 普通属性</h2><blockquote>
+<p>准备属性</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 简单属性</span><br><span class="line">private Long id;</span><br><span class="line">private String name;</span><br><span class="line">private Boolean sex;</span><br><span class="line">private BigDecimal salary;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>配置的代码</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property name=&quot;id&quot; value=&quot;1&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;name&quot; value=&quot;王霸天&quot; /&gt;</span><br><span class="line">&lt;property name=&quot;sex&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">&lt;property name=&quot;salary&quot; value=&quot;58&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-集合"><a href="#3-2-集合" class="headerlink" title="3.2 集合"></a>3.2 集合</h2><blockquote>
+<p>准备的属性</p>
+</blockquote>
+<ul>
+<li>list与set(不允许重复)</li>
+<li>关键的那个标签(list,set,array)写错(与声明的匹配不上)也可以用(但是不建议)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private List&lt;String&gt; list;</span><br><span class="line">private Set&lt;String&gt; set;</span><br><span class="line">private List&lt;OtherBean&gt; otherBeanList;</span><br><span class="line">private Set&lt;OtherBean&gt; otherBeanSet;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>配置的代码</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;property name=&quot;list&quot;&gt;</span><br><span class="line">   &lt;list&gt;</span><br><span class="line">       &lt;value&gt;abc&lt;/value&gt;</span><br><span class="line">       &lt;value&gt;abc&lt;/value&gt;</span><br><span class="line">       &lt;value&gt;123&lt;/value&gt;</span><br><span class="line">       &lt;value&gt;321&lt;/value&gt;</span><br><span class="line">   &lt;/list&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;!--Set&lt;String&gt; set :无序,不重复--&gt;</span><br><span class="line">&lt;property name=&quot;set&quot;&gt;</span><br><span class="line">   &lt;set&gt;</span><br><span class="line">       &lt;value&gt;abc&lt;/value&gt;</span><br><span class="line">       &lt;value&gt;abc&lt;/value&gt;</span><br><span class="line">       &lt;value&gt;123&lt;/value&gt;</span><br><span class="line">       &lt;value&gt;321&lt;/value&gt;</span><br><span class="line">   &lt;/set&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;!--List&lt;OtherBean&gt; otherBeanList--&gt;</span><br><span class="line">&lt;property name=&quot;otherBeanList&quot;&gt;</span><br><span class="line">   &lt;list&gt;</span><br><span class="line">        &lt;ref bean=&quot;otherBean&quot; /&gt;</span><br><span class="line">        &lt;ref bean=&quot;otherBean&quot; /&gt;</span><br><span class="line">        &lt;bean class=&quot;cn.itsource._03_di.OtherBean&quot; /&gt;</span><br><span class="line">        &lt;bean class=&quot;cn.itsource._03_di.OtherBean&quot; /&gt;</span><br><span class="line">   &lt;/list&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;!--Set&lt;OtherBean&gt; otherBeanSet--&gt;</span><br><span class="line">&lt;property name=&quot;otherBeanSet&quot;&gt;</span><br><span class="line">   &lt;set&gt;</span><br><span class="line">       &lt;ref bean=&quot;otherBean&quot; /&gt;</span><br><span class="line">       &lt;ref bean=&quot;otherBean&quot; /&gt;</span><br><span class="line">       &lt;bean class=&quot;cn.itsource._03_di.OtherBean&quot; /&gt;</span><br><span class="line">       &lt;bean class=&quot;cn.itsource._03_di.OtherBean&quot; /&gt;</span><br><span class="line">   &lt;/set&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-数组与properties"><a href="#3-3-数组与properties" class="headerlink" title="3.3 数组与properties"></a>3.3 数组与properties</h2><ul>
+<li>数组与properties都有两种写法(简写形式)</li>
+<li>properties的简写形式不支持中文</li>
+</ul>
+<blockquote>
+<p>数组与properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">private String[] arrays;</span><br><span class="line">private Properties props1;</span><br><span class="line">private Properties props2;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>xml配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--String[] arrays :标准写法 --&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">&lt;property name=&quot;arrays&quot;&gt;</span><br><span class="line">   &lt;array&gt;</span><br><span class="line">       &lt;value&gt;abc&lt;/value&gt;</span><br><span class="line">       &lt;value&gt;def&lt;/value&gt;</span><br><span class="line">       &lt;value&gt;gf&lt;/value&gt;</span><br><span class="line">   &lt;/array&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">--&gt;</span><br><span class="line">&lt;!--String[] arrays :简写形式 (数组中每个值用,隔开)--&gt;</span><br><span class="line">&lt;property name=&quot;arrays&quot; value=&quot;abc,dfe,fd&quot; /&gt;</span><br><span class="line">&lt;!--Properties props1:标准写法--&gt;</span><br><span class="line">&lt;property name=&quot;props1&quot;&gt;</span><br><span class="line">   &lt;props&gt;</span><br><span class="line">       &lt;prop key=&quot;driver&quot;&gt;com.mysql.jdbc.Driver&lt;/prop&gt;</span><br><span class="line">       &lt;prop key=&quot;url&quot;&gt;jdbc:mysql:///spring哈哈&lt;/prop&gt;</span><br><span class="line">       &lt;prop key=&quot;username&quot;&gt;root&lt;/prop&gt;</span><br><span class="line">       &lt;prop key=&quot;password&quot;&gt;admin&lt;/prop&gt;</span><br><span class="line">   &lt;/props&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;!--Properties props2:简写形式(不支持中文)--&gt;</span><br><span class="line">&lt;property name=&quot;props2&quot;&gt;</span><br><span class="line">   &lt;value&gt;</span><br><span class="line">       driver=com.mysql.jdbc.Driver</span><br><span class="line">       url=jdbc:mysql:///spring哈哈</span><br><span class="line">       username=root</span><br><span class="line">   &lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="四-XML的自动注入-了解即可"><a href="#四-XML的自动注入-了解即可" class="headerlink" title="四. XML的自动注入(了解即可)"></a>四. XML的自动注入(了解即可)</h1><ul>
+<li>自动注入有两种方式 (类型与名称)</li>
+<li>设置全局的自动注入 <beans ... default-autowire="byType/byName"></beans></li>
+<li>单独为某一个bean配置自动注入 <bean ... autowire="byType/byName"></bean></li>
+</ul>
+<h1 id="五-全注解-重要"><a href="#五-全注解-重要" class="headerlink" title="五. 全注解(重要)"></a>五. 全注解(重要)</h1><h2 id="5-1-扫描相应的包"><a href="#5-1-扫描相应的包" class="headerlink" title="5.1 扫描相应的包"></a>5.1 扫描相应的包</h2><ul>
+<li>注意:引入context的头 &lt;context:component-scan base-package=”cn.itsource._05_anno” /&gt;</li>
+</ul>
+<h2 id="5-2-在相应的类上加注解"><a href="#5-2-在相应的类上加注解" class="headerlink" title="5.2 在相应的类上加注解"></a>5.2 在相应的类上加注解</h2><ul>
+<li><p>Controller：控制层</p>
+</li>
+<li><p>Service：业务层</p>
+</li>
+<li><p>Repository：持久层</p>
+</li>
+<li><p>Component:组件(一个bean不知道在哪一层用这个)</p>
+</li>
+<li><p>@Autowired:注入功能</p>
+</li>
+</ul>
+<h2 id="5-3-如果出现多个bean类型一样怎么办？"><a href="#5-3-如果出现多个bean类型一样怎么办？" class="headerlink" title="5.3 如果出现多个bean类型一样怎么办？"></a>5.3 如果出现多个bean类型一样怎么办？</h2><ul>
+<li>注解的bean有默认名称(类名【首字母小写】) 如 userDaoImpl</li>
+<li>修改bean的名称 Component/Service/Repository/Controller(“名称”)</li>
+<li>在注入bean的时候加上一个限定注解</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">@Qualifier(&quot;userJPADaoImpl&quot;)</span><br><span class="line">//@Resource(name = &quot;userJDBCDao&quot;)</span><br><span class="line">private IUserDao userDao;</span><br></pre></td></tr></table></figure>
+<h1 id="六-代理模式"><a href="#六-代理模式" class="headerlink" title="六 代理模式"></a>六 代理模式</h1><ul>
+<li>分为静态与动态</li>
+<li>Spring使用的是动态代码:JDK(接口)/CGLIB</li>
+<li>动态代理的代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">//通过JDK的方案创建一个动态代理对象呢？</span><br><span class="line">/**</span><br><span class="line"> * java.lang.reflect:Proxy(代理)对象</span><br><span class="line"> * Foo Bar:张三，李四，王五</span><br><span class="line"> *   ClassLoader loader ：类加载器(随便给它一个)</span><br><span class="line">     Class&lt;?&gt;[] interfaces:接口(为什么这里是一个数组)</span><br><span class="line">     InvocationHandler h :增强功能(自己实现)</span><br><span class="line"> */</span><br><span class="line">IEmployeeService proxy = (IEmployeeService)Proxy.newProxyInstance(</span><br><span class="line">    this.getClass().getClassLoader(),</span><br><span class="line">    employeeService.getClass().getInterfaces(),</span><br><span class="line">    new InvocationHandler() &#123;</span><br><span class="line">        /**</span><br><span class="line">         * @param proxy :代理对象(没有用)</span><br><span class="line">         * @param method :执行的方法</span><br><span class="line">         * @param args :方法中的参数</span><br><span class="line">         */</span><br><span class="line">        @Override</span><br><span class="line">        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">            Object result = null;</span><br><span class="line">            try &#123;</span><br><span class="line">                txManager.begin();</span><br><span class="line">                //在这里面完成功能增强</span><br><span class="line">                //通过反射执行相应的方法</span><br><span class="line">                result = method.invoke(employeeService, args);</span><br><span class="line">                txManager.commit();</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                txManager.rollback();</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; finally &#123;</span><br><span class="line">                txManager.close();</span><br><span class="line">            &#125;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="七-Spring的AOP"><a href="#七-Spring的AOP" class="headerlink" title="七. Spring的AOP"></a>七. Spring的AOP</h1><h2 id="7-1-XML版本"><a href="#7-1-XML版本" class="headerlink" title="7.1  XML版本"></a>7.1  XML版本</h2><blockquote>
+<p>准备接口:IEmployeeService</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface IEmployeeService &#123;</span><br><span class="line">    void save();</span><br><span class="line">    void update();</span><br><span class="line">    void delete();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>准备实现 EmployeeServiceImpl</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class EmployeeServiceImpl implements IEmployeeService &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void save() &#123;</span><br><span class="line">        System.out.println(&quot;送花给你....&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void update() &#123;</span><br><span class="line">        System.out.println(&quot;EmployeeServiceImpl udpate..&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void delete() &#123;</span><br><span class="line">        System.out.println(&quot;EmployeeServiceImpl delete..&quot;);</span><br><span class="line">        //int i = 1/0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>事务管理器(假)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class TxManager &#123;</span><br><span class="line"></span><br><span class="line">    public void begin()&#123;</span><br><span class="line">        System.out.println(&quot;开启事务...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void commit()&#123;</span><br><span class="line">        System.out.println(&quot;提交事务...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void rollback(Throwable e)&#123;</span><br><span class="line">        System.out.println(&quot;回滚事务...,错误的原因:&quot;+e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void close()&#123;</span><br><span class="line">        System.out.println(&quot;关闭资源...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //搞了一个ProceedingJoinPoint（连接点对象）</span><br><span class="line">    public void around(ProceedingJoinPoint joinPoint)&#123;</span><br><span class="line">        System.out.println(joinPoint.getArgs()); //参数</span><br><span class="line">        System.out.println(joinPoint.getSignature()); //方法签名(这个方法的所有信息)</span><br><span class="line">        System.out.println(joinPoint.getTarget().getClass()); //真实主题角色</span><br><span class="line">        System.out.println(joinPoint.getThis().getClass()); //代理主题角色</span><br><span class="line">        try &#123;</span><br><span class="line">            begin();</span><br><span class="line">            joinPoint.proceed(); //执行对应的方法</span><br><span class="line">            commit();</span><br><span class="line">        &#125; catch (Throwable e) &#123;</span><br><span class="line">            rollback(e);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>配置(关键)</p>
+<ul>
+<li>引入aop的头</li>
+<li>准备两个bean(EmployeeServiceImpl,TxManager)</li>
+<li>如果有环绕通知,其它通知就不需要了</li>
+<li>注意:何时,何地,做什么</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;</span><br><span class="line">       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd</span><br><span class="line">&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--真实主题角色--&gt;</span><br><span class="line">    &lt;bean id=&quot;employeeService&quot; class=&quot;cn.itsource._08_xmlaop.EmployeeServiceImpl&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--准备一个事务--&gt;</span><br><span class="line">    &lt;bean id=&quot;txManager&quot; class=&quot;cn.itsource._08_xmlaop.TxManager&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--何时,何地,做什么事--&gt;</span><br><span class="line">    &lt;!--代表要做一个AOP的配置--&gt;</span><br><span class="line">    &lt;aop:config&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">            配置(定义)切点 在哪些类的哪些方法进行功能</span><br><span class="line">                id:切点名称(随便取)</span><br><span class="line">                expression:表达式(最后定位都是方法)</span><br><span class="line">                    *:所有返回值</span><br><span class="line">                    cn.itsource._08_xmlaop:对应的包</span><br><span class="line">                    I*Service:以I开头,Service结尾的所有接口(所有实现接口的方法)</span><br><span class="line">                    *:所有方法</span><br><span class="line">                    (..):所有参数</span><br><span class="line">          --&gt;</span><br><span class="line">        &lt;aop:pointcut id=&quot;pointcut&quot; expression=&quot;execution(* cn.itsource._08_xmlaop.I*Service.*(..))&quot; /&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">            切面:由切点和增强组成</span><br><span class="line">                ref=&quot;txManager&quot; -&gt; 对应的增强类</span><br><span class="line">        --&gt;</span><br><span class="line">        &lt;aop:aspect ref=&quot;txManager&quot;&gt;</span><br><span class="line">            &lt;!--</span><br><span class="line">            aop:before:前置通知</span><br><span class="line">                何地:在哪些类的哪些方法中:pointcut</span><br><span class="line">                何时:在方法执行之前:before</span><br><span class="line">                做什么事:执行txManager这个bean中的begin方法</span><br><span class="line">                 try &#123;</span><br><span class="line">                        //前置通知</span><br><span class="line">                        result = method.invoke(employeeService, args);</span><br><span class="line">                        //后置通知</span><br><span class="line">                    &#125; catch (Exception e) &#123;</span><br><span class="line">                        //异常通知</span><br><span class="line">                    &#125; finally &#123;</span><br><span class="line">                        //最终通知</span><br><span class="line">                    &#125;</span><br><span class="line">            --&gt;</span><br><span class="line">            &lt;!--&lt;aop:before method=&quot;begin&quot; pointcut-ref=&quot;pointcut&quot; /&gt;--&gt;</span><br><span class="line">            &lt;!--后置通知--&gt;</span><br><span class="line">            &lt;!--&lt;aop:after-returning method=&quot;commit&quot; pointcut-ref=&quot;pointcut&quot;  /&gt;--&gt;</span><br><span class="line">            &lt;!--异常通知 throwing这个错,方法中才可以获到(名字必需一致) --&gt;</span><br><span class="line">            &lt;!--&lt;aop:after-throwing method=&quot;rollback&quot; pointcut-ref=&quot;pointcut&quot; throwing=&quot;e&quot; /&gt;--&gt;</span><br><span class="line">            &lt;!--最终通知 --&gt;</span><br><span class="line">            &lt;!--&lt;aop:after method=&quot;close&quot; pointcut-ref=&quot;pointcut&quot;  /&gt;--&gt;</span><br><span class="line">            &lt;!--环绕通知--&gt;</span><br><span class="line">            &lt;aop:around method=&quot;around&quot; pointcut-ref=&quot;pointcut&quot;  /&gt;</span><br><span class="line">        &lt;/aop:aspect&gt;</span><br><span class="line">    &lt;/aop:config&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>测试</p>
+</blockquote>
+<ul>
+<li>查看一下这个对象是否已经被代理</li>
+<li>声明必需是接口</li>
+<li>测试一下有异常与没有异常的区别</li>
+</ul>
+<h2 id="7-2-注解版"><a href="#7-2-注解版" class="headerlink" title="7.2 注解版"></a>7.2 注解版</h2><ul>
+<li>需要在相应的bean上加注解</li>
+<li>配置包的扫描</li>
+<li>所有的配置都是在TxManager加注解</li>
+</ul>
+<blockquote>
+<p>xml配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;</span><br><span class="line">       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd</span><br><span class="line">       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd</span><br><span class="line">&quot;&gt;</span><br><span class="line">    &lt;!--扫描包--&gt;</span><br><span class="line">    &lt;context:component-scan base-package=&quot;cn.itsource._09_annoaop&quot; /&gt;</span><br><span class="line">    &lt;!--支持切面的注解--&gt;</span><br><span class="line">    &lt;aop:aspectj-autoproxy /&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>TxManager</p>
+</blockquote>
+<ul>
+<li>切点的名字是方法名()</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">package cn.itsource._09_annoaop;</span><br><span class="line"></span><br><span class="line">import org.aspectj.lang.ProceedingJoinPoint;</span><br><span class="line">import org.aspectj.lang.annotation.*;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @Aspect -&gt; &lt;aop:aspect ref=&quot;txManager&quot;&gt;</span><br><span class="line"> */</span><br><span class="line">@Component</span><br><span class="line">@Aspect</span><br><span class="line">public class TxManager &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 切点:</span><br><span class="line">     * &lt;aop:pointcut id=&quot;pointcut()&quot; expression=&quot;execution(* cn.itsource._09_annoaop.I*Service.*(..))&quot; /&gt;</span><br><span class="line">     */</span><br><span class="line">    @Pointcut(&quot;execution(* cn.itsource._09_annoaop.I*Service.*(..))&quot;)</span><br><span class="line">    public void pointcut()&#123;&#125;</span><br><span class="line"></span><br><span class="line">//    @Before(&quot;pointcut()&quot;)</span><br><span class="line">    public void begin()&#123;</span><br><span class="line">        System.out.println(&quot;开启事务...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//    @AfterReturning(&quot;pointcut()&quot;)</span><br><span class="line">    public void commit()&#123;</span><br><span class="line">        System.out.println(&quot;提交事务...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//    @AfterThrowing(pointcut = &quot;pointcut()&quot;,throwing = &quot;e&quot;)</span><br><span class="line">    public void rollback(Throwable e)&#123;</span><br><span class="line">        System.out.println(&quot;回滚事务...,错误的原因:&quot;+e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//    @After(&quot;pointcut()&quot;)</span><br><span class="line">    public void close()&#123;</span><br><span class="line">        System.out.println(&quot;关闭资源...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //搞了一个ProceedingJoinPoint（连接点对象）</span><br><span class="line">    @Around(&quot;pointcut()&quot;)</span><br><span class="line">    public void around(ProceedingJoinPoint joinPoint)&#123;</span><br><span class="line">        System.out.println(joinPoint.getArgs()); //参数</span><br><span class="line">        System.out.println(joinPoint.getSignature()); //方法签名(这个方法的所有信息)</span><br><span class="line">        System.out.println(joinPoint.getTarget().getClass()); //真实主题角色</span><br><span class="line">        System.out.println(joinPoint.getThis().getClass()); //代理主题角色</span><br><span class="line">        try &#123;</span><br><span class="line">            begin();</span><br><span class="line">            joinPoint.proceed(); //执行对应的方法</span><br><span class="line">            commit();</span><br><span class="line">        &#125; catch (Throwable e) &#123;</span><br><span class="line">            rollback(e);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://conjurermaple.github.io/2019/03/10/Spring学习笔记-二/" title="Spring学习笔记(二)" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/10/Spring学习笔记-二/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://conjurermaple.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://conjurermaple.github.io/" target="_blank"><span class="text-dark">maple</span><small class="ml-1x">Java &amp; Other</small></a></h3>
+        <div>拼命努力的人，生活不会辜负你。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2019/03/09/JPA学习笔记-四/" title="JPA学习笔记(四)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Blog by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '383f19b856237c034a38',
+    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
+    repo: 'conjurermaple.github.io',
+    owner: 'ConjurerMaple',
+    admin: ['ConjurerMaple'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+
+
+
+
+</body>
+</html>
