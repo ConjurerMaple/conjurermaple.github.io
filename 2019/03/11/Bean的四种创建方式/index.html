@@ -17,25 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>JDK原生API解析XML | maple</title>
-  <meta name="description" content="1234567891011121314151617181920212223242526272829303132/**	 * @throws Exception	 * 修改某个节点的元素内容	 * 将第一个联系人的address的值改为重庆	 */	@Test	public void test2() throws Exception &amp;#123;		//获取DocumentBuilderFac">
-<meta name="keywords" content="JAVA">
+  <title>Bean的四种创建方式 | maple</title>
+  <meta name="description" content="1. 普通方式 利用公共无参构造创建  1&amp;lt;bean id=&amp;quot;hello&amp;quot; class=&amp;quot;cn.itsource._10_bean.HelloBean&amp;quot; /&amp;gt; 1.2 FactoryBean方式 一个类实现了FactoryBean接口 执行getObject方式，返回的值也会变成一个Bean   准备一个FactoryBean  12345678">
+<meta name="keywords" content="框架篇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JDK原生API解析XML">
-<meta property="og:url" content="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/index.html">
+<meta property="og:title" content="Bean的四种创建方式">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/03/11/Bean的四种创建方式/index.html">
 <meta property="og:site_name" content="maple博客">
-<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132/**	 * @throws Exception	 * 修改某个节点的元素内容	 * 将第一个联系人的address的值改为重庆	 */	@Test	public void test2() throws Exception &amp;#123;		//获取DocumentBuilderFac">
+<meta property="og:description" content="1. 普通方式 利用公共无参构造创建  1&amp;lt;bean id=&amp;quot;hello&amp;quot; class=&amp;quot;cn.itsource._10_bean.HelloBean&amp;quot; /&amp;gt; 1.2 FactoryBean方式 一个类实现了FactoryBean接口 执行getObject方式，返回的值也会变成一个Bean   准备一个FactoryBean  12345678">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/20181228124756383.png">
-<meta property="og:image" content="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/2018122813030697.png">
-<meta property="og:image" content="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/20181228125152407.png">
-<meta property="og:updated_time" content="2019-02-22T05:53:54.248Z">
+<meta property="og:updated_time" content="2019-03-11T11:50:04.793Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JDK原生API解析XML">
-<meta name="twitter:description" content="1234567891011121314151617181920212223242526272829303132/**	 * @throws Exception	 * 修改某个节点的元素内容	 * 将第一个联系人的address的值改为重庆	 */	@Test	public void test2() throws Exception &amp;#123;		//获取DocumentBuilderFac">
-<meta name="twitter:image" content="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/20181228124756383.png">
+<meta name="twitter:title" content="Bean的四种创建方式">
+<meta name="twitter:description" content="1. 普通方式 利用公共无参构造创建  1&amp;lt;bean id=&amp;quot;hello&amp;quot; class=&amp;quot;cn.itsource._10_bean.HelloBean&amp;quot; /&amp;gt; 1.2 FactoryBean方式 一个类实现了FactoryBean接口 执行getObject方式，返回的值也会变成一个Bean   准备一个FactoryBean  12345678">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/index.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/11/Bean的四种创建方式/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -344,21 +340,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-普通方式"><span class="toc-number">1.</span> <span class="toc-text">1. 普通方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-2-FactoryBean方式"><span class="toc-number">2.</span> <span class="toc-text">1.2 FactoryBean方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-3-静态工厂"><span class="toc-number">3.</span> <span class="toc-text">1.3 静态工厂</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-4-实例工厂"><span class="toc-number">4.</span> <span class="toc-text">1.4 实例工厂</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-JDK原生API解析XML" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Bean的四种创建方式" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      JDK原生API解析XML
+      Bean的四种创建方式
     </h1>
   
 
@@ -366,20 +362,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/02/22/JDK原生API解析XML/" class="article-date">
-	  <time datetime="2019-02-22T05:50:31.000Z" itemprop="datePublished">2019-02-22</time>
+	<a href="/2019/03/11/Bean的四种创建方式/" class="article-date">
+	  <time datetime="2019-03-11T11:46:12.000Z" itemprop="datePublished">2019-03-11</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
+    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/JAVA/">JAVA</a>
+	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
   </span>
 
 
@@ -392,19 +388,47 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/02/22/JDK原生API解析XML/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/11/Bean的四种创建方式/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p><img src="/2019/02/22/JDK原生API解析XML/20181228124756383.png" alt="作者：maple"></p>
-<p><img src="/2019/02/22/JDK原生API解析XML/2018122813030697.png" alt="作者：maple"></p>
-<p><img src="/2019/02/22/JDK原生API解析XML/20181228125152407.png" alt="作者：maple"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 * 修改某个节点的元素内容</span></span><br><span class="line"><span class="comment">	 * 将第一个联系人的address的值改为重庆</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">//获取DocumentBuilderFactory</span></span><br><span class="line">		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();</span><br><span class="line">		<span class="comment">//获取解析器</span></span><br><span class="line">		DocumentBuilder builder = builderFactory.newDocumentBuilder();</span><br><span class="line">		<span class="comment">//将内存中的XML解析为Document对象</span></span><br><span class="line">		Document dom = builder.parse(file);</span><br><span class="line">		<span class="comment">//拿到根节点</span></span><br><span class="line">		Element root = dom.getDocumentElement();</span><br><span class="line">		<span class="comment">//拿到第一个联系人</span></span><br><span class="line">		Element linkman = (Element) root.getElementsByTagName(<span class="string">"linkman"</span>).item(<span class="number">0</span>);</span><br><span class="line">		<span class="comment">//拿到第一个address</span></span><br><span class="line">		Node address = linkman.getElementsByTagName(<span class="string">"address"</span>).item(<span class="number">0</span>);</span><br><span class="line">		<span class="comment">//此时只是将内存中的数据更改了，没有做同步</span></span><br><span class="line">		address.setTextContent(<span class="string">"重庆"</span>);</span><br><span class="line">		<span class="comment">//同步</span></span><br><span class="line">		TransformerFactory transformerFactory = TransformerFactory.newInstance();</span><br><span class="line">		<span class="comment">//拿到转换器</span></span><br><span class="line">		Transformer transformer = transformerFactory.newTransformer();</span><br><span class="line">		<span class="comment">//拿到内存里面的数据</span></span><br><span class="line">		Source domSource = <span class="keyword">new</span> DOMSource(dom);</span><br><span class="line">		<span class="comment">//拿到磁盘上的文件</span></span><br><span class="line">		Result result = <span class="keyword">new</span> StreamResult(file);</span><br><span class="line">		transformer.transform(domSource, result);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 * 增加一个联系人</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Document dom = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);</span><br><span class="line">		<span class="comment">//获取根节点</span></span><br><span class="line">		Element root = dom.getDocumentElement();</span><br><span class="line">		<span class="comment">//创建linkman节点</span></span><br><span class="line">		Element linkman = dom.createElement(<span class="string">"linkman"</span>);</span><br><span class="line">		linkman.setAttribute(<span class="string">"id"</span>, <span class="string">"3"</span>);</span><br><span class="line">		root.appendChild(linkman);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//创建name</span></span><br><span class="line">		Element name = dom.createElement(<span class="string">"name"</span>);</span><br><span class="line">		name.setTextContent(<span class="string">"小米"</span>);</span><br><span class="line">		linkman.appendChild(name);</span><br><span class="line">		<span class="comment">//创建email</span></span><br><span class="line">		Element email = dom.createElement(<span class="string">"email"</span>);</span><br><span class="line">		email.setTextContent(<span class="string">"192033344@qq.com"</span>);</span><br><span class="line">		linkman.appendChild(email);</span><br><span class="line">		<span class="comment">//创建address</span></span><br><span class="line">		Element address = dom.createElement(<span class="string">"address"</span>);</span><br><span class="line">		address.setTextContent(<span class="string">"成都高新区"</span>);</span><br><span class="line">		linkman.appendChild(address);</span><br><span class="line">		<span class="comment">//创建group</span></span><br><span class="line">		Element group = dom.createElement(<span class="string">"group"</span>);</span><br><span class="line">		group.setTextContent(<span class="string">"小米科技有限公司"</span>);</span><br><span class="line">		linkman.appendChild(group);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//同步</span></span><br><span class="line">		TransformerFactory transformerFactory = TransformerFactory.newInstance();</span><br><span class="line">		Transformer transformer = transformerFactory.newTransformer();</span><br><span class="line">		Source source = <span class="keyword">new</span> DOMSource(dom);</span><br><span class="line">		Result result = <span class="keyword">new</span> StreamResult(file);</span><br><span class="line">		transformer.transform(source, result);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除第三个联系人</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);</span><br><span class="line">		Element root = document.getDocumentElement();</span><br><span class="line">		Node linkman = root.getElementsByTagName(<span class="string">"linkman"</span>).item(<span class="number">2</span>);</span><br><span class="line">		linkman.getParentNode().removeChild(linkman);</span><br><span class="line">		</span><br><span class="line">		Transformer transformer = TransformerFactory.newInstance().newTransformer();</span><br><span class="line">		Source source = <span class="keyword">new</span> DOMSource(document);</span><br><span class="line">		Result result = <span class="keyword">new</span> StreamResult(file);</span><br><span class="line">		transformer.transform(source, result);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
+        <h1 id="1-普通方式"><a href="#1-普通方式" class="headerlink" title="1. 普通方式"></a>1. 普通方式</h1><blockquote>
+<p>利用公共无参构造创建</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;hello&quot; class=&quot;cn.itsource._10_bean.HelloBean&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="1-2-FactoryBean方式"><a href="#1-2-FactoryBean方式" class="headerlink" title="1.2 FactoryBean方式"></a>1.2 FactoryBean方式</h1><ul>
+<li>一个类实现了FactoryBean接口</li>
+<li>执行getObject方式，返回的值也会变成一个Bean</li>
+</ul>
+<blockquote>
+<p>准备一个FactoryBean</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 一个类实现FactoryBean接口，那么它就是一个FactoryBean</span><br><span class="line"> *  泛型就是它要操作的那个类型</span><br><span class="line"> */</span><br><span class="line">public class EntityManagerFactoryBean implements FactoryBean&lt;EntityManagerFactory&gt; &#123;</span><br><span class="line"></span><br><span class="line">    //这个方法返回什么对象，我们拿到的bean就是什么对象</span><br><span class="line">    @Override</span><br><span class="line">    public EntityManagerFactory getObject() throws Exception &#123;</span><br><span class="line">        return Persistence.createEntityManagerFactory();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //返回的对象类型</span><br><span class="line">    @Override</span><br><span class="line">    public Class&lt;?&gt; getObjectType() &#123;</span><br><span class="line">        return EntityManagerFactory.class;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //这个对象是否是单例的</span><br><span class="line">    @Override</span><br><span class="line">    public boolean isSingleton() &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="1-3-静态工厂"><a href="#1-3-静态工厂" class="headerlink" title="1.3 静态工厂"></a>1.3 静态工厂</h1><ul>
+<li>工厂中有一个静态方法</li>
+<li>直接拿到这个方法中返回的对象(bean)</li>
+</ul>
+<blockquote>
+<p>准备一个静态工厂</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class DaoFactory &#123;</span><br><span class="line">    //在这个工厂中有一个静态方法</span><br><span class="line">    public static MyDao createMyDao()&#123;</span><br><span class="line">        return new MyDao();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>配置这个工厂对应的方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;myDao&quot; class=&quot;cn.itsource._10_bean.DaoFactory&quot;</span><br><span class="line">          factory-method=&quot;createMyDao&quot;&gt;&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="1-4-实例工厂"><a href="#1-4-实例工厂" class="headerlink" title="1.4 实例工厂"></a>1.4 实例工厂</h1><ul>
+<li>工厂中有个方法</li>
+<li>直接拿到这个方法中返回的对象(bean)</li>
+</ul>
+<blockquote>
+<p>准备一个工厂<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class DaoFactory &#123;</span><br><span class="line">    public  MyDao createMyDao()&#123;</span><br><span class="line">        return new MyDao();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>配置这个工厂对应的方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--工厂的一个方法(非静态)--&gt;</span><br><span class="line">&lt;bean id=&quot;daoFactory&quot; class=&quot;cn.itsource._10_bean.DaoFactory&quot; /&gt;</span><br><span class="line">&lt;bean id=&quot;myDao&quot; factory-bean=&quot;daoFactory&quot; factory-method=&quot;createMyDao&quot; /&gt;</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
@@ -413,7 +437,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/" title="JDK原生API解析XML" target="_blank" rel="external">https://conjurermaple.github.io/2019/02/22/JDK原生API解析XML/</a>
+      <a href="https://conjurermaple.github.io/2019/03/11/Bean的四种创建方式/" title="Bean的四种创建方式" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/11/Bean的四种创建方式/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -459,13 +483,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2019/02/23/Ajax结合json案例学习/" title="Ajax结合json案例学习"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2019/02/22/Dom4j解析XML/" title="Dom4j解析XML"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/03/11/SSJ-Spring-SpringMvc-JPA-集成/" title="SSJ(Spring+SpringMvc+JPA)集成"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
