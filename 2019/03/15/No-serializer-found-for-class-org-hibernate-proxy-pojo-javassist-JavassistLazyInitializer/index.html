@@ -17,18 +17,23 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>404 Not Found：该页无法显示 | maple</title>
-  <meta name="keywords" content="JAVA">
-<meta property="og:type" content="website">
-<meta property="og:title" content="404 Not Found：该页无法显示">
-<meta property="og:url" content="https://conjurermaple.github.io/404.html">
+  <title>No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer | maple</title>
+  <meta name="description" content="出现原因：SpringMVC与Jpa集成的时候(有懒加载)就会出现这个问题这是因为你需要序列化对象有一个属性是一类类型，而你使用了Hibernate的延迟加载所以这里是个Hibernate的代理对象。该代理对象有些属性不能被序列化所以会报错。  解决方案：  方式一：在类上加属性：生成的时候把这个字段忽略了：@JsonIgnoreProperties(value={“hibernateLazyIn">
+<meta name="keywords" content="错误积累">
+<meta property="og:type" content="article">
+<meta property="og:title" content="No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/index.html">
 <meta property="og:site_name" content="maple博客">
+<meta property="og:description" content="出现原因：SpringMVC与Jpa集成的时候(有懒加载)就会出现这个问题这是因为你需要序列化对象有一个属性是一类类型，而你使用了Hibernate的延迟加载所以这里是个Hibernate的代理对象。该代理对象有些属性不能被序列化所以会报错。  解决方案：  方式一：在类上加属性：生成的时候把这个字段忽略了：@JsonIgnoreProperties(value={“hibernateLazyIn">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-21T11:24:38.160Z">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/1.png">
+<meta property="og:updated_time" content="2019-03-15T13:06:34.510Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="404 Not Found：该页无法显示">
+<meta name="twitter:title" content="No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer">
+<meta name="twitter:description" content="出现原因：SpringMVC与Jpa集成的时候(有懒加载)就会出现这个问题这是因为你需要序列化对象有一个属性是一类类型，而你使用了Hibernate的延迟加载所以这里是个Hibernate的代理对象。该代理对象有些属性不能被序列化所以会报错。  解决方案：  方式一：在类上加属性：生成的时候把这个字段忽略了：@JsonIgnoreProperties(value={“hibernateLazyIn">
+<meta name="twitter:image" content="https://conjurermaple.github.io/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/1.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/404.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -333,16 +338,25 @@
 
   
   
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text"></span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
 <main class="main" role="main">
   <div class="content">
-  <article id="page-" class="article article-type-page" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      404 Not Found：该页无法显示
+      No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer
     </h1>
   
 
@@ -350,12 +364,22 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/404.html" class="article-date">
-	  <time datetime="2019-02-22T06:55:02.968Z" itemprop="datePublished">2019-02-22</time>
+	<a href="/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/" class="article-date">
+	  <time datetime="2019-03-15T13:03:37.000Z" itemprop="datePublished">2019-03-15</time>
 	</a>
 </span>
         
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/错误积累/">错误积累</a>
+  </span>
+
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/错误积累/">错误积累</a>
+  </span>
+
 
         
 	<span class="article-read hidden-xs">
@@ -366,13 +390,22 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/404.html#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <script type="text/javascript" src="//www.qq.com/404/search_children.js" charset="utf-8" homepageurl="<%- config.url %>" homepagename="回到我的主页"></script>
+        <h2 id><a href="#" class="headerlink" title></a><img src="/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/1.png" alt="作者：Z-AI"></h2><p>出现原因：SpringMVC与Jpa集成的时候(有懒加载)就会出现这个问题<br>这是因为你需要序列化对象有一个属性是一类类型，而你使用了Hibernate的延迟加载所以这里是个Hibernate的代理对象。该代理对象有些属性不能被序列化所以会报错。</p>
+<blockquote>
+<p>解决方案：</p>
+<ul>
+<li>方式一：<br>在类上加属性：生成的时候把这个字段忽略了：<br>@JsonIgnoreProperties(value={“hibernateLazyInitializer”,”handler”,”fieldHandler”})</li>
+</ul>
+</blockquote>
+<ul>
+<li>方式二：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">第一步：创建一个新的类(重写com.fasterxml.jackson.databind.ObjectMapper)</span><br><span class="line">package cn.itsource.pss.common;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.annotation.JsonInclude;</span><br><span class="line">import com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line">import com.fasterxml.jackson.databind.SerializationFeature;</span><br><span class="line"></span><br><span class="line">public class CustomMapper extends ObjectMapper &#123;</span><br><span class="line">    public CustomMapper() &#123;</span><br><span class="line">        this.setSerializationInclusion(JsonInclude.Include.NON_NULL);</span><br><span class="line">        // 设置 SerializationFeature.FAIL_ON_EMPTY_BEANS 为 false</span><br><span class="line">        this.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">第二步：在applicationContext-mvc.xml中配置一下即可</span><br><span class="line">&lt;!-- Spring MVC 配置 --&gt;</span><br><span class="line">&lt;mvc:annotation-driven&gt;</span><br><span class="line">    &lt;mvc:message-converters&gt;</span><br><span class="line">        &lt;bean class=&quot;org.springframework.http.converter.json.MappingJackson2HttpMessageConverter&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;supportedMediaTypes&quot;&gt;</span><br><span class="line">                &lt;list&gt;</span><br><span class="line">                    &lt;value&gt;application/json; charset=UTF-8&lt;/value&gt;</span><br><span class="line">                    &lt;value&gt;application/x-www-form-urlencoded; charset=UTF-8&lt;/value&gt;</span><br><span class="line">                &lt;/list&gt;</span><br><span class="line">            &lt;/property&gt;</span><br><span class="line">            &lt;!-- No serializer:配置 objectMapper 为我们自定义扩展后的 CustomMapper,解决了返回对象有关系对象的报错问题 --&gt;</span><br><span class="line">            &lt;property name=&quot;objectMapper&quot;&gt;</span><br><span class="line">                &lt;bean class=&quot;cn.itsource.pss.common.CustomMapper&quot;&gt;&lt;/bean&gt;</span><br><span class="line">            &lt;/property&gt;</span><br><span class="line">        &lt;/bean&gt;</span><br><span class="line">    &lt;/mvc:message-converters&gt;</span><br><span class="line">&lt;/mvc:annotation-driven&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -382,7 +415,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://conjurermaple.github.io//404.html" title="404 Not Found：该页无法显示" target="_blank" rel="external">https://conjurermaple.github.io//404.html</a>
+      <a href="https://conjurermaple.github.io/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/" title="No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -413,12 +446,37 @@
   </article>
   
     
+  <section id="comments">
+  	
+           
+    
+  </section>
+
 
   
 </div>
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
   <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2019/03/15/could-not-initialize-proxy-no-Session错误/" title="could not initialize proxy - no Session错误"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
   
   
   <!-- Button trigger modal -->
@@ -534,6 +592,33 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '383f19b856237c034a38',
+    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
+    repo: 'conjurermaple.github.io',
+    owner: 'ConjurerMaple',
+    admin: ['ConjurerMaple'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
 
 
 
