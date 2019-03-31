@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>SpringDataJPA条件查询+分页排序 | maple</title>
-  <meta name="description" content="123456789101112131415161718192021222324@Testpublic void testFind03() &amp;#123;    Specification spec = new Specification&amp;lt;Employee&amp;gt;() &amp;#123;        @Override        public Predicate toPredicate(Root">
+  <title>使用easypoi集成SpringMVC进行大数据导出 | maple</title>
+  <meta name="description" content="导包 导入easypoi的包，注意：要去掉poi的包，有冲突  12345678910111213141516&amp;lt;!-- easypoi的支持 使用easypoi要取消poi的包-有冲突 --&amp;gt;    &amp;lt;dependency&amp;gt;      &amp;lt;groupId&amp;gt;cn.afterturn&amp;lt;/groupId&amp;gt;      &amp;lt;artifactId&amp;gt;eas">
 <meta name="keywords" content="框架篇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringDataJPA条件查询+分页排序">
-<meta property="og:url" content="https://conjurermaple.github.io/2019/03/30/SpringDataJPA条件查询-分页排序/index.html">
+<meta property="og:title" content="使用easypoi集成SpringMVC进行大数据导出">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/03/31/使用easypoi集成SpringMVC进行大数据导出/index.html">
 <meta property="og:site_name" content="maple博客">
-<meta property="og:description" content="123456789101112131415161718192021222324@Testpublic void testFind03() &amp;#123;    Specification spec = new Specification&amp;lt;Employee&amp;gt;() &amp;#123;        @Override        public Predicate toPredicate(Root">
+<meta property="og:description" content="导包 导入easypoi的包，注意：要去掉poi的包，有冲突  12345678910111213141516&amp;lt;!-- easypoi的支持 使用easypoi要取消poi的包-有冲突 --&amp;gt;    &amp;lt;dependency&amp;gt;      &amp;lt;groupId&amp;gt;cn.afterturn&amp;lt;/groupId&amp;gt;      &amp;lt;artifactId&amp;gt;eas">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-30T13:22:43.283Z">
+<meta property="og:updated_time" content="2019-03-31T13:53:01.962Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringDataJPA条件查询+分页排序">
-<meta name="twitter:description" content="123456789101112131415161718192021222324@Testpublic void testFind03() &amp;#123;    Specification spec = new Specification&amp;lt;Employee&amp;gt;() &amp;#123;        @Override        public Predicate toPredicate(Root">
+<meta name="twitter:title" content="使用easypoi集成SpringMVC进行大数据导出">
+<meta name="twitter:description" content="导包 导入easypoi的包，注意：要去掉poi的包，有冲突  12345678910111213141516&amp;lt;!-- easypoi的支持 使用easypoi要取消poi的包-有冲突 --&amp;gt;    &amp;lt;dependency&amp;gt;      &amp;lt;groupId&amp;gt;cn.afterturn&amp;lt;/groupId&amp;gt;      &amp;lt;artifactId&amp;gt;eas">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/30/SpringDataJPA条件查询-分页排序/index.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/31/使用easypoi集成SpringMVC进行大数据导出/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -340,21 +340,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#导包"><span class="toc-number">1.</span> <span class="toc-text">导包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#新建domain"><span class="toc-number">2.</span> <span class="toc-text">新建domain</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#新建ExcelExportServer"><span class="toc-number">3.</span> <span class="toc-text">新建ExcelExportServer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#applicationContext-mvc-xml配置"><span class="toc-number">4.</span> <span class="toc-text">applicationContext-mvc.xml配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#controller代码"><span class="toc-number">5.</span> <span class="toc-text">controller代码</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-SpringDataJPA条件查询-分页排序" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-使用easypoi集成SpringMVC进行大数据导出" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      SpringDataJPA条件查询+分页排序
+      使用easypoi集成SpringMVC进行大数据导出
     </h1>
   
 
@@ -362,8 +362,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/30/SpringDataJPA条件查询-分页排序/" class="article-date">
-	  <time datetime="2019-03-30T13:21:47.000Z" itemprop="datePublished">2019-03-30</time>
+	<a href="/2019/03/31/使用easypoi集成SpringMVC进行大数据导出/" class="article-date">
+	  <time datetime="2019-03-31T13:45:45.000Z" itemprop="datePublished">2019-03-31</time>
 	</a>
 </span>
         
@@ -388,13 +388,24 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/30/SpringDataJPA条件查询-分页排序/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/31/使用easypoi集成SpringMVC进行大数据导出/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void testFind03() &#123;</span><br><span class="line">    Specification spec = new Specification&lt;Employee&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public Predicate toPredicate(Root root, CriteriaQuery query, CriteriaBuilder cb) &#123;</span><br><span class="line">            //加上条件: username like &apos;%1%&apos;</span><br><span class="line">            Path path1 = root.get(&quot;username&quot;);</span><br><span class="line">            Predicate p1 = cb.and(cb.like(path1, &quot;%1%&quot;));</span><br><span class="line">            //把两个查询条件放到query对象中去(条件使用where)</span><br><span class="line">            CriteriaQuery where = query.where(p1);</span><br><span class="line">            //返回查询条件</span><br><span class="line">            return where.getRestriction();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    //排序 ：第一个参数是排序的规则(DESC/ASC)  后面参数是排序的字符</span><br><span class="line">    Sort sort = new Sort(Sort.Direction.DESC,&quot;username&quot;);</span><br><span class="line">    Pageable pageable = new PageRequest(0, 10,sort);</span><br><span class="line"></span><br><span class="line">    Page&lt;Employee&gt; page = employeeRepository.findAll(spec, pageable);</span><br><span class="line">    for (Employee emp : page) &#123;</span><br><span class="line">        System.out.println(emp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h1><blockquote>
+<p>导入easypoi的包，注意：要去掉poi的包，有冲突</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- easypoi的支持 使用easypoi要取消poi的包-有冲突 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;cn.afterturn&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;easypoi-base&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.2.0&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;cn.afterturn&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;easypoi-web&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.2.0&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;cn.afterturn&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;easypoi-annotation&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.2.0&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="新建domain"><a href="#新建domain" class="headerlink" title="新建domain"></a>新建domain</h1><p>我现在数据库里插入了接近一百万条数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//这里使用了jpa</span><br><span class="line"></span><br><span class="line">我这里做测试，就简单建了</span><br><span class="line">@Entity</span><br><span class="line">@Table(name = &quot;bigdata&quot;)</span><br><span class="line">public class BigData extends BaseDomain&#123;</span><br><span class="line">    @Excel(name = &quot;名称&quot;,width = 15) </span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="新建ExcelExportServer"><a href="#新建ExcelExportServer" class="headerlink" title="新建ExcelExportServer"></a>新建ExcelExportServer</h1><p>要使用easypoi的大数据导出，需要实现IExcelExportServer接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class MyExcelExportServer implements IExcelExportServer &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private IBigDataService bigDataService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public List&lt;Object&gt; selectListForExcelExport(Object o, int i) &#123;</span><br><span class="line">        //i是页码，自动传入，进行分页查询</span><br><span class="line">        List list = bigDataService.queryLimit(i);</span><br><span class="line">        System.out.println(&quot;----------&quot;+i);</span><br><span class="line">        return list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="applicationContext-mvc-xml配置"><a href="#applicationContext-mvc-xml配置" class="headerlink" title="applicationContext-mvc.xml配置"></a>applicationContext-mvc.xml配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//固定写法</span><br><span class="line">&lt;context:component-scan base-package=&quot;cn.afterturn.easypoi.handler.inter&quot;/&gt;</span><br><span class="line"></span><br><span class="line">//实现IExcelExportServer接口的类</span><br><span class="line">&lt;bean class=&quot;cn.pj.aisell.common.MyExcelExportServer&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="controller代码"><a href="#controller代码" class="headerlink" title="controller代码"></a>controller代码</h1><blockquote>
+<p>注意：这里有一个坑，发现不能有title，不然会报错，我已经注释了</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//大数据导出`</span><br><span class="line">    @RequestMapping(&quot;/bigdata&quot;)</span><br><span class="line">    public void downloadByPoiBaseView(ModelMap map, HttpServletRequest request,</span><br><span class="line">                                      HttpServletResponse response) &#123;</span><br><span class="line">//        ExportParams params = new ExportParams(&quot;2412312&quot;, &quot;测试&quot;, ExcelType.XSSF);</span><br><span class="line">        long start = new Date().getTime();</span><br><span class="line">        ExportParams params = new ExportParams();</span><br><span class="line">//        params.setFreezeCol(2);</span><br><span class="line">        map.put(BigExcelConstants.CLASS, BigData.class);</span><br><span class="line">        map.put(BigExcelConstants.PARAMS, params);</span><br><span class="line">        map.put(BigExcelConstants.FILE_NAME, &quot;lala&quot;);</span><br><span class="line">        //就是我们的查询参数,会带到接口中,供接口查询使用</span><br><span class="line">        map.put(BigExcelConstants.DATA_PARAMS, new HashMap&lt;String,String&gt;());</span><br><span class="line">        map.put(BigExcelConstants.DATA_INTER,excelExportServer );</span><br><span class="line">        PoiBaseView.render(map, request, response, BigExcelConstants.EASYPOI_BIG_EXCEL_VIEW);</span><br><span class="line">        long end = new Date().getTime();</span><br><span class="line">        System.out.println(&quot;总共用时:&quot;+(end-start));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
@@ -403,7 +414,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://conjurermaple.github.io/2019/03/30/SpringDataJPA条件查询-分页排序/" title="SpringDataJPA条件查询+分页排序" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/30/SpringDataJPA条件查询-分页排序/</a>
+      <a href="https://conjurermaple.github.io/2019/03/31/使用easypoi集成SpringMVC进行大数据导出/" title="使用easypoi集成SpringMVC进行大数据导出" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/31/使用easypoi集成SpringMVC进行大数据导出/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -449,13 +460,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2019/03/30/SpringDataJPA自己扩展功能/" title="SpringDataJPA自己扩展功能"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2019/03/30/JPA多个条件查询/" title="SpringDataJPA多个条件查询"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/03/31/spring发送邮件/" title="spring发送邮件"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
