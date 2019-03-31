@@ -17,23 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>web.xml低版本不支持EL表达式 | maple</title>
-  <meta name="description" content="现在web.xml使用提2.3的版本，这个版本是不支持EL表达式的，所以我们需要改它的头修改成2.4及以上版本！  修改为3.1版本的  1234567&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;lt;web-app xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchem">
+  <title>shiro单用登录(同一时刻只能登录一个账号) | maple</title>
+  <meta name="description" content="applicationContext-shiro.xml123456789101112131415161718192021222324&amp;lt;bean id=&amp;quot;myRealm&amp;quot; class=&amp;quot;com.sys.shiro.MyRealm&amp;quot; /&amp;gt;    &amp;lt;bean id=&amp;quot;sessionDAO&amp;quot; class=&amp;quot;org.a">
 <meta name="keywords" content="框架篇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="web.xml低版本不支持EL表达式">
-<meta property="og:url" content="https://conjurermaple.github.io/2019/03/31/web-xml低版本不支持EL表达式/index.html">
+<meta property="og:title" content="shiro单用登录(同一时刻只能登录一个账号)">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/03/31/shiro单用登录-同一时刻只能登录一个账号/index.html">
 <meta property="og:site_name" content="maple博客">
-<meta property="og:description" content="现在web.xml使用提2.3的版本，这个版本是不支持EL表达式的，所以我们需要改它的头修改成2.4及以上版本！  修改为3.1版本的  1234567&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;lt;web-app xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchem">
+<meta property="og:description" content="applicationContext-shiro.xml123456789101112131415161718192021222324&amp;lt;bean id=&amp;quot;myRealm&amp;quot; class=&amp;quot;com.sys.shiro.MyRealm&amp;quot; /&amp;gt;    &amp;lt;bean id=&amp;quot;sessionDAO&amp;quot; class=&amp;quot;org.a">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://conjurermaple.github.io/2019/03/31/web-xml低版本不支持EL表达式/1.png">
-<meta property="og:updated_time" content="2019-03-31T04:57:09.111Z">
+<meta property="og:updated_time" content="2019-03-31T14:20:27.573Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="web.xml低版本不支持EL表达式">
-<meta name="twitter:description" content="现在web.xml使用提2.3的版本，这个版本是不支持EL表达式的，所以我们需要改它的头修改成2.4及以上版本！  修改为3.1版本的  1234567&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;lt;web-app xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchem">
-<meta name="twitter:image" content="https://conjurermaple.github.io/2019/03/31/web-xml低版本不支持EL表达式/1.png">
+<meta name="twitter:title" content="shiro单用登录(同一时刻只能登录一个账号)">
+<meta name="twitter:description" content="applicationContext-shiro.xml123456789101112131415161718192021222324&amp;lt;bean id=&amp;quot;myRealm&amp;quot; class=&amp;quot;com.sys.shiro.MyRealm&amp;quot; /&amp;gt;    &amp;lt;bean id=&amp;quot;sessionDAO&amp;quot; class=&amp;quot;org.a">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/31/web-xml低版本不支持EL表达式/index.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/31/shiro单用登录-同一时刻只能登录一个账号/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -342,21 +340,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#applicationContext-shiro-xml"><span class="toc-number">1.</span> <span class="toc-text">applicationContext-shiro.xml</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#controller"><span class="toc-number">2.</span> <span class="toc-text">controller</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-web-xml低版本不支持EL表达式" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-shiro单用登录-同一时刻只能登录一个账号" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      web.xml低版本不支持EL表达式
+      shiro单用登录(同一时刻只能登录一个账号)
     </h1>
   
 
@@ -364,8 +362,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/31/web-xml低版本不支持EL表达式/" class="article-date">
-	  <time datetime="2019-03-31T03:58:48.000Z" itemprop="datePublished">2019-03-31</time>
+	<a href="/2019/03/31/shiro单用登录-同一时刻只能登录一个账号/" class="article-date">
+	  <time datetime="2019-03-31T14:12:02.000Z" itemprop="datePublished">2019-03-31</time>
 	</a>
 </span>
         
@@ -390,18 +388,14 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/31/web-xml低版本不支持EL表达式/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/31/shiro单用登录-同一时刻只能登录一个账号/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p><img src="/2019/03/31/web-xml低版本不支持EL表达式/1.png" alt="作者：maple"></p>
-<p>现在web.xml使用提2.3的版本，这个版本是不支持EL表达式的，<br>所以我们需要改它的头修改成2.4及以上版本！</p>
-<blockquote>
-<p>修改为3.1版本的</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;</span><br><span class="line">         id=&quot;WebApp_ID&quot; version=&quot;3.1&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
+        <h1 id="applicationContext-shiro-xml"><a href="#applicationContext-shiro-xml" class="headerlink" title="applicationContext-shiro.xml"></a>applicationContext-shiro.xml</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;myRealm&quot; class=&quot;com.sys.shiro.MyRealm&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;bean id=&quot;sessionDAO&quot; class=&quot;org.apache.shiro.session.mgt.eis.MemorySessionDAO&quot;&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;bean id=&quot;sessionManager&quot;</span><br><span class="line">        class=&quot;org.apache.shiro.web.session.mgt.DefaultWebSessionManager&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;globalSessionTimeout&quot; value=&quot;1800000&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;deleteInvalidSessions&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;sessionValidationSchedulerEnabled&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;sessionValidationInterval&quot; value=&quot;1800000&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;sessionIdCookie&quot; ref=&quot;sessionIdCookie&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;sessionDAO&quot; ref=&quot;sessionDAO&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- Shiro默认会使用Servlet容器的Session,可通过sessionMode属性来指定使用Shiro原生Session --&gt;</span><br><span class="line">    &lt;!-- 即&lt;property name=&quot;sessionMode&quot; value=&quot;native&quot;/&gt;,详细说明见官方文档 --&gt;</span><br><span class="line">    &lt;!-- 这里主要是设置自定义的单Realm应用,若有多个Realm,可使用&apos;realms&apos;属性代替 --&gt;</span><br><span class="line">    &lt;bean id=&quot;securityManager&quot; class=&quot;org.apache.shiro.web.mgt.DefaultWebSecurityManager&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;cacheManager&quot; ref=&quot;shiroCacheManager&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;realm&quot; ref=&quot;myRealm&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;sessionManager&quot; ref=&quot;sessionManager&quot; /&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="controller"><a href="#controller" class="headerlink" title="controller"></a>controller</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value = &quot;/login&quot;,method = RequestMethod.POST)</span><br><span class="line">   @ResponseBody</span><br><span class="line">   public JsonResult login(String username, String password,String code,HttpServletRequest request) &#123;</span><br><span class="line">       String random = (String)request.getSession().getAttribute(&quot;RANDOMCODE_IN_SESSION&quot;);</span><br><span class="line">       boolean same = RandomCodeUtils.isSame(random, code);</span><br><span class="line">       if (!same) &#123;</span><br><span class="line">           //验证码不同</span><br><span class="line">           return new JsonResult(false,&quot;验证码不正确&quot;);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       Collection&lt;Session&gt; sessions = sessionDAO.getActiveSessions();</span><br><span class="line">       for (Session session : sessions) &#123;</span><br><span class="line"></span><br><span class="line">           System.out.println(&quot;登录用户&quot; + session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY));</span><br><span class="line">           if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) != null) &#123;</span><br><span class="line">               return new JsonResult(false,&quot;该用户已经登录&quot;);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       //拿到当前用户</span><br><span class="line">       Subject subject = SecurityUtils.getSubject();</span><br><span class="line">       //判断是否登录</span><br><span class="line">       if (!subject.isAuthenticated()) &#123;</span><br><span class="line">           try &#123;</span><br><span class="line">               UsernamePasswordToken token = new UsernamePasswordToken(username,password);</span><br><span class="line">               subject.login(token);</span><br><span class="line">           &#125; catch (UnknownAccountException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">               System.err.println(&quot;用户名不正确&quot;);</span><br><span class="line">               return new JsonResult(false,&quot;用户名或密码错误&quot;);</span><br><span class="line">           &#125; catch (IncorrectCredentialsException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">               System.err.println(&quot;密码不正确&quot;);</span><br><span class="line">               return new JsonResult(false,&quot;用户名或密码错误&quot;);</span><br><span class="line">           &#125; catch (AuthenticationException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">               return new JsonResult(false,&quot;未知错误&quot;);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       //将当前登录用户放入session</span><br><span class="line">       UserContext.setUser();</span><br><span class="line">       return new JsonResult();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
@@ -410,7 +404,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://conjurermaple.github.io/2019/03/31/web-xml低版本不支持EL表达式/" title="web.xml低版本不支持EL表达式" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/31/web-xml低版本不支持EL表达式/</a>
+      <a href="https://conjurermaple.github.io/2019/03/31/shiro单用登录-同一时刻只能登录一个账号/" title="shiro单用登录(同一时刻只能登录一个账号)" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/31/shiro单用登录-同一时刻只能登录一个账号/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -456,13 +450,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2019/03/31/修改造成数据丢失/" title="修改造成数据丢失"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2019/03/30/SpringDataJPA自己扩展功能/" title="SpringDataJPA自己扩展功能"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/03/31/datagrid三次请求/" title="datagrid三次相同请求"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
