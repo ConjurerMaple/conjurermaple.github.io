@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>shiro学习笔记(一) | maple</title>
+  <meta name="description" content="1. shiro认识Apache Shiro是一个强大且易用的Java安全框架,有身份验证、授权、密码学和会话管理。使用Shiro的易于理解的API,您可以快速、轻松地获得任何应用程序,从最小的移动应用程序到最大的网络和企业应用程序。与之相对的还有一个是Spring security 1.1 shiro和Spring security区别   框架 shiro Spring security">
+<meta name="keywords" content="框架篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shiro学习笔记(一)">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/03/31/shiro学习笔记-一/index.html">
+<meta property="og:site_name" content="maple博客">
+<meta property="og:description" content="1. shiro认识Apache Shiro是一个强大且易用的Java安全框架,有身份验证、授权、密码学和会话管理。使用Shiro的易于理解的API,您可以快速、轻松地获得任何应用程序,从最小的移动应用程序到最大的网络和企业应用程序。与之相对的还有一个是Spring security 1.1 shiro和Spring security区别   框架 shiro Spring security">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-31T07:44:04.616Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shiro学习笔记(一)">
+<meta name="twitter:description" content="1. shiro认识Apache Shiro是一个强大且易用的Java安全框架,有身份验证、授权、密码学和会话管理。使用Shiro的易于理解的API,您可以快速、轻松地获得任何应用程序,从最小的移动应用程序到最大的网络和企业应用程序。与之相对的还有一个是Spring security 1.1 shiro和Spring security区别   框架 shiro Spring security">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/31/shiro学习笔记-一/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://conjurermaple.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">maple</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java &amp; Other</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Chengdu, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架篇/">框架篇</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/错误积累/">错误积累</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架篇/">框架篇</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误积累/">错误积累</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 13.33px;">JAVA</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/前端/" style="font-size: 13.67px;">前端</a> <a href="/tags/框架篇/" style="font-size: 14px;">框架篇</a> <a href="/tags/错误积累/" style="font-size: 13.67px;">错误积累</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/31/shiro展示用户名与注销/" class="title">shiro展示用户名与注销</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-31T08:30:54.000Z" itemprop="datePublished">2019-03-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/javascript/">javascript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/31/回车登录/" class="title">回车登录</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-31T08:26:56.000Z" itemprop="datePublished">2019-03-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/javascript/">javascript</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/31/注销登陆跳出顶层页面/" class="title">注销登陆跳出顶层页面</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-31T08:24:51.000Z" itemprop="datePublished">2019-03-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/31/shiro完成基本登录/" class="title">shiro完成基本登录</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-31T07:47:56.000Z" itemprop="datePublished">2019-03-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/31/shiro学习笔记-一/" class="title">shiro学习笔记(一)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-31T07:17:08.000Z" itemprop="datePublished">2019-03-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-shiro认识"><span class="toc-number">1.</span> <span class="toc-text">1. shiro认识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-shiro和Spring-security区别"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 shiro和Spring security区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-shiro的四大基石"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 shiro的四大基石</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-shiro的核心api"><span class="toc-number">2.</span> <span class="toc-text">2. shiro的核心api</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-操作之前，先得到securityManager对象"><span class="toc-number">2.1.</span> <span class="toc-text">2.1  操作之前，先得到securityManager对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-我们使用过的方法"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 我们使用过的方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-密码加密功能"><span class="toc-number">3.</span> <span class="toc-text">3.密码加密功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-自定义Realm"><span class="toc-number">4.</span> <span class="toc-text">4.自定义Realm</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-集成Spring"><span class="toc-number">5.</span> <span class="toc-text">5.集成Spring</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-导包"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 导包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-web-xml"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 web.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-application-shiro-xml"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 application-shiro.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-获取Map过滤"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 获取Map过滤</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-shiro学习笔记-一" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      shiro学习笔记(一)
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/03/31/shiro学习笔记-一/" class="article-date">
+	  <time datetime="2019-03-31T07:17:08.000Z" itemprop="datePublished">2019-03-31</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/31/shiro学习笔记-一/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="1-shiro认识"><a href="#1-shiro认识" class="headerlink" title="1. shiro认识"></a>1. shiro认识</h1><p>Apache Shiro是一个强大且易用的Java安全框架,有身份验证、授权、密码学和会话管理。使用Shiro的易于理解的API,您可以快速、轻松地获得任何应用程序,从最小的移动应用程序到最大的网络和企业应用程序。<br>与之相对的还有一个是Spring security</p>
+<h2 id="1-1-shiro和Spring-security区别"><a href="#1-1-shiro和Spring-security区别" class="headerlink" title="1.1 shiro和Spring security区别"></a>1.1 shiro和Spring security区别</h2><table>
+<thead>
+<tr>
+<th>框架</th>
+<th style="text-align:center">shiro</th>
+<th>Spring security</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>易用性</td>
+<td style="text-align:center">√</td>
+<td>×</td>
+</tr>
+<tr>
+<td>粒度</td>
+<td style="text-align:center">粗</td>
+<td>细(功能多强大)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-2-shiro的四大基石"><a href="#1-2-shiro的四大基石" class="headerlink" title="1.2 shiro的四大基石"></a>1.2 shiro的四大基石</h2><p>身份验证、授权、密码学和会话管理 securityManager:核心对象 realm:获取数据接口</p>
+<h1 id="2-shiro的核心api"><a href="#2-shiro的核心api" class="headerlink" title="2. shiro的核心api"></a>2. shiro的核心api</h1><h2 id="2-1-操作之前，先得到securityManager对象"><a href="#2-1-操作之前，先得到securityManager对象" class="headerlink" title="2.1  操作之前，先得到securityManager对象"></a>2.1  操作之前，先得到securityManager对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> //一.创建我们自己的Realm</span><br><span class="line">MyRealm myRealm = new MyRealm();</span><br><span class="line"></span><br><span class="line">//二.搞一个核心对象:</span><br><span class="line">DefaultSecurityManager securityManager = new DefaultSecurityManager();</span><br><span class="line">securityManager.setRealm(myRealm);</span><br><span class="line"></span><br><span class="line">//三.把securityManager放到上下文中</span><br><span class="line">SecurityUtils.setSecurityManager(securityManager);</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-我们使用过的方法"><a href="#2-2-我们使用过的方法" class="headerlink" title="2.2 我们使用过的方法"></a>2.2 我们使用过的方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//1.拿到当前用户</span><br><span class="line">Subject currentUser = SecurityUtils.getSubject();</span><br><span class="line">//2.判断是否登录</span><br><span class="line">currentUser.isAuthenticated();</span><br><span class="line">//3.登录(需要令牌的)</span><br><span class="line">/**</span><br><span class="line">    UnknownAccountException:用户名不存在</span><br><span class="line">    IncorrectCredentialsException:密码错误</span><br><span class="line">    AuthenticationException:其它错误</span><br><span class="line">*/</span><br><span class="line"> UsernamePasswordToken token = new UsernamePasswordToken(&quot;admin&quot;, &quot;123456&quot;);</span><br><span class="line"> currentUser.login(token);</span><br><span class="line"> </span><br><span class="line">//4.判断是否是这个角色/权限</span><br><span class="line">currentUser.hasRole(&quot;角色名&quot;)</span><br><span class="line">currentUser.isPermitted(&quot;权限名&quot;)</span><br></pre></td></tr></table></figure>
+<h1 id="3-密码加密功能"><a href="#3-密码加密功能" class="headerlink" title="3.密码加密功能"></a>3.密码加密功能</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * String algorithmName, Object source, Object salt, int hashIterations)</span><br><span class="line"> * 第一个参数algorithmName:加密算法名称</span><br><span class="line"> * 第二个参数source:加密原密码</span><br><span class="line"> * 第三个参数salt:盐值</span><br><span class="line"> * 第四个参数hashIterations:加密次数</span><br><span class="line"> */</span><br><span class="line">SimpleHash hash = new SimpleHash(&quot;MD5&quot;,&quot;123456&quot;,&quot;itsource&quot;,10);</span><br><span class="line">System.out.println(hash.toHex());</span><br></pre></td></tr></table></figure>
+<h1 id="4-自定义Realm"><a href="#4-自定义Realm" class="headerlink" title="4.自定义Realm"></a>4.自定义Realm</h1><blockquote>
+</blockquote>
+<pre><code>继承AuthorizingRealm
+
+    实现两个方法：doGetAuthorizationInfo(授权) /doGetAuthenticationInfo(登录认证)
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//身份认证</span><br><span class="line">@Override</span><br><span class="line">protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException &#123;</span><br><span class="line">    //1.拿用户名与密码</span><br><span class="line">    UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;</span><br><span class="line">    String username = token.getUsername();</span><br><span class="line">    //2.根据用户名拿对应的密码</span><br><span class="line">    String password = getByName(username);</span><br><span class="line">    if(password==null)&#123;</span><br><span class="line">        return null; //返回空代表用户名有问题</span><br><span class="line">    &#125;</span><br><span class="line">    //返回认证信息</span><br><span class="line">    //准备盐值</span><br><span class="line">    ByteSource salt = ByteSource.Util.bytes(&quot;itsource&quot;);</span><br><span class="line">    //密码是shiro自己进行判断</span><br><span class="line">    SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username,password,salt,getName());</span><br><span class="line">    return authenticationInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//授权</span><br><span class="line">@Override</span><br><span class="line">protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) &#123;</span><br><span class="line">    //拿到用户名  Principal:主体(用户对象/用户名)</span><br><span class="line">    String username = (String)principalCollection.getPrimaryPrincipal();</span><br><span class="line">    //拿到角色</span><br><span class="line">    Set&lt;String&gt; roles = findRolesBy(username);</span><br><span class="line">    //拿到权限</span><br><span class="line">    Set&lt;String&gt; permis = findPermsBy(username);</span><br><span class="line">    //把角色权限交给用户</span><br><span class="line">    SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();</span><br><span class="line">    authorizationInfo.setRoles(roles);</span><br><span class="line">    authorizationInfo.setStringPermissions(permis);</span><br><span class="line">    return authorizationInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意:如果我们的密码加密，应该怎么判断(匹配器)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//一.创建我们自己的Realm</span><br><span class="line">MyRealm myRealm = new MyRealm();</span><br><span class="line">//创建一个凭证匹配器(无法设置盐值)</span><br><span class="line">HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();</span><br><span class="line">//  使用MD5的方式比较密码</span><br><span class="line">matcher.setHashAlgorithmName(&quot;md5&quot;);</span><br><span class="line">// 设置编码的迭代次数</span><br><span class="line">matcher.setHashIterations(10);</span><br><span class="line">//设置凭证匹配器(加密方式匹配)</span><br><span class="line">myRealm.setCredentialsMatcher(matcher);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h1 id="5-集成Spring"><a href="#5-集成Spring" class="headerlink" title="5.集成Spring"></a>5.集成Spring</h1><blockquote>
+<p>去找：shiro-root-1.4.0-RC2\samples\spring</p>
+</blockquote>
+<h2 id="5-1-导包"><a href="#5-1-导包" class="headerlink" title="5.1 导包"></a>5.1 导包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- shiro的支持包 --&gt;</span><br><span class="line"> &lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-all&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.4.0&lt;/version&gt;</span><br><span class="line">    &lt;type&gt;pom&lt;/type&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">  &lt;!-- shiro与Spring的集成包 --&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.4.0&lt;/version&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="5-2-web-xml"><a href="#5-2-web-xml" class="headerlink" title="5.2 web.xml"></a>5.2 web.xml</h2><blockquote>
+<p>这个过滤器是一个代码(只关注它的名称)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;filter&gt;</span><br><span class="line">  &lt;filter-name&gt;shiroFilter&lt;/filter-name&gt;</span><br><span class="line">  &lt;filter-class&gt;org.springframework.web.filter.DelegatingFilterProxy&lt;/filter-class&gt;</span><br><span class="line">  &lt;init-param&gt;</span><br><span class="line">    &lt;param-name&gt;targetFilterLifecycle&lt;/param-name&gt;</span><br><span class="line">    &lt;param-value&gt;true&lt;/param-value&gt;</span><br><span class="line">  &lt;/init-param&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line"></span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">  &lt;filter-name&gt;shiroFilter&lt;/filter-name&gt;</span><br><span class="line">  &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="5-3-application-shiro-xml"><a href="#5-3-application-shiro-xml" class="headerlink" title="5.3 application-shiro.xml"></a>5.3 application-shiro.xml</h2><blockquote>
+<p>在咱们的application引入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;import resource=&quot;classpath:applicationContext-shiro.xml&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>是从案例中拷备过来，进行了相应的修改</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;</span><br><span class="line">       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;!-- 创建securityManager这个核心对象 --&gt;</span><br><span class="line">    &lt;bean id=&quot;securityManager&quot; class=&quot;org.apache.shiro.web.mgt.DefaultWebSecurityManager&quot;&gt;</span><br><span class="line">        &lt;!-- 设置一个realm进去 --&gt;</span><br><span class="line">        &lt;property name=&quot;realm&quot; ref=&quot;jpaRealm&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 被引用的realm(一定会写一个自定义realm) --&gt;</span><br><span class="line">    &lt;bean id=&quot;jpaRealm&quot; class=&quot;cn.itsource.aisell.shiro.JpaRealm&quot;&gt;</span><br><span class="line">        &lt;!-- 为这个realm设置相应的匹配器 --&gt;</span><br><span class="line">        &lt;property name=&quot;credentialsMatcher&quot;&gt;</span><br><span class="line">            &lt;bean class=&quot;org.apache.shiro.authc.credential.HashedCredentialsMatcher&quot;&gt;</span><br><span class="line">                &lt;!-- 设置加密方式 --&gt;</span><br><span class="line">                &lt;property name=&quot;hashAlgorithmName&quot; value=&quot;md5&quot;/&gt;</span><br><span class="line">                &lt;!-- 设置加密次数 --&gt;</span><br><span class="line">                &lt;property name=&quot;hashIterations&quot; value=&quot;10&quot; /&gt;</span><br><span class="line">            &lt;/bean&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--  可以让咱们的权限判断支持【注解】方法 --&gt;</span><br><span class="line">    &lt;bean id=&quot;lifecycleBeanPostProcessor&quot; class=&quot;org.apache.shiro.spring.LifecycleBeanPostProcessor&quot;/&gt;</span><br><span class="line">    &lt;bean class=&quot;org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator&quot;</span><br><span class="line">          depends-on=&quot;lifecycleBeanPostProcessor&quot;/&gt;</span><br><span class="line">    &lt;bean class=&quot;org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;securityManager&quot; ref=&quot;securityManager&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;!--  真正实现权限的过滤器 它的id名称和web.xml中的过滤器名称一样 --&gt;</span><br><span class="line">    &lt;bean id=&quot;shiroFilter&quot; class=&quot;org.apache.shiro.spring.web.ShiroFilterFactoryBean&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;securityManager&quot; ref=&quot;securityManager&quot;/&gt;</span><br><span class="line">        &lt;!-- 登录路径:如果没有登录，就会跳到这里来 --&gt;</span><br><span class="line">        &lt;property name=&quot;loginUrl&quot; value=&quot;/s/login.jsp&quot;/&gt;</span><br><span class="line">        &lt;!-- 登录成功后的跳转路径 --&gt;</span><br><span class="line">        &lt;property name=&quot;successUrl&quot; value=&quot;/s/main.jsp&quot;/&gt;</span><br><span class="line">        &lt;!-- 没有权限跳转的路径 --&gt;</span><br><span class="line">        &lt;property name=&quot;unauthorizedUrl&quot; value=&quot;/s/unauthorized.jsp&quot;/&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">            anon:这个路径不需要登录也可以访问</span><br><span class="line">            authc:需要登录才可以访问</span><br><span class="line">            perms[depts:index]:做权限拦截</span><br><span class="line">                咱们以后哪些访问有权限拦截,需要从数据库中读取</span><br><span class="line">        --&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">        &lt;property name=&quot;filterChainDefinitions&quot;&gt;</span><br><span class="line">            &lt;value&gt;</span><br><span class="line">                /s/login.jsp = anon</span><br><span class="line">                /login = anon</span><br><span class="line">                /s/permission.jsp = perms[user:index]</span><br><span class="line">                /depts/index = perms[depts:index]</span><br><span class="line">                /** = authc</span><br><span class="line">            &lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        --&gt;</span><br><span class="line">        &lt;property name=&quot;filterChainDefinitionMap&quot; ref=&quot;filterChainDefinitionMap&quot; /&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    &lt;!-- 实例工厂设置 --&gt;</span><br><span class="line">    &lt;bean id=&quot;filterChainDefinitionMap&quot;</span><br><span class="line">          factory-bean=&quot;filterChainDefinitionMapFactory&quot;</span><br><span class="line">          factory-method=&quot;createFilterChainDefinitionMap&quot; /&gt;</span><br><span class="line">    &lt;!-- 创建可以拿到权限map的bean --&gt;</span><br><span class="line">    &lt;bean id=&quot;filterChainDefinitionMapFactory&quot; class=&quot;cn.itsource.aisell.shiro.FilterChainDefinitionMapFactory&quot; /&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="5-4-获取Map过滤"><a href="#5-4-获取Map过滤" class="headerlink" title="5.4 获取Map过滤"></a>5.4 获取Map过滤</h2><blockquote>
+<p>注意，返回的Map必需是有序的（LinkedHashMap）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class FilterChainDefinitionMapFactory &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 后面这个值会从数据库中来拿</span><br><span class="line">     * /s/login.jsp = anon</span><br><span class="line">     * /login = anon</span><br><span class="line">     * /s/permission.jsp = perms[user:index]</span><br><span class="line">     * /depts/index = perms[depts:index]</span><br><span class="line">     * /** = authc</span><br><span class="line">     */</span><br><span class="line">    public Map&lt;String,String&gt; createFilterChainDefinitionMap()&#123;</span><br><span class="line">        //注:LinkedHashMap是有序的</span><br><span class="line">        Map&lt;String,String&gt; filterChainDefinitionMap = new LinkedHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        filterChainDefinitionMap.put(&quot;/s/login.jsp&quot;, &quot;anon&quot;);</span><br><span class="line">        filterChainDefinitionMap.put(&quot;/login&quot;, &quot;anon&quot;);</span><br><span class="line">        filterChainDefinitionMap.put(&quot;/s/permission.jsp&quot;, &quot;perms[user:index]&quot;);</span><br><span class="line">        filterChainDefinitionMap.put(&quot;/depts/index&quot;, &quot;perms[depts:index]&quot;);</span><br><span class="line">        filterChainDefinitionMap.put(&quot;/**&quot;, &quot;authc&quot;);</span><br><span class="line"></span><br><span class="line">        return filterChainDefinitionMap;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://conjurermaple.github.io/2019/03/31/shiro学习笔记-一/" title="shiro学习笔记(一)" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/31/shiro学习笔记-一/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://conjurermaple.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://conjurermaple.github.io/" target="_blank"><span class="text-dark">maple</span><small class="ml-1x">Java &amp; Other</small></a></h3>
+        <div>拼命努力的人，生活不会辜负你。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/03/31/shiro完成基本登录/" title="shiro完成基本登录"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/03/31/velocity学习笔记-一/" title="velocity学习笔记(一)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Blog by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '383f19b856237c034a38',
+    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
+    repo: 'conjurermaple.github.io',
+    owner: 'ConjurerMaple',
+    admin: ['ConjurerMaple'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+
+
+
+
+</body>
+</html>
