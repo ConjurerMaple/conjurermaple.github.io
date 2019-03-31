@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>JPA学习笔记(三) | maple</title>
-  <meta name="description" content="一. 单向一对多 性能非常差,不建议使用 如果要使用，建议使用双向的多对一，一对多  代码配置 必需使用接口声明 可以使用List(有序允许重复)或者Set 一定要指定外键(否则会出现中间表)123@OneToMany@JoinColumn(name = &amp;quot;dir_id &amp;quot;)private List&amp;lt;Product&amp;gt; products = new ArrayList">
+  <title>spring发送邮件 | maple</title>
+  <meta name="description" content="场景：忘记密码发送邮件  导包12345&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;javax.mail&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;mail&amp;lt;/artifactId&amp;gt;	&amp;lt;version&amp;gt;1.4.1&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt; applicationContext.x">
 <meta name="keywords" content="框架篇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JPA学习笔记(三)">
-<meta property="og:url" content="https://conjurermaple.github.io/2019/03/07/JPA学习笔记-三/index.html">
+<meta property="og:title" content="spring发送邮件">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/03/31/spring发送邮件/index.html">
 <meta property="og:site_name" content="maple博客">
-<meta property="og:description" content="一. 单向一对多 性能非常差,不建议使用 如果要使用，建议使用双向的多对一，一对多  代码配置 必需使用接口声明 可以使用List(有序允许重复)或者Set 一定要指定外键(否则会出现中间表)123@OneToMany@JoinColumn(name = &amp;quot;dir_id &amp;quot;)private List&amp;lt;Product&amp;gt; products = new ArrayList">
+<meta property="og:description" content="场景：忘记密码发送邮件  导包12345&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;javax.mail&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;mail&amp;lt;/artifactId&amp;gt;	&amp;lt;version&amp;gt;1.4.1&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt; applicationContext.x">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-07T12:38:05.262Z">
+<meta property="og:updated_time" content="2019-03-31T13:43:12.239Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JPA学习笔记(三)">
-<meta name="twitter:description" content="一. 单向一对多 性能非常差,不建议使用 如果要使用，建议使用双向的多对一，一对多  代码配置 必需使用接口声明 可以使用List(有序允许重复)或者Set 一定要指定外键(否则会出现中间表)123@OneToMany@JoinColumn(name = &amp;quot;dir_id &amp;quot;)private List&amp;lt;Product&amp;gt; products = new ArrayList">
+<meta name="twitter:title" content="spring发送邮件">
+<meta name="twitter:description" content="场景：忘记密码发送邮件  导包12345&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;javax.mail&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;mail&amp;lt;/artifactId&amp;gt;	&amp;lt;version&amp;gt;1.4.1&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt; applicationContext.x">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/07/JPA学习笔记-三/index.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/31/spring发送邮件/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -340,21 +340,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-单向一对多"><span class="toc-number">1.</span> <span class="toc-text">一. 单向一对多</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码配置"><span class="toc-number">1.1.</span> <span class="toc-text">代码配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-双向多对一，一对多"><span class="toc-number">2.</span> <span class="toc-text">二. 双向多对一，一对多</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-级联"><span class="toc-number">3.</span> <span class="toc-text">三. 级联</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四-多对多"><span class="toc-number">4.</span> <span class="toc-text">四. 多对多</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五-一对一-了解"><span class="toc-number">5.</span> <span class="toc-text">五. 一对一(了解)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六-注意点"><span class="toc-number">6.</span> <span class="toc-text">六. 注意点</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#导包"><span class="toc-number">1.</span> <span class="toc-text">导包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#applicationContext-xml配置"><span class="toc-number">2.</span> <span class="toc-text">applicationContext.xml配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#controller代码"><span class="toc-number">3.</span> <span class="toc-text">controller代码</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-JPA学习笔记-三" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-spring发送邮件" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      JPA学习笔记(三)
+      spring发送邮件
     </h1>
   
 
@@ -362,8 +362,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/07/JPA学习笔记-三/" class="article-date">
-	  <time datetime="2019-03-07T12:30:15.000Z" itemprop="datePublished">2019-03-07</time>
+	<a href="/2019/03/31/spring发送邮件/" class="article-date">
+	  <time datetime="2019-03-31T13:39:38.000Z" itemprop="datePublished">2019-03-31</time>
 	</a>
 </span>
         
@@ -388,73 +388,21 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/07/JPA学习笔记-三/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/31/spring发送邮件/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="一-单向一对多"><a href="#一-单向一对多" class="headerlink" title="一. 单向一对多"></a>一. 单向一对多</h1><ul>
-<li>性能非常差,不建议使用</li>
-<li>如果要使用，建议使用双向的多对一，一对多</li>
-</ul>
-<h2 id="代码配置"><a href="#代码配置" class="headerlink" title="代码配置"></a>代码配置</h2><ul>
-<li>必需使用接口声明</li>
-<li>可以使用List(有序允许重复)或者Set</li>
-<li>一定要指定外键(否则会出现中间表)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@OneToMany</span><br><span class="line">@JoinColumn(name = &quot;dir_id &quot;)</span><br><span class="line">private List&lt;Product&gt; products = new ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="二-双向多对一，一对多"><a href="#二-双向多对一，一对多" class="headerlink" title="二. 双向多对一，一对多"></a>二. 双向多对一，一对多</h1><ul>
-<li>双向配置的表结构和单向是完全一样的</li>
-<li>尽量使用多方来维护关系(性能好)</li>
-<li>外键在哪边,哪边就是多方(也方便维护)</li>
-</ul>
-<blockquote>
-<p>Prdocut(多方)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    @Entity</span><br><span class="line">@Table(name = &quot;product&quot;)</span><br><span class="line">public class Product &#123;</span><br><span class="line">    ...</span><br><span class="line">    /**</span><br><span class="line">     * 多个产品对应一个产品类型</span><br><span class="line">     *  默认的名称就dir_id</span><br><span class="line">     */</span><br><span class="line">    @ManyToOne(fetch = FetchType.LAZY)</span><br><span class="line">    @JoinColumn(name=&quot;dir_id&quot;)</span><br><span class="line">    private ProductDir dir;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <blockquote>
+<p>场景：忘记密码发送邮件</p>
 </blockquote>
+<h1 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;javax.mail&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;mail&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.4.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="applicationContext-xml配置"><a href="#applicationContext-xml配置" class="headerlink" title="applicationContext.xml配置"></a>applicationContext.xml配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;mailSender&quot; class=&quot;org.springframework.mail.javamail.JavaMailSenderImpl&quot;&gt;</span><br><span class="line">		&lt;!-- 163邮箱,smtp.163.com --&gt;</span><br><span class="line">		&lt;!-- admin@163.com 用户名:admin 密码:xxx --&gt;</span><br><span class="line">		&lt;!-- smtp邮件发送协议 --&gt;</span><br><span class="line">		&lt;!-- pop3收邮件协议 --&gt;</span><br><span class="line">		&lt;property name=&quot;host&quot; value=&quot;smtp.163.com&quot; /&gt;</span><br><span class="line">		&lt;property name=&quot;username&quot; value=&quot;123456&quot; /&gt;</span><br><span class="line">		&lt;property name=&quot;password&quot; value=&quot;开启POP3/SMTP服务，生成的授权码&quot; /&gt;</span><br><span class="line">		&lt;property name=&quot;javaMailProperties&quot;&gt;</span><br><span class="line">			&lt;props&gt;</span><br><span class="line">				&lt;!-- 必须进行授权认证，它的目的就是阻止他人任意乱发邮件 --&gt;</span><br><span class="line">				&lt;prop key=&quot;mail.smtp.auth&quot;&gt;true&lt;/prop&gt;</span><br><span class="line">				&lt;!-- SMTP加密方式:连接到一个TLS保护连接 --&gt;</span><br><span class="line">				&lt;prop key=&quot;mail.smtp.starttls.enable&quot;&gt;true&lt;/prop&gt;</span><br><span class="line">			&lt;/props&gt;</span><br><span class="line">		&lt;/property&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>PrdocutDir(一方)</p>
+<p>注意:发送的邮箱要开启POP3/SMTP服务，生成授权码</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Entity</span><br><span class="line">@Table(name = &quot;productdir&quot;)</span><br><span class="line">public class ProductDir &#123;</span><br><span class="line">    ...</span><br><span class="line">    /**</span><br><span class="line">     * 确定外键关连的名称叫:dir_id</span><br><span class="line">     *      保证维护关系的列是同一列</span><br><span class="line">     *  mappedBy = &quot;dir&quot; :映射的关系交给Product类中的dir的属性去维护</span><br><span class="line">     *                    放弃了关系维护</span><br><span class="line">     */</span><br><span class="line">    @OneToMany(mappedBy = &quot;dir&quot;)</span><br><span class="line">    private List&lt;Product&gt; products = new ArrayList&lt;&gt;();</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="三-级联"><a href="#三-级联" class="headerlink" title="三. 级联"></a>三. 级联</h1><ul>
-<li>级联很危险,不要随便使用</li>
-<li>组合关系(单据)必需使用级联</li>
-<li>要使用就是使用最强级联: cascade = CascadeType.ALL,orphanRemoval = true</li>
-</ul>
-<blockquote>
-<p>代码配置</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Entity</span><br><span class="line">@Table(name = &quot;productdir&quot;)</span><br><span class="line">public class ProductDir &#123;</span><br><span class="line">    ...</span><br><span class="line">    /**</span><br><span class="line">     * 确定外键关连的名称叫:dir_id</span><br><span class="line">     *      保证维护关系的列是同一列</span><br><span class="line">     *  mappedBy = &quot;dir&quot; :映射的关系交给Product类中的dir的属性去维护</span><br><span class="line">     *                    放弃了关系维护</span><br><span class="line">     *  cascade:级联</span><br><span class="line">     *      CascadeType.PERSIST:级联保存(一人得道,鸡狗升天)</span><br><span class="line">     *      CascadeType.MERGE:级联修改（荣辱与共）</span><br><span class="line">     *      CascadeType.REMOVE:级联删除 (生死与共)</span><br><span class="line">     *      CascadeType.ALL：级联增删改</span><br><span class="line">     *  orphanRemoval：孤儿删除</span><br><span class="line">     */</span><br><span class="line">    @OneToMany(mappedBy = &quot;dir&quot;,cascade = CascadeType.ALL,orphanRemoval = true)</span><br><span class="line">    private List&lt;Product&gt; products = new ArrayList&lt;&gt;();</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="四-多对多"><a href="#四-多对多" class="headerlink" title="四. 多对多"></a>四. 多对多</h1><ul>
-<li>一定要自己去控制中间表的表名与列名</li>
-<li>正常操作都没有问题(尽量不要使用级联)</li>
-<li>双向保证表名列名是一致的</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @JoinTable:对中间表进行设置</span><br><span class="line"> *  name = &quot;t_user_role&quot;:中间表的名称</span><br><span class="line"> *  joinColumns = @JoinColumn(name = &quot;user_id&quot;):修改当前表对应的列名</span><br><span class="line"> *  inverseJoinColumns = @JoinColumn(name = &quot;role_id&quot;):对面那张表的列名</span><br><span class="line"> */</span><br><span class="line">@ManyToMany</span><br><span class="line">@JoinTable(name = &quot;t_user_role&quot;</span><br><span class="line">        ,joinColumns = @JoinColumn(name = &quot;user_id&quot;)</span><br><span class="line">        ,inverseJoinColumns = @JoinColumn(name = &quot;role_id&quot;))</span><br><span class="line">private List&lt;Role&gt; roles = new ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
-<h1 id="五-一对一-了解"><a href="#五-一对一-了解" class="headerlink" title="五. 一对一(了解)"></a>五. 一对一(了解)</h1><ul>
-<li>共享主键(扩展性不强,不建议使用)</li>
-<li>唯一外键(扩展性强,建议使用)</li>
-<li>外键在哪边,哪边就是从表</li>
-</ul>
-<blockquote>
-<p>QQ：主表</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Entity</span><br><span class="line">public class QQ &#123;</span><br><span class="line">  @Id</span><br><span class="line">  @GeneratedValue</span><br><span class="line">  private Long id;</span><br><span class="line">  private String number;</span><br><span class="line">  // 一对一,一个qq号码对应一个qq空间</span><br><span class="line">  @OneToOne(mappedBy=&quot;qq&quot;)</span><br><span class="line">  private QQZone zone;</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>QQZone:从表</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Entity</span><br><span class="line">public class QQZone &#123;</span><br><span class="line">  @Id</span><br><span class="line">  @GeneratedValue</span><br><span class="line">  private Long id;</span><br><span class="line">  private String name;</span><br><span class="line">  // 一对一,一个qq空间输入一个qq号码</span><br><span class="line">  // 默认值optional = true表示qq_id可以为空;反之。。。</span><br><span class="line">  @OneToOne(optional = false)</span><br><span class="line">  // unique=true确保了一对一关系</span><br><span class="line">  @JoinColumn(name = &quot;qq_id&quot;, unique = true)</span><br><span class="line">  private QQ qq;</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
-<h1 id="六-注意点"><a href="#六-注意点" class="headerlink" title="六. 注意点"></a>六. 注意点</h1><ul>
-<li>单向多对一,一对多,双向多对一,一对多,表结构完成一样</li>
-<li>单向一对多性能差(不用)</li>
-<li>声明的时候都用接口</li>
-<li>集合先new出来(以免以后代码麻烦)</li>
-<li>JPA，集合默认懒加载</li>
-<li>想要性能好，先保存一方后多方</li>
-<li>先配置单向(业务需要再配置双向) </li>
-<li>不要在toString()相互打印，互相调用容易内存溢出</li>
-</ul>
-
+<h1 id="controller代码"><a href="#controller代码" class="headerlink" title="controller代码"></a>controller代码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">           //设定mail server</span><br><span class="line">           senderImpl.setHost(&quot;smtp.qq.com&quot;);</span><br><span class="line">           //建立邮件消息,发送简单邮件和html邮件的区别</span><br><span class="line">           MimeMessage mailMessage = senderImpl.createMimeMessage();</span><br><span class="line">           MimeMessageHelper messageHelper = new MimeMessageHelper(mailMessage,&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">           //设置收件人，寄件人</span><br><span class="line">           messageHelper.setTo(email);</span><br><span class="line">           messageHelper.setFrom(&quot;xxxx@qq.com&quot;);</span><br><span class="line">           messageHelper.setSubject(&quot;密码找回&quot;);</span><br><span class="line">           //true 表示启动HTML格式的邮件</span><br><span class="line">           messageHelper.setText(&quot;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;a href=&apos;&apos;&gt;点击链接找回密码&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;&quot;,true);</span><br><span class="line"></span><br><span class="line">           //发送邮件</span><br><span class="line">           senderImpl.send(mailMessage);</span><br><span class="line">       &#125; catch (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
@@ -463,7 +411,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://conjurermaple.github.io/2019/03/07/JPA学习笔记-三/" title="JPA学习笔记(三)" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/07/JPA学习笔记-三/</a>
+      <a href="https://conjurermaple.github.io/2019/03/31/spring发送邮件/" title="spring发送邮件" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/31/spring发送邮件/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -509,13 +457,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2019/03/09/JPA学习笔记-四/" title="JPA学习笔记(四)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2019/03/06/JPA学习笔记-二/" title="JPA学习笔记(二)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/03/31/shiro有对应的权限才能显示按钮/" title="shiro有对应的权限才能显示按钮"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
