@@ -17,23 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>could not initialize proxy - no Session错误 | maple</title>
-  <meta name="description" content="出现原因：entityManager已经关闭了，然后再去操作就会出现此错误 解决方案： - 不要在关闭后再去操作 -我的情况：多对一的情况，在多方配置了懒加载 查询完多方后，可能已经关闭了，但是在前台取了一方的数据。 在web.xml里配置123456789&amp;lt;!-- 加上OpenEntityManager --&amp;gt;&amp;lt;filter&amp;gt;    &amp;lt;filter-name&amp;gt">
-<meta name="keywords" content="错误积累">
+  <title>菜单管理双向多对一配置 | maple</title>
+  <meta name="description" content="1. 菜单管理配置 员工 -&amp;gt; 角色 -&amp;gt; 权限 -&amp;gt; 菜单  1.1 Menu  菜单domain的自关连配置      需要配置双向,但是不能让JPA去管理一对多(我们自己管理:@Transient)          双向生成JSON会产生死循环,需要一边进行忽略:@JsonIgnore 123456789//让它不再生成JSON   @ManyToOne(fetch =">
+<meta name="keywords" content="框架篇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="could not initialize proxy - no Session错误">
-<meta property="og:url" content="https://conjurermaple.github.io/2019/03/15/could-not-initialize-proxy-no-Session错误/index.html">
+<meta property="og:title" content="菜单管理双向多对一配置">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/03/31/菜单管理双向多对一配置/index.html">
 <meta property="og:site_name" content="maple博客">
-<meta property="og:description" content="出现原因：entityManager已经关闭了，然后再去操作就会出现此错误 解决方案： - 不要在关闭后再去操作 -我的情况：多对一的情况，在多方配置了懒加载 查询完多方后，可能已经关闭了，但是在前台取了一方的数据。 在web.xml里配置123456789&amp;lt;!-- 加上OpenEntityManager --&amp;gt;&amp;lt;filter&amp;gt;    &amp;lt;filter-name&amp;gt">
+<meta property="og:description" content="1. 菜单管理配置 员工 -&amp;gt; 角色 -&amp;gt; 权限 -&amp;gt; 菜单  1.1 Menu  菜单domain的自关连配置      需要配置双向,但是不能让JPA去管理一对多(我们自己管理:@Transient)          双向生成JSON会产生死循环,需要一边进行忽略:@JsonIgnore 123456789//让它不再生成JSON   @ManyToOne(fetch =">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://conjurermaple.github.io/2019/03/15/could-not-initialize-proxy-no-Session错误/1.png">
-<meta property="og:updated_time" content="2019-03-15T12:59:39.394Z">
+<meta property="og:updated_time" content="2019-03-31T09:56:02.857Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="could not initialize proxy - no Session错误">
-<meta name="twitter:description" content="出现原因：entityManager已经关闭了，然后再去操作就会出现此错误 解决方案： - 不要在关闭后再去操作 -我的情况：多对一的情况，在多方配置了懒加载 查询完多方后，可能已经关闭了，但是在前台取了一方的数据。 在web.xml里配置123456789&amp;lt;!-- 加上OpenEntityManager --&amp;gt;&amp;lt;filter&amp;gt;    &amp;lt;filter-name&amp;gt">
-<meta name="twitter:image" content="https://conjurermaple.github.io/2019/03/15/could-not-initialize-proxy-no-Session错误/1.png">
+<meta name="twitter:title" content="菜单管理双向多对一配置">
+<meta name="twitter:description" content="1. 菜单管理配置 员工 -&amp;gt; 角色 -&amp;gt; 权限 -&amp;gt; 菜单  1.1 Menu  菜单domain的自关连配置      需要配置双向,但是不能让JPA去管理一对多(我们自己管理:@Transient)          双向生成JSON会产生死循环,需要一边进行忽略:@JsonIgnore 123456789//让它不再生成JSON   @ManyToOne(fetch =">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/15/could-not-initialize-proxy-no-Session错误/index.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/31/菜单管理双向多对一配置/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -342,21 +340,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-菜单管理配置"><span class="toc-number">1.</span> <span class="toc-text">1. 菜单管理配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Menu"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 Menu</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-MenuRepository"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 MenuRepository</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-MenuService"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 MenuService</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-could-not-initialize-proxy-no-Session错误" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-菜单管理双向多对一配置" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      could not initialize proxy - no Session错误
+      菜单管理双向多对一配置
     </h1>
   
 
@@ -364,20 +362,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/15/could-not-initialize-proxy-no-Session错误/" class="article-date">
-	  <time datetime="2019-03-15T12:52:06.000Z" itemprop="datePublished">2019-03-15</time>
+	<a href="/2019/03/31/菜单管理双向多对一配置/" class="article-date">
+	  <time datetime="2019-03-31T09:52:56.000Z" itemprop="datePublished">2019-03-31</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/错误积累/">错误积累</a>
+    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/错误积累/">错误积累</a>
+	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
   </span>
 
 
@@ -390,20 +388,34 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/15/could-not-initialize-proxy-no-Session错误/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/31/菜单管理双向多对一配置/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p><img src="/2019/03/15/could-not-initialize-proxy-no-Session错误/1.png" alt="作者：Z-AI"></p>
-<p>出现原因：entityManager已经关闭了，然后再去操作就会出现此错误</p>
-<p>解决方案：</p>
-<pre><code>- 不要在关闭后再去操作
--我的情况：多对一的情况，在多方配置了懒加载
-查询完多方后，可能已经关闭了，但是在前台取了一方的数据。
-</code></pre><p>在web.xml里配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 加上OpenEntityManager --&gt;</span><br><span class="line">&lt;filter&gt;</span><br><span class="line">    &lt;filter-name&gt;openEntity&lt;/filter-name&gt;</span><br><span class="line">    &lt;filter-class&gt;org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">    &lt;filter-name&gt;openEntity&lt;/filter-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure></p>
+        <h1 id="1-菜单管理配置"><a href="#1-菜单管理配置" class="headerlink" title="1. 菜单管理配置"></a>1. 菜单管理配置</h1><blockquote>
+<p>员工 -&gt; 角色 -&gt; 权限 -&gt; 菜单</p>
+</blockquote>
+<h2 id="1-1-Menu"><a href="#1-1-Menu" class="headerlink" title="1.1 Menu"></a>1.1 Menu</h2><blockquote>
+</blockquote>
+<pre><code>菜单domain的自关连配置
 
+    需要配置双向,但是不能让JPA去管理一对多(我们自己管理:@Transient)
+
+        双向生成JSON会产生死循环,需要一边进行忽略:@JsonIgnore
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//让它不再生成JSON</span><br><span class="line">   @ManyToOne(fetch = FetchType.LAZY)</span><br><span class="line">   @JoinColumn(name = &quot;parent_id&quot;)</span><br><span class="line">   @JsonIgnore</span><br><span class="line">   private Menu parent;</span><br><span class="line"></span><br><span class="line">   // 临时属性 -&gt; 这个字段JPA就不管它了</span><br><span class="line">   @Transient</span><br><span class="line">   private List&lt;Menu&gt; children = new ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-MenuRepository"><a href="#1-2-MenuRepository" class="headerlink" title="1.2 MenuRepository"></a>1.2 MenuRepository</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface MenuRepository extends BaseRepository&lt;Menu,Long&gt;&#123;</span><br><span class="line">    @Query(&quot;select distinct m from Employee e join e.roles r join r.permissions p join p.menu m where e.id = ?1&quot;)</span><br><span class="line">    List&lt;Menu&gt; findByUser(Long userId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-MenuService"><a href="#1-3-MenuService" class="headerlink" title="1.3 MenuService"></a>1.3 MenuService</h2><blockquote>
+</blockquote>
+<pre><code>根据设计只能通过员工找到子菜单
+
+    需要通过子菜单拿到父菜单
+
+        判断这个父菜单是否已经存到集合中
+
+            如果这个菜单单没有存起来,放到集合中 把当前这个子菜单放到父菜单中去
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public List&lt;Menu&gt; findLoginMenu() &#123;</span><br><span class="line">    //1.准备一个装父菜单的容器</span><br><span class="line">    List&lt;Menu&gt; parentMenus = new ArrayList&lt;&gt;();</span><br><span class="line">    //2.拿到当前登录用户的所有子菜单</span><br><span class="line">    Employee loginUser = UserContext.getUser();</span><br><span class="line">    List&lt;Menu&gt; children = menuRepository.findByUser(loginUser.getId());</span><br><span class="line">    //3.遍历子菜单，设置它们的关系</span><br><span class="line">    for (Menu child : children) &#123;</span><br><span class="line">        //3.1 根据子菜单拿到它对应的父菜单</span><br><span class="line">        Menu parent = child.getParent();</span><br><span class="line">        //3.2 判断这个父菜单是否在容器中</span><br><span class="line">        if(!parentMenus.contains(parent))&#123;</span><br><span class="line">            //3.3 如果不在，把父菜单放进去</span><br><span class="line">            parentMenus.add(parent);</span><br><span class="line">        &#125;</span><br><span class="line">        //3.4 为这个父菜单添加对应的子菜单</span><br><span class="line">        parent.getChildren().add(child);</span><br><span class="line">    &#125;</span><br><span class="line">    return parentMenus;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
@@ -412,7 +424,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://conjurermaple.github.io/2019/03/15/could-not-initialize-proxy-no-Session错误/" title="could not initialize proxy - no Session错误" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/15/could-not-initialize-proxy-no-Session错误/</a>
+      <a href="https://conjurermaple.github.io/2019/03/31/菜单管理双向多对一配置/" title="菜单管理双向多对一配置" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/31/菜单管理双向多对一配置/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -459,12 +471,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/" title="No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2019/03/31/shiro有对应的权限才能显示按钮/" title="shiro有对应的权限才能显示按钮"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2019/03/12/SpringDataJPA学习笔记-一/" title="SpringDataJPA学习笔记(一)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/03/31/shiro-ajax请求的权限处理/" title="shiro-ajax请求的权限处理"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
