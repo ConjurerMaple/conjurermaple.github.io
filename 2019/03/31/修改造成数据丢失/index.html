@@ -17,17 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>maple</title>
-  <meta name="keywords" content="JAVA">
-<meta property="og:type" content="website">
-<meta property="og:title" content="maple博客">
-<meta property="og:url" content="https://conjurermaple.github.io/index.html">
+  <title>修改造成数据丢失 | maple</title>
+  <meta name="description" content="修改数据时，发现有些数据丢失了不能保存完整的数据  解决方式：  在这里，咱们有三个解决方案：方案一：隐藏要传递的值（只隐藏，但是数据还是需要传递，这和第一个项目是同相同的方案）这个方案的优点是简单易理解，缺点是如果字段过多，代码量会比较大，另外这种方案的安全性确实是有一些低！    方案二：在JPA的相应字段上加标签：@Column(updatable = false)private Strin">
+<meta name="keywords" content="错误积累">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修改造成数据丢失">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/03/31/修改造成数据丢失/index.html">
 <meta property="og:site_name" content="maple博客">
+<meta property="og:description" content="修改数据时，发现有些数据丢失了不能保存完整的数据  解决方式：  在这里，咱们有三个解决方案：方案一：隐藏要传递的值（只隐藏，但是数据还是需要传递，这和第一个项目是同相同的方案）这个方案的优点是简单易理解，缺点是如果字段过多，代码量会比较大，另外这种方案的安全性确实是有一些低！    方案二：在JPA的相应字段上加标签：@Column(updatable = false)private Strin">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-31T05:10:20.067Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="maple博客">
+<meta name="twitter:title" content="修改造成数据丢失">
+<meta name="twitter:description" content="修改数据时，发现有些数据丢失了不能保存完整的数据  解决方式：  在这里，咱们有三个解决方案：方案一：隐藏要传递的值（只隐藏，但是数据还是需要传递，这和第一个项目是同相同的方案）这个方案的优点是简单易理解，缺点是如果字段过多，代码量会比较大，另外这种方案的安全性确实是有一些低！    方案二：在JPA的相应字段上加标签：@Column(updatable = false)private Strin">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/index.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/31/修改造成数据丢失/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -331,409 +335,222 @@
 </aside>
 
   
-  <main class="main" role="main">
   
-  <div class="content article-list">
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-修改造成数据丢失" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
+    <div class="article-header">
+      
+        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/31/关联关系n-to-n错误/">关联关系n-to-n错误</a>
+    <h1 class="article-title" itemprop="name">
+      修改造成数据丢失
     </h1>
   
 
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/31/关联关系n-to-n错误/" class="article-date">
-	  <time datetime="2019-03-31T05:10:52.000Z" itemprop="datePublished">3月 31</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/错误积累/">错误积累</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/错误积累/">错误积累</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/31/关联关系n-to-n错误/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/31/修改造成数据丢失/">修改造成数据丢失</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
+      
+      <div class="article-meta">
+        <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2019/03/31/修改造成数据丢失/" class="article-date">
-	  <time datetime="2019-03-31T04:58:36.000Z" itemprop="datePublished">3月 31</time>
+	  <time datetime="2019-03-31T04:58:36.000Z" itemprop="datePublished">2019-03-31</time>
 	</a>
 </span>
-    
+        
   <span class="article-category">
     <i class="icon icon-folder"></i>
     <a class="article-category-link" href="/categories/错误积累/">错误积累</a>
   </span>
 
-    
+        
   <span class="article-tag">
     <i class="icon icon-tags"></i>
 	<a class="article-tag-link" href="/tags/错误积累/">错误积累</a>
   </span>
 
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/31/修改造成数据丢失/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
 
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/31/web-xml低版本不支持EL表达式/">web.xml低版本不支持EL表达式</a>
-    </h1>
-  
 
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/31/修改造成数据丢失/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>修改数据时，发现有些数据丢失了不能保存完整的数据</p>
+<blockquote>
+<p>解决方式：</p>
+<ul>
+<li>在这里，咱们有三个解决方案：<br>方案一：隐藏要传递的值（只隐藏，但是数据还是需要传递，这和第一个项目是同相同的方案）<br>这个方案的优点是简单易理解，缺点是如果字段过多，代码量会比较大，另外这种方案的安全性确实是有一些低！</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>方案二：在JPA的相应字段上加标签：<br>@Column(updatable = false)<br>private String password;</p>
+</li>
+<li><p>方案三：先查询数据库，获取持久状态的对象，然后把页面的数据set到对象里面<br>(这种方案也是用得比较多的一种方案)<br>Employee tempEmployee = employeeService.get(employee.getId());<br>//需要修改的值就从页面里面的employee放入tempEmployee<br>tempEmployee.setUsername(employee.getUsername());<br>employeeService.save(tempEmployee);</p>
+</li>
+</ul>
+<p>#使用第三种方式(@ModelAttribute注解)<br>运用在方法上，会在每一个@RequestMapping标注的方法前执行，如果有返回值，则自动将该返回值加入到ModelMap中；<br>运用在参数上，会将客户端传递过来的参数按名称注入到指定对象中，并且会将这个对象自动加入ModelMap中，便于View层使用；</p>
+<hr>
+<p>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">这时候，我们可以看到这个类所有的方法（通过路@RequestMapping）访问之前都会先访问这个方法。接下来，我们可以看一下这个是怎么传值的。</span><br><span class="line">在下面的传值代码中我们也解决了数据丢失的问题。</span><br><span class="line">//这里准备一个方法，所有方法执行前都会执行它</span><br><span class="line">@ModelAttribute(&quot;editEmployee&quot;)</span><br><span class="line">public Employee beforeEdit(Long id)&#123;</span><br><span class="line">    if(id!=null)&#123;</span><br><span class="line">        Employee employee = employeeService.findOne(id);</span><br><span class="line">        return employee;</span><br><span class="line">    &#125;</span><br><span class="line">    return  null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;/save&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public Map&lt;String,Object&gt; save(Employee employee)&#123;</span><br><span class="line">    return saveOrUpdate(employee);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;/update&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public Map&lt;String,Object&gt; update(@ModelAttribute(&quot;editEmployee&quot;)Employee employee)&#123;</span><br><span class="line">    return saveOrUpdate(employee);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>现在所有方法都会进入到beforeEdit中，那么只要传过来id,就会执行这个方法，这个对效率是会有影响的。所以我们可以对代码进行修改，让只有修改功能才去执行这个查询代码！！</p>
+</blockquote>
+<hr>
+<p>前台再传一个cmd=update的参数就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 特性:在执行相应方法之前都会先执行这个方法</span><br><span class="line"> */</span><br><span class="line">@ModelAttribute(&quot;editEmployee&quot;)</span><br><span class="line">public Employee beforeEdit(Long id, String cmd)&#123;</span><br><span class="line">    //有id的时候-&gt; 修改功能</span><br><span class="line">    if(id!=null &amp;&amp; &quot;update&quot;.equals(cmd)) &#123;</span><br><span class="line">        Employee employee = employeeService.findOne(id); </span><br><span class="line">        return employee;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://conjurermaple.github.io/2019/03/31/修改造成数据丢失/" title="修改造成数据丢失" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/31/修改造成数据丢失/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://conjurermaple.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://conjurermaple.github.io/" target="_blank"><span class="text-dark">maple</span><small class="ml-1x">Java &amp; Other</small></a></h3>
+        <div>拼命努力的人，生活不会辜负你。</div>
+      </div>
+    </figure>
   </div>
+</div>
+
+
+    </div>
+  </article>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/31/web-xml低版本不支持EL表达式/" class="article-date">
-	  <time datetime="2019-03-31T03:58:48.000Z" itemprop="datePublished">3月 31</time>
-	</a>
-</span>
     
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
-  </span>
-
+  <section id="comments">
+  	
+           
     
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
-  </span>
+  </section>
 
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/31/web-xml低版本不支持EL表达式/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/30/SpringDataJPA自己扩展功能/">SpringDataJPA自己扩展功能</a>
-    </h1>
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
   
-
-  </div>
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/03/31/关联关系n-to-n错误/" title="关联关系n-to-n错误"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/03/31/web-xml低版本不支持EL表达式/" title="web.xml低版本不支持EL表达式"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/30/SpringDataJPA自己扩展功能/" class="article-date">
-	  <time datetime="2019-03-30T13:34:08.000Z" itemprop="datePublished">3月 30</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/30/SpringDataJPA自己扩展功能/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/30/SpringDataJPA条件查询-分页排序/">SpringDataJPA条件查询+分页排序</a>
-    </h1>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
   
-
-  </div>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/30/SpringDataJPA条件查询-分页排序/" class="article-date">
-	  <time datetime="2019-03-30T13:21:47.000Z" itemprop="datePublished">3月 30</time>
-	</a>
-</span>
+  <div class="bar-right">
     
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/30/SpringDataJPA条件查询-分页排序/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/30/JPA多个条件查询/">SpringDataJPA多个条件查询</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/30/JPA多个条件查询/" class="article-date">
-	  <time datetime="2019-03-30T13:16:40.000Z" itemprop="datePublished">3月 30</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/30/JPA多个条件查询/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/30/JPA父类不持久化/">JPA父类不持久化</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/30/JPA父类不持久化/" class="article-date">
-	  <time datetime="2019-03-30T12:59:42.000Z" itemprop="datePublished">3月 30</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/30/JPA父类不持久化/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/30/连接池配置/">连接池配置</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/30/连接池配置/" class="article-date">
-	  <time datetime="2019-03-30T12:51:52.000Z" itemprop="datePublished">3月 30</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/30/连接池配置/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/23/使用easypoi时遇到cn-afterturn-easypoi-exception-excel-ExcelImportException-创建对象异常错误/">使用easypoi时遇到cn.afterturn.easypoi.exception.excel.ExcelImportException: 创建对象异常错误</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/23/使用easypoi时遇到cn-afterturn-easypoi-exception-excel-ExcelImportException-创建对象异常错误/" class="article-date">
-	  <time datetime="2019-03-23T13:06:09.000Z" itemprop="datePublished">3月 23</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/错误积累/">错误积累</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/错误积累/">错误积累</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/23/使用easypoi时遇到cn-afterturn-easypoi-exception-excel-ExcelImportException-创建对象异常错误/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/22/java-lang-ClassNotFoundException-org-springframework-web-context-ContextLoaderListener/">java.lang.ClassNotFoundException:org.springframework.web.context.ContextLoaderListener</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/22/java-lang-ClassNotFoundException-org-springframework-web-context-ContextLoaderListener/" class="article-date">
-	  <time datetime="2019-03-22T00:41:07.000Z" itemprop="datePublished">3月 22</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/错误积累/">错误积累</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/错误积累/">错误积累</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/22/java-lang-ClassNotFoundException-org-springframework-web-context-ContextLoaderListener/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
     
   </div>
-
+  </div>
+</nav>
   
-    
-    <nav class="bar bar-footer clearfix" data-stick-bottom>
-        <div class="bar-inner">
-        <ul class="pager pull-left">
-            
-            <li class="prev disabled">
-                <a href="javascript:;">
-                    <i class="icon icon-angle-left"></i>
-                    上一页
-                </a>
-            </li>
-            
-            
-            <li class="next">
-                <a href="/page/2/">
-                    下一页
-                    <i class="icon icon-angle-right"></i>
-                </a>
-            </li>
-            
-        </ul>
-        <div class="total-article bar-right">Page 1 of 4</div>
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
         </div>
-    </nav>
-    
- 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -794,6 +611,27 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '383f19b856237c034a38',
+    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
+    repo: 'conjurermaple.github.io',
+    owner: 'ConjurerMaple',
+    admin: ['ConjurerMaple'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
 
 
 
