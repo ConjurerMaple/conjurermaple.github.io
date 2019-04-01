@@ -17,18 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>404 Not Found：该页无法显示 | maple</title>
-  <meta name="keywords" content="JAVA">
-<meta property="og:type" content="website">
-<meta property="og:title" content="404 Not Found：该页无法显示">
-<meta property="og:url" content="https://conjurermaple.github.io/404.html">
+  <title>easypoi集成springmvc导入excel文件 | maple</title>
+  <meta name="description" content="导包注意：省略了JPA的包1234567891011121314151617181920212223&amp;lt;!-- easypoi的支持 使用easypoi要取消poi的包-有冲突 --&amp;gt;    &amp;lt;dependency&amp;gt;      &amp;lt;groupId&amp;gt;cn.afterturn&amp;lt;/groupId&amp;gt;      &amp;lt;artifactId&amp;gt;easypoi-">
+<meta name="keywords" content="框架篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="easypoi集成springmvc导入excel文件">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/04/01/easypoi集成springmvc导入excel文件/index.html">
 <meta property="og:site_name" content="maple博客">
+<meta property="og:description" content="导包注意：省略了JPA的包1234567891011121314151617181920212223&amp;lt;!-- easypoi的支持 使用easypoi要取消poi的包-有冲突 --&amp;gt;    &amp;lt;dependency&amp;gt;      &amp;lt;groupId&amp;gt;cn.afterturn&amp;lt;/groupId&amp;gt;      &amp;lt;artifactId&amp;gt;easypoi-">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-21T11:24:38.160Z">
+<meta property="og:updated_time" content="2019-04-01T14:28:09.970Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="404 Not Found：该页无法显示">
+<meta name="twitter:title" content="easypoi集成springmvc导入excel文件">
+<meta name="twitter:description" content="导包注意：省略了JPA的包1234567891011121314151617181920212223&amp;lt;!-- easypoi的支持 使用easypoi要取消poi的包-有冲突 --&amp;gt;    &amp;lt;dependency&amp;gt;      &amp;lt;groupId&amp;gt;cn.afterturn&amp;lt;/groupId&amp;gt;      &amp;lt;artifactId&amp;gt;easypoi-">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/404.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/04/01/easypoi集成springmvc导入excel文件/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -333,16 +336,25 @@
 
   
   
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#导包"><span class="toc-number">1.</span> <span class="toc-text">导包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#domain"><span class="toc-number">2.</span> <span class="toc-text">domain</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#controller代码"><span class="toc-number">3.</span> <span class="toc-text">controller代码</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
 <main class="main" role="main">
   <div class="content">
-  <article id="page-" class="article article-type-page" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-easypoi集成springmvc导入excel文件" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      404 Not Found：该页无法显示
+      easypoi集成springmvc导入excel文件
     </h1>
   
 
@@ -350,12 +362,22 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/404.html" class="article-date">
-	  <time datetime="2019-02-22T06:55:02.968Z" itemprop="datePublished">2019-02-22</time>
+	<a href="/2019/04/01/easypoi集成springmvc导入excel文件/" class="article-date">
+	  <time datetime="2019-04-01T14:19:41.000Z" itemprop="datePublished">2019-04-01</time>
 	</a>
 </span>
         
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
+  </span>
+
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
+  </span>
+
 
         
 	<span class="article-read hidden-xs">
@@ -366,14 +388,16 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/404.html#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/04/01/easypoi集成springmvc导入excel文件/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <script type="text/javascript" src="//www.qq.com/404/search_children.js" charset="utf-8" homepageurl="<%- config.url %>" homepagename="回到我的主页"></script>
-
+        <h1 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h1><p>注意：省略了JPA的包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- easypoi的支持 使用easypoi要取消poi的包-有冲突 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;cn.afterturn&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;easypoi-base&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.2.0&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;cn.afterturn&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;easypoi-web&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.2.0&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;cn.afterturn&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;easypoi-annotation&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.2.0&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- JSR 303 规范验证包 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.hibernate&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;5.2.4.Final&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="domain"><a href="#domain" class="headerlink" title="domain"></a>domain</h1><p>employee类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">@Entity</span><br><span class="line">@Table(name = &quot;employee&quot;)</span><br><span class="line">@ExcelTarget(value = &quot;employee&quot;)</span><br><span class="line">public class Employee extends BaseDomain&#123;</span><br><span class="line">    @Excel(name = &quot;用户名&quot;,width = 15)</span><br><span class="line">    @NotBlank(message = &quot;用户名不能为空&quot;)</span><br><span class="line">    private String username;</span><br><span class="line">    private String password;</span><br><span class="line">    @Excel(name = &quot;邮箱&quot;,width = 20)</span><br><span class="line">    @Email</span><br><span class="line">    @NotBlank(message = &quot;邮箱不能为空&quot;)</span><br><span class="line">    private String email;</span><br><span class="line">    @Excel(name = &quot;年龄&quot;)</span><br><span class="line">    @Max(value = 65,message = &quot;年龄不能超过65&quot;)</span><br><span class="line">    @Min(value = 18,message = &quot;年龄最小是18&quot;)</span><br><span class="line">    private Integer age;</span><br><span class="line">    @Excel(name = &quot;头像&quot;,type = 2,width = 15,height = 40)</span><br><span class="line">    private String headImage;</span><br><span class="line">    private int enable;//0：启用员工 1：账户被禁用  2：账户不可用</span><br><span class="line">    @ManyToOne(fetch = FetchType.LAZY)</span><br><span class="line">    @JoinColumn(name = &quot;department_id&quot;)</span><br><span class="line">    @ExcelEntity</span><br><span class="line">    private Department department;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @ManyToMany</span><br><span class="line">    @JoinTable(name = &quot;employee_role&quot;,joinColumns = &#123;@JoinColumn(name = &quot;employee_id&quot;)&#125;,</span><br><span class="line">            inverseJoinColumns = &#123;@JoinColumn(name = &quot;role_id&quot;)&#125;)</span><br><span class="line">    private Set&lt;Role&gt; roles = new HashSet&lt;&gt;();</span><br></pre></td></tr></table></figure></p>
+<p>department类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Entity</span><br><span class="line">@Table(name = &quot;department&quot;)</span><br><span class="line">@ExcelTarget(&quot;department&quot;)</span><br><span class="line">public class Department extends BaseDomain &#123;</span><br><span class="line">    @Excel(name = &quot;名称_department,部门名称_employee&quot;)</span><br><span class="line">    private String name;</span><br></pre></td></tr></table></figure></p>
+<h1 id="controller代码"><a href="#controller代码" class="headerlink" title="controller代码"></a>controller代码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"> @RequestMapping(&quot;/emp&quot;)</span><br><span class="line">   public void importEmp(@RequestParam(value = &quot;file&quot;, required = false) MultipartFile multipartFile, HttpServletRequest request, HttpServletResponse response) throws IOException &#123;</span><br><span class="line"></span><br><span class="line">        //获取图片名称</span><br><span class="line">        String fileName = multipartFile.getOriginalFilename();</span><br><span class="line">        String mimeType = request.getServletContext().getMimeType(fileName);</span><br><span class="line">        //此处应该判断mime类型</span><br><span class="line"></span><br><span class="line">        ImportParams params = new ImportParams();</span><br><span class="line">        //params.setTitleRows(1);</span><br><span class="line">        params.setHeadRows(1);</span><br><span class="line">        params.setNeedVerfiy(true);</span><br><span class="line">        params.setVerifyHandler(employeeExcelVerifyHandler);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            result = ExcelImportUtil.importExcelMore(</span><br><span class="line">                    multipartFile.getInputStream(),</span><br><span class="line">                    Employee.class, params);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (result.getList() != null) &#123;</span><br><span class="line">            result.getList().forEach(employee -&gt; &#123;</span><br><span class="line">                //设置初始密码</span><br><span class="line">                employee.setPassword(&quot;123456&quot;);</span><br><span class="line">                Department department = departmentService.queryByName(employee.getDepartment().getName());</span><br><span class="line">                employee.setDepartment(department);</span><br><span class="line">                employeeService.save(employee);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">//        if (result.isVerfiyFail()) &#123; //验证失败 下载错误的文件</span><br><span class="line">           /* Workbook failWorkbook = result.getFailWorkbook();</span><br><span class="line">            response.setContentType(&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;); //mime类型</span><br><span class="line">            response.setHeader(&quot;Content-disposition&quot;, &quot;attachment;filename=error.xlsx&quot;);</span><br><span class="line">            response.setHeader(&quot;Pragma&quot;, &quot;No-cache&quot;);//设置不要缓存</span><br><span class="line">            OutputStream ouputStream = response.getOutputStream();</span><br><span class="line">            failWorkbook.write(ouputStream);</span><br><span class="line">            ouputStream.flush();</span><br><span class="line">            ouputStream.close();*/</span><br><span class="line">//        &#125;</span><br><span class="line">//        return  &quot;import/index&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
@@ -382,7 +406,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://conjurermaple.github.io//404.html" title="404 Not Found：该页无法显示" target="_blank" rel="external">https://conjurermaple.github.io//404.html</a>
+      <a href="https://conjurermaple.github.io/2019/04/01/easypoi集成springmvc导入excel文件/" title="easypoi集成springmvc导入excel文件" target="_blank" rel="external">https://conjurermaple.github.io/2019/04/01/easypoi集成springmvc导入excel文件/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -413,12 +437,37 @@
   </article>
   
     
+  <section id="comments">
+  	
+           
+    
+  </section>
+
 
   
 </div>
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
   <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2019/03/31/百度人脸识别集成springmvc实现登录/" title="百度人脸识别集成springmvc实现登录"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
   
   
   <!-- Button trigger modal -->
@@ -534,6 +583,33 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '383f19b856237c034a38',
+    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
+    repo: 'conjurermaple.github.io',
+    owner: 'ConjurerMaple',
+    admin: ['ConjurerMaple'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
 
 
 
