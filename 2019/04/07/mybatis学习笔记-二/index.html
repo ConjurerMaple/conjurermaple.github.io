@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>mybatis学习笔记(二) | maple</title>
+  <meta name="description" content="1. 映射Mapper 接口方法映射到对应的SQL Mapper.xml的命名空间名称就是Maper接口的全限定名 Mapper接口上也可以写SQL(不建议这么做)  1.1 employeeMapper.xml1234567891011&amp;lt;!--这个命名空间的名称就是咱们Mapper接口的全限定名--&amp;gt;&amp;lt;mapper namespace=&amp;quot;cn.itsource._02">
+<meta name="keywords" content="框架篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis学习笔记(二)">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/04/07/mybatis学习笔记-二/index.html">
+<meta property="og:site_name" content="maple博客">
+<meta property="og:description" content="1. 映射Mapper 接口方法映射到对应的SQL Mapper.xml的命名空间名称就是Maper接口的全限定名 Mapper接口上也可以写SQL(不建议这么做)  1.1 employeeMapper.xml1234567891011&amp;lt;!--这个命名空间的名称就是咱们Mapper接口的全限定名--&amp;gt;&amp;lt;mapper namespace=&amp;quot;cn.itsource._02">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-07T13:35:52.201Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mybatis学习笔记(二)">
+<meta name="twitter:description" content="1. 映射Mapper 接口方法映射到对应的SQL Mapper.xml的命名空间名称就是Maper接口的全限定名 Mapper接口上也可以写SQL(不建议这么做)  1.1 employeeMapper.xml1234567891011&amp;lt;!--这个命名空间的名称就是咱们Mapper接口的全限定名--&amp;gt;&amp;lt;mapper namespace=&amp;quot;cn.itsource._02">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/04/07/mybatis学习笔记-二/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://conjurermaple.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">maple</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java &amp; Other</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Chengdu, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架篇/">框架篇</a><span class="category-list-count">32</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/错误积累/">错误积累</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架篇/">框架篇</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误积累/">错误积累</a><span class="tag-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 13.25px;">JAVA</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/javascript/" style="font-size: 13.25px;">javascript</a> <a href="/tags/前端/" style="font-size: 13.75px;">前端</a> <a href="/tags/框架篇/" style="font-size: 14px;">框架篇</a> <a href="/tags/错误积累/" style="font-size: 13.5px;">错误积累</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/07/mybatis学习笔记-二/" class="title">mybatis学习笔记(二)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-07T00:36:41.000Z" itemprop="datePublished">2019-04-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/03/mybatis学习笔记-一/" class="title">mybatis学习笔记(一)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-03T11:03:17.000Z" itemprop="datePublished">2019-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/01/easypoi集成springmvc导入excel文件/" class="title">easypoi集成springmvc导入excel文件</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-01T14:19:41.000Z" itemprop="datePublished">2019-04-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/31/百度人脸识别集成springmvc实现登录/" class="title">百度人脸识别集成springmvc实现登录</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-31T14:25:08.000Z" itemprop="datePublished">2019-03-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/31/shiro单用登录-同一时刻只能登录一个账号/" class="title">shiro单用登录(同一时刻只能登录一个账号)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-31T14:12:02.000Z" itemprop="datePublished">2019-03-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-映射Mapper"><span class="toc-number">1.</span> <span class="toc-text">1. 映射Mapper</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-employeeMapper-xml"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 employeeMapper.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-EmployeeMapper"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 EmployeeMapper</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-调用-Mapper的方法"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 调用 Mapper的方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-高级查询"><span class="toc-number">2.</span> <span class="toc-text">2. 高级查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-批量删除-添加-动态修改"><span class="toc-number">3.</span> <span class="toc-text">3. 批量删除,添加,动态修改</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-批量删除"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 批量删除</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1传数组的方法"><span class="toc-number">3.1.1.</span> <span class="toc-text">3.1.1传数组的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2传集合的方式"><span class="toc-number">3.1.2.</span> <span class="toc-text">3.1.2传集合的方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-批量添加"><span class="toc-number">3.2.</span> <span class="toc-text">3.1 批量添加</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-动态修改"><span class="toc-number">3.3.</span> <span class="toc-text">3.2 动态修改</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-多对一"><span class="toc-number">4.</span> <span class="toc-text">4. 多对一</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-准备domain"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 准备domain</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2嵌套结果"><span class="toc-number">4.2.</span> <span class="toc-text">4.2嵌套结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-嵌套查询"><span class="toc-number">4.3.</span> <span class="toc-text">4.2 嵌套查询</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-一对多"><span class="toc-number">5.</span> <span class="toc-text">5. 一对多</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-准备domain"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 准备domain</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-级联保存"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 级联保存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-嵌套结果"><span class="toc-number">5.3.</span> <span class="toc-text">5.3  嵌套结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-嵌套查询"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 嵌套查询</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-缓存"><span class="toc-number">6.</span> <span class="toc-text">6. 缓存</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-mybatis学习笔记-二" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mybatis学习笔记(二)
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/04/07/mybatis学习笔记-二/" class="article-date">
+	  <time datetime="2019-04-07T00:36:41.000Z" itemprop="datePublished">2019-04-07</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/04/07/mybatis学习笔记-二/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="1-映射Mapper"><a href="#1-映射Mapper" class="headerlink" title="1. 映射Mapper"></a>1. 映射Mapper</h1><ul>
+<li>接口方法映射到对应的SQL</li>
+<li>Mapper.xml的命名空间名称就是Maper接口的全限定名</li>
+<li>Mapper接口上也可以写SQL(不建议这么做)</li>
+</ul>
+<h2 id="1-1-employeeMapper-xml"><a href="#1-1-employeeMapper-xml" class="headerlink" title="1.1 employeeMapper.xml"></a>1.1 employeeMapper.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--这个命名空间的名称就是咱们Mapper接口的全限定名--&gt;</span><br><span class="line">&lt;mapper namespace=&quot;cn.itsource._02_mapper.mapper.EmployeeMapper&quot;&gt;</span><br><span class="line">    &lt;!--这个id的名称必需和映射的EmployeeMapper的方法名一致--&gt;</span><br><span class="line">    &lt;insert id=&quot;save&quot; parameterType=&quot;employee&quot;&gt;</span><br><span class="line">      ...</span><br><span class="line">    &lt;/insert&gt;</span><br><span class="line"></span><br><span class="line">    &lt;select id=&quot;findAll&quot; resultType=&quot;employee&quot;&gt;</span><br><span class="line">      ...</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-EmployeeMapper"><a href="#1-2-EmployeeMapper" class="headerlink" title="1.2 EmployeeMapper"></a>1.2 EmployeeMapper</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package cn.itsource._02_mapper.mapper;</span><br><span class="line">public interface EmployeeMapper &#123;</span><br><span class="line"></span><br><span class="line">    void save(Employee employee);</span><br><span class="line">//    @Select(&quot;select * from employee&quot;)</span><br><span class="line">    List&lt;Employee&gt; findAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-调用-Mapper的方法"><a href="#1-3-调用-Mapper的方法" class="headerlink" title="1.3 调用 Mapper的方法"></a>1.3 调用 Mapper的方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SqlSession session = MyBatisUtil.openSession();</span><br><span class="line">EmployeeMapper mapper = session.getMapper(EmployeeMapper.class);</span><br><span class="line"></span><br><span class="line">mapper.findAll().forEach(e -&gt; System.out.println(e));</span><br></pre></td></tr></table></figure>
+<h1 id="2-高级查询"><a href="#2-高级查询" class="headerlink" title="2. 高级查询"></a>2. 高级查询</h1><ul>
+<li>准备一个Query对象(封装所有条件)</li>
+<li>模糊查询 concat(“%”,#{name},”%”)</li>
+<li>遇到特殊符号 1.转义 &lt; CDATA段 &lt;![CDATA[…]]&gt;</li>
+<li>使用where标签(第一个and变成where)</li>
+<li>if中有多个条件使用 and/or 进行关联</li>
+<li>如果出现相就的代码,可以单独抽取sql标签,引用include即可</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;findByQuery&quot; parameterType=&quot;employeeQuery&quot; resultType=&quot;employee&quot;&gt;</span><br><span class="line">        select * from employee &lt;include refid=&quot;whereSql&quot; /&gt;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--准备代码片断--&gt;</span><br><span class="line">&lt;sql id=&quot;whereSql&quot;&gt;</span><br><span class="line">    &lt;where&gt;</span><br><span class="line">        &lt;if test=&quot;name!=null and name!=&apos;&apos;&quot;&gt;</span><br><span class="line">            and name like concat(&quot;%&quot;,#&#123;name&#125;,&quot;%&quot;)</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;minAge!=null&quot;&gt;</span><br><span class="line">            and age &gt;= #&#123;minAge&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;maxAge!=null&quot;&gt;</span><br><span class="line">            &lt;![CDATA[ and age&lt;=#&#123;maxAge&#125; ]]&gt;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">    &lt;/where&gt;</span><br><span class="line">&lt;/sql&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="3-批量删除-添加-动态修改"><a href="#3-批量删除-添加-动态修改" class="headerlink" title="3. 批量删除,添加,动态修改"></a>3. 批量删除,添加,动态修改</h1><h2 id="3-1-批量删除"><a href="#3-1-批量删除" class="headerlink" title="3.1 批量删除"></a>3.1 批量删除</h2><ul>
+<li>首先知道sql delete from 表名 where id in (?,?,..)</li>
+</ul>
+<p>collection=””:代表你要循环的是什么? array/list<br>如果传过来的是数据,写array(集合就写list)<br>item:循环的每一个数据<br>open:拼接字符串以什么开始<br>close:拼接字符串以什么结尾<br>separator:拼接的时候每个值使用,隔开<br>index:遍历的下标</p>
+<h3 id="3-1-1传数组的方法"><a href="#3-1-1传数组的方法" class="headerlink" title="3.1.1传数组的方法"></a>3.1.1传数组的方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &lt;delete id=&quot;batchDelete&quot; parameterType=&quot;long[]&quot;&gt;</span><br><span class="line">        delete from employee where id in</span><br><span class="line">        &lt;foreach collection=&quot;array&quot; item=&quot;v&quot; open=&quot;(&quot; close=&quot;)&quot; separator=&quot;,&quot;&gt;</span><br><span class="line">            #&#123;v&#125;</span><br><span class="line">        &lt;/foreach&gt;</span><br><span class="line">&lt;/delete&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="3-1-2传集合的方式"><a href="#3-1-2传集合的方式" class="headerlink" title="3.1.2传集合的方式"></a>3.1.2传集合的方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;delete id=&quot;batchDelete&quot; parameterType=&quot;list&quot;&gt;</span><br><span class="line">       delete from employee where id in</span><br><span class="line">       &lt;foreach collection=&quot;list&quot; item=&quot;v&quot; open=&quot;(&quot; close=&quot;)&quot; separator=&quot;,&quot;&gt;</span><br><span class="line">           #&#123;v&#125;</span><br><span class="line">       &lt;/foreach&gt;</span><br><span class="line">   &lt;/delete&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3-1-批量添加"><a href="#3-1-批量添加" class="headerlink" title="3.1 批量添加"></a>3.1 批量添加</h2><blockquote>
+<p>首先知道sql `insert into 表名 (p1,p2,…) values (#{p1},#{p2}),(#{p1},#{p2}),…</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=&quot;batchSave&quot; parameterType=&quot;list&quot;&gt;</span><br><span class="line">    insert into employee (name,age,sex) values</span><br><span class="line">    &lt;foreach collection=&quot;list&quot; item=&quot;emp&quot; separator=&quot;,&quot;&gt;</span><br><span class="line">        (#&#123;emp.name&#125;,#&#123;emp.age&#125;,#&#123;emp.sex&#125;)</span><br><span class="line">    &lt;/foreach&gt;</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-动态修改"><a href="#3-2-动态修改" class="headerlink" title="3.2 动态修改"></a>3.2 动态修改</h2><blockquote>
+<p>咱们修改一个对象,咱们只能修改有数据的部分<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--动态修改--&gt;</span><br><span class="line">&lt;update id=&quot;update&quot; parameterType=&quot;cn.itsource._02_mapper.domain.Employee&quot;&gt;</span><br><span class="line">    UPDATE employee</span><br><span class="line">    &lt;trim prefix=&quot;SET&quot; suffixOverrides=&quot;,&quot;&gt;</span><br><span class="line">        &lt;if test=&quot;name!=null and name!=&apos;&apos;&quot;&gt;</span><br><span class="line">          name = #&#123;name&#125;,</span><br><span class="line">         &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;age!=null&quot;&gt;</span><br><span class="line">          age=#&#123;age&#125;,</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;sex!=null&quot;&gt;</span><br><span class="line">          sex = #&#123;sex&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">    &lt;/trim&gt;</span><br><span class="line">    WHERE id = #&#123;id&#125;</span><br><span class="line">&lt;/update&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>更好的方案</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;update id=&quot;update&quot; parameterType=&quot;cn.itsource._02_mapper.domain.Employee&quot;&gt;</span><br><span class="line">    UPDATE employee</span><br><span class="line">    &lt;set&gt;</span><br><span class="line">        &lt;if test=&quot;name!=null and name!=&apos;&apos;&quot;&gt;</span><br><span class="line">            name = #&#123;name&#125;,</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;age!=null&quot;&gt;</span><br><span class="line">            age=#&#123;age&#125;,</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">    &lt;/set&gt;</span><br><span class="line">    WHERE id=#&#123;id&#125;</span><br><span class="line">&lt;/update&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="4-多对一"><a href="#4-多对一" class="headerlink" title="4. 多对一"></a>4. 多对一</h1><ul>
+<li>准备(两张表employee,department,两个domain,两个mapper.xml)</li>
+<li>查询(嵌套结果[一条sql],嵌套查询[n+1条sql])</li>
+</ul>
+<h2 id="4-1-准备domain"><a href="#4-1-准备domain" class="headerlink" title="4.1 准备domain"></a>4.1 准备domain</h2><ul>
+<li><p>Employee</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Employee &#123;</span><br><span class="line"></span><br><span class="line">    private Long id;</span><br><span class="line">    private String name;</span><br><span class="line">    private Integer age;</span><br><span class="line">    private Boolean sex;</span><br><span class="line"></span><br><span class="line">    private Department dept;</span><br><span class="line">    //... getter,setter与toString</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Department</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Department &#123;</span><br><span class="line">    private Long id;</span><br><span class="line">    private String name;</span><br><span class="line">    //... getter,setter与toString</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-2嵌套结果"><a href="#4-2嵌套结果" class="headerlink" title="4.2嵌套结果"></a>4.2嵌套结果</h2><ul>
+<li>查询的sql要关连多张表(一定要取别名,不然有些名称会产生冲突)</li>
+<li>当我们使用了association 后默认的映射失败,需要自己手动完成映射</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;findAll&quot; resultMap=&quot;employeeMap&quot;&gt;</span><br><span class="line">    select e.id eid,e.name ename,e.age,e.sex,d.id did,d.name dname</span><br><span class="line">      from employee e join department d on d.id = e.dept_id</span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br><span class="line">&lt;resultMap id=&quot;employeeMap&quot; type=&quot;employee&quot;&gt;</span><br><span class="line">    &lt;!-- 手动完成基本映射 --&gt;</span><br><span class="line">    &lt;id property=&quot;id&quot; column=&quot;eid&quot; /&gt;</span><br><span class="line">    &lt;result property=&quot;name&quot; column=&quot;ename&quot; /&gt;</span><br><span class="line">    &lt;result property=&quot;sex&quot; column=&quot;sex&quot; /&gt;</span><br><span class="line">    &lt;result property=&quot;age&quot; column=&quot;age&quot; /&gt;</span><br><span class="line">    &lt;!-- property:属性名,javaType:属性类型 --&gt;</span><br><span class="line">    &lt;association property=&quot;dept&quot; javaType=&quot;department&quot;&gt;</span><br><span class="line">        &lt;id property=&quot;id&quot; column=&quot;did&quot; /&gt;</span><br><span class="line">        &lt;result property=&quot;name&quot; column=&quot;dname&quot; /&gt;</span><br><span class="line">    &lt;/association&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-嵌套查询"><a href="#4-2-嵌套查询" class="headerlink" title="4.2 嵌套查询"></a>4.2 嵌套查询</h2><ul>
+<li>会产生n+1条sql</li>
+<li>需要去找到对应的那条sql并且执行</li>
+<li>保证MyBatis能找到这两个xml</li>
+</ul>
+<blockquote>
+<p>employeeMapper.xml</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;findAll&quot; resultMap=&quot;employeeMap&quot;&gt;</span><br><span class="line">    SELECT * FROM employee</span><br><span class="line">&lt;/select&gt;</span><br><span class="line">&lt;!--嵌套查询方案--&gt;</span><br><span class="line">&lt;resultMap id=&quot;employeeMap&quot; type=&quot;employee&quot;&gt;</span><br><span class="line">    &lt;id property=&quot;id&quot; column=&quot;id&quot; /&gt;</span><br><span class="line">    &lt;result property=&quot;name&quot; column=&quot;name&quot; /&gt;</span><br><span class="line">    &lt;result property=&quot;sex&quot; column=&quot;sex&quot; /&gt;</span><br><span class="line">    &lt;result property=&quot;age&quot; column=&quot;age&quot; /&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">    查询相应的部门</span><br><span class="line">        column:数据库对应的列 select:查询对应的sql的路径</span><br><span class="line"> --&gt;</span><br><span class="line">    &lt;association property=&quot;dept&quot; javaType=&quot;department&quot;</span><br><span class="line">             column=&quot;dept_id&quot; select=&quot;cn.itsource._04_many2one.DepartmentMapper.findById&quot; /&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>departmentMapper.xml</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;mapper namespace=&quot;cn.itsource._04_many2one.DepartmentMapper&quot;&gt;</span><br><span class="line">    &lt;select id=&quot;findById&quot; parameterType=&quot;long&quot; resultType=&quot;department&quot;&gt;</span><br><span class="line">        select * from department where id = #&#123;id&#125;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="5-一对多"><a href="#5-一对多" class="headerlink" title="5. 一对多"></a>5. 一对多</h1><h2 id="5-1-准备domain"><a href="#5-1-准备domain" class="headerlink" title="5.1 准备domain"></a>5.1 准备domain</h2><ul>
+<li>Employee</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Employee &#123;</span><br><span class="line"></span><br><span class="line">    private Long id;</span><br><span class="line">    private String name;</span><br><span class="line">    private Integer age;</span><br><span class="line">    private Boolean sex;</span><br><span class="line">     //... getter,setter与toString</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Department</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Department &#123;</span><br><span class="line">    private Long id;</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    private List&lt;Employee&gt; employees = new ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<h2 id="5-2-级联保存"><a href="#5-2-级联保存" class="headerlink" title="5.2 级联保存"></a>5.2 级联保存</h2><ul>
+<li>准备两个Mapper</li>
+<li>保存部门后需要马上拿到它的id</li>
+<li>保存员工传的是Map{List<employee>,deptId}</employee></li>
+</ul>
+<blockquote>
+<p>departmentMapper.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--保存后需要拿到id--&gt;</span><br><span class="line">&lt;insert id=&quot;save&quot; parameterType=&quot;department&quot;</span><br><span class="line">        useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot; keyColumn=&quot;id&quot;&gt;</span><br><span class="line">    insert into department (name) values (#&#123;name&#125;)</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>employeeMapper.xml</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=&quot;batchSave&quot; parameterType=&quot;map&quot;&gt;</span><br><span class="line">    insert into employee (name,age,sex,dept_id) values</span><br><span class="line">    &lt;foreach collection=&quot;list&quot; item=&quot;emp&quot; separator=&quot;,&quot;&gt;</span><br><span class="line">        (#&#123;emp.name&#125;,#&#123;emp.age&#125;,#&#123;emp.sex&#125;,#&#123;deptId&#125;)</span><br><span class="line">    &lt;/foreach&gt;</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="5-3-嵌套结果"><a href="#5-3-嵌套结果" class="headerlink" title="5.3  嵌套结果"></a>5.3  嵌套结果</h2><ul>
+<li>查询的sql要关连多张表(一定要取别名,不然有些名称会产生冲突)</li>
+<li>当我们使用了collection 后默认的映射失败,需要自己手动完成映射</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;resultMap id=&quot;departmentMap&quot; type=&quot;department&quot;&gt;</span><br><span class="line">    &lt;id property=&quot;id&quot; column=&quot;did&quot; /&gt;</span><br><span class="line">    &lt;result property=&quot;name&quot; column=&quot;dname&quot; /&gt;</span><br><span class="line">    &lt;collection property=&quot;employees&quot; ofType=&quot;employee&quot;&gt;</span><br><span class="line">        &lt;id property=&quot;id&quot; column=&quot;eid&quot; /&gt;</span><br><span class="line">        &lt;result property=&quot;name&quot; column=&quot;ename&quot; /&gt;</span><br><span class="line">        &lt;result property=&quot;age&quot; column=&quot;age&quot; /&gt;</span><br><span class="line">        &lt;result property=&quot;sex&quot; column=&quot;sex&quot; /&gt;</span><br><span class="line">    &lt;/collection&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br><span class="line"></span><br><span class="line">&lt;select id=&quot;findAll&quot; resultMap=&quot;departmentMap&quot;&gt;</span><br><span class="line">    select d.id did,d.name dname,e.id eid,e.name ename,e.age,e.sex</span><br><span class="line">    from department d left join employee e on e.dept_id = d.id</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="5-4-嵌套查询"><a href="#5-4-嵌套查询" class="headerlink" title="5.4 嵌套查询"></a>5.4 嵌套查询</h2><blockquote>
+<p>依赖需要找到对应的SQL</p>
+</blockquote>
+<ul>
+<li>departmentMapper.xml</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;resultMap id=&quot;departmentMap&quot; type=&quot;department&quot;&gt;</span><br><span class="line">    &lt;id property=&quot;id&quot; column=&quot;id&quot; /&gt;</span><br><span class="line">    &lt;result property=&quot;name&quot; column=&quot;name&quot; /&gt;</span><br><span class="line">    &lt;collection property=&quot;employees&quot; ofType=&quot;employee&quot; column=&quot;id&quot; select=&quot;cn.itsource._05_one2many.EmployeeMapper.findByDeptId&quot;&gt;</span><br><span class="line">    &lt;/collection&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br><span class="line">&lt;select id=&quot;findAll&quot; resultMap=&quot;departmentMap&quot;&gt;</span><br><span class="line">    select *  from department</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>employeeMapper.xml</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--这个命名空间的名称就是咱们Mapper接口的全限定名--&gt;</span><br><span class="line">&lt;mapper namespace=&quot;cn.itsource._05_one2many.EmployeeMapper&quot;&gt;</span><br><span class="line"></span><br><span class="line">    //...</span><br><span class="line">    </span><br><span class="line">    &lt;select id=&quot;findByDeptId&quot; resultType=&quot;employee&quot; parameterType=&quot;long&quot;&gt;</span><br><span class="line">        select * from employee where dept_id = #&#123;deptId&#125;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="6-缓存"><a href="#6-缓存" class="headerlink" title="6. 缓存"></a>6. 缓存</h1><ul>
+<li>自带一级级联</li>
+<li>二级缓存需要加上标签 <cache></cache></li>
+<li>二级缓存的对象必需是序列化对象 .. implements Serializable</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://conjurermaple.github.io/2019/04/07/mybatis学习笔记-二/" title="mybatis学习笔记(二)" target="_blank" rel="external">https://conjurermaple.github.io/2019/04/07/mybatis学习笔记-二/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://conjurermaple.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://conjurermaple.github.io/" target="_blank"><span class="text-dark">maple</span><small class="ml-1x">Java &amp; Other</small></a></h3>
+        <div>拼命努力的人，生活不会辜负你。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2019/04/03/mybatis学习笔记-一/" title="mybatis学习笔记(一)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Blog by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '383f19b856237c034a38',
+    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
+    repo: 'conjurermaple.github.io',
+    owner: 'ConjurerMaple',
+    admin: ['ConjurerMaple'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+
+
+
+
+</body>
+</html>
