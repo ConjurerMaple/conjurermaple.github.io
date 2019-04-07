@@ -17,21 +17,17 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>连接池配置 | maple</title>
-  <meta name="description" content="1234567891011121314151617181920212223242526272829303132&amp;lt;!-- 配置连接池 --&amp;gt;   &amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;org.apache.commons.dbcp.BasicDataSource&amp;quot; destroy-method=&amp;quot;close&amp;qu">
-<meta name="keywords" content="框架篇">
-<meta property="og:type" content="article">
-<meta property="og:title" content="连接池配置">
-<meta property="og:url" content="https://conjurermaple.github.io/2019/03/30/连接池配置/index.html">
+  <title>归档 | maple</title>
+  <meta name="keywords" content="JAVA">
+<meta property="og:type" content="website">
+<meta property="og:title" content="maple博客">
+<meta property="og:url" content="https://conjurermaple.github.io/archives/page/6/index.html">
 <meta property="og:site_name" content="maple博客">
-<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132&amp;lt;!-- 配置连接池 --&amp;gt;   &amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;org.apache.commons.dbcp.BasicDataSource&amp;quot; destroy-method=&amp;quot;close&amp;qu">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-30T13:22:22.785Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="连接池配置">
-<meta name="twitter:description" content="1234567891011121314151617181920212223242526272829303132&amp;lt;!-- 配置连接池 --&amp;gt;   &amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;org.apache.commons.dbcp.BasicDataSource&amp;quot; destroy-method=&amp;quot;close&amp;qu">
+<meta name="twitter:title" content="maple博客">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/30/连接池配置/index.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/archives/page/6/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -336,200 +332,75 @@
 
   
   
-<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
-  <div class="slimContent">
-    <nav id="toc" class="article-toc">
-      <h3 class="toc-title">文章目录</h3>
-      
-    </nav>
-  </div>
-</aside>
-
 <main class="main" role="main">
-  <div class="content">
-  <article id="post-连接池配置" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  	<article class="content article article-archives article-type-list" itemscope>
+	    <header class="article-header">
+	      <h1 itemprop="title">归档</h1>
+	      <p class="text-muted">共 1 篇文章</p>
+	    </header>
+	    <div class="article-body">
+	      
+  
+  
     
-    <div class="article-header">
+    
       
-        
-  
-    <h1 class="article-title" itemprop="name">
-      连接池配置
-    </h1>
-  
-
       
-      <div class="article-meta">
-        <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/30/连接池配置/" class="article-date">
-	  <time datetime="2019-03-30T12:51:52.000Z" itemprop="datePublished">2019-03-30</time>
-	</a>
-</span>
-        
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
-  </span>
-
-        
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
-  </span>
-
-
-        
-	<span class="article-read hidden-xs">
-	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
-	    <span id="busuanzi_container_page_pv">
-			<span id="busuanzi_value_page_pv">0</span>
-		</span>
-	</span>
-
-
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/30/连接池配置/#comments" class="article-comment-link">评论</a></span>
-        
-      </div>
-    </div>
-    <div class="article-entry marked-body" itemprop="articleBody">
-      
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 配置连接池 --&gt;</span><br><span class="line">   &lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot; destroy-method=&quot;close&quot;&gt;</span><br><span class="line">       &lt;!--连接数据4个属性 --&gt;</span><br><span class="line">       &lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;jdbc.driverClassName&#125;&quot; /&gt;</span><br><span class="line">       &lt;property name=&quot;url&quot; value=&quot;$&#123;jdbc.url&#125;&quot; /&gt;</span><br><span class="line">       &lt;property name=&quot;username&quot; value=&quot;$&#123;jdbc.username&#125;&quot; /&gt;</span><br><span class="line">       &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot; /&gt;</span><br><span class="line">       &lt;!--maxActive: 最大连接数量 --&gt;</span><br><span class="line">       &lt;property name=&quot;maxActive&quot; value=&quot;150&quot; /&gt;</span><br><span class="line">       &lt;!--minIdle: 最小空闲连接 --&gt;</span><br><span class="line">       &lt;property name=&quot;minIdle&quot; value=&quot;5&quot; /&gt;</span><br><span class="line">       &lt;!--maxIdle: 最大空闲连接 --&gt;</span><br><span class="line">       &lt;property name=&quot;maxIdle&quot; value=&quot;20&quot; /&gt;</span><br><span class="line">       &lt;!--initialSize: 初始化连接 --&gt;</span><br><span class="line">       &lt;property name=&quot;initialSize&quot; value=&quot;30&quot; /&gt;</span><br><span class="line">       &lt;!-- 用来配置数据库断开后自动连接的 --&gt;</span><br><span class="line">       &lt;!-- 连接被泄露时是否打印 --&gt;</span><br><span class="line">       &lt;property name=&quot;logAbandoned&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">       &lt;!--removeAbandoned: 是否自动回收超时连接 --&gt;</span><br><span class="line">       &lt;property name=&quot;removeAbandoned&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">       &lt;!--removeAbandonedTimeout: 超时时间(以秒数为单位) --&gt;</span><br><span class="line">       &lt;property name=&quot;removeAbandonedTimeout&quot; value=&quot;10&quot; /&gt;</span><br><span class="line">       &lt;!--maxWait: 超时等待时间以毫秒为单位 1000等于60秒 --&gt;</span><br><span class="line">       &lt;property name=&quot;maxWait&quot; value=&quot;1000&quot; /&gt;</span><br><span class="line">       &lt;!-- 在空闲连接回收器线程运行期间休眠的时间值,以毫秒为单位. --&gt;</span><br><span class="line">       &lt;property name=&quot;timeBetweenEvictionRunsMillis&quot; value=&quot;10000&quot; /&gt;</span><br><span class="line">       &lt;!-- 在每次空闲连接回收器线程(如果有)运行时检查的连接数量 --&gt;</span><br><span class="line">       &lt;property name=&quot;numTestsPerEvictionRun&quot; value=&quot;10&quot; /&gt;</span><br><span class="line">       &lt;!-- 1000 * 60 * 30 连接在池中保持空闲而不被空闲连接回收器线程 --&gt;</span><br><span class="line">       &lt;property name=&quot;minEvictableIdleTimeMillis&quot; value=&quot;10000&quot; /&gt;</span><br><span class="line">       &lt;property name=&quot;validationQuery&quot; value=&quot;SELECT NOW() FROM DUAL&quot; /&gt;</span><br><span class="line">   &lt;/bean&gt;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <div class="article-footer">
-      <blockquote class="mt-2x">
-  <ul class="post-copyright list-unstyled">
-    
-    <li class="post-copyright-link hidden-xs">
-      <strong>本文链接：</strong>
-      <a href="https://conjurermaple.github.io/2019/03/30/连接池配置/" title="连接池配置" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/30/连接池配置/</a>
-    </li>
-    
-    <li class="post-copyright-license">
-      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li>
-  </ul>
-</blockquote>
-
-
-<div class="panel panel-default panel-badger">
-  <div class="panel-body">
-    <figure class="media">
-      <div class="media-left">
-        <a href="https://conjurermaple.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
-        </a>
-      </div>
-      <div class="media-body">
-        <h3 class="media-heading"><a href="https://conjurermaple.github.io/" target="_blank"><span class="text-dark">maple</span><small class="ml-1x">Java &amp; Other</small></a></h3>
-        <div>拼命努力的人，生活不会辜负你。</div>
-      </div>
-    </figure>
-  </div>
-</div>
-
-
-    </div>
-  </article>
-  
-    
-  <section id="comments">
-  	
-           
-    
-  </section>
-
-
-  
-</div>
-
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
-  <div class="bar-inner">
-  
-  <ul class="pager pull-left">
-    
-    <li class="prev">
-      <a href="/2019/03/30/JPA父类不持久化/" title="JPA父类不持久化"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
-    
-    <li class="next">
-      <a href="/2019/03/23/使用easypoi时遇到cn-afterturn-easypoi-exception-excel-ExcelImportException-创建对象异常错误/" title="使用easypoi时遇到cn.afterturn.easypoi.exception.excel.ExcelImportException: 创建对象异常错误"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
-    </li>
-    
-    
-    <li class="toggle-toc">
-      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
-        <span>[&nbsp;</span><span>文章目录</span>
-        <i class="text-collapsed icon icon-anchor"></i>
-        <i class="text-in icon icon-close"></i>
-        <span>]</span>
-      </a>
-    </li>
-    
-  </ul>
-  
-  
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
-  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
-    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
-  </div> -->
-  
-  
-  <div class="bar-right">
-    
-    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
-    
-  </div>
-  </div>
-</nav>
-  
-<!-- Modal -->
-<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content donate">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <div class="modal-body">
-        <div class="donate-box">
-          <div class="donate-head">
-            <p>感谢您的支持，我会继续努力的!</p>
-          </div>
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
-              <div class="donate-payimg">
-                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
-              </div>
-              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
-              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
-              <div class="donate-payimg">
-                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
-              </div>
-              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
-              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
-            </div>
-          </div>
-          <div class="donate-footer">
-            <ul class="nav nav-tabs nav-justified" role="tablist">
-              <li role="presentation" class="active">
-                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
-              </li>
-              <li role="presentation" class>
-                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
-              </li>
-            </ul>
-          </div>
+      <section class="panel panel-default b-no">
+        <div class="panel-heading" role="tab">
+          <h3 class="panel-title">
+            <a data-toggle="collapse" href="#collapse2019" aria-expanded="true">
+              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
+              2019
+            </a>
+            <!-- <a href="/archives/2019" class="archive-year">2019</a> -->
+          </h3>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+        <div id="collapse2019" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2019">
+        <div class="panel-body">
+          <div class="collection">
+    
+    
+<a href="/2019/02/22/Dom4j解析XML/" class="collection-item" target="_blank" itemprop="url">
+  <time datetime="2019-02-22T05:14:50.000Z" itemprop="datePublished">2019-02-22</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> Dom4j解析XML
+</a>
 
 
+  
+  
+    </div></div></div></section>
+  
 
+	    </div>
+  	</article>
+  	
+    
+    <nav class="bar bar-footer clearfix" data-stick-bottom>
+        <div class="bar-inner">
+        <ul class="pager pull-left">
+            
+            <li class="prev">
+                <a href="/archives/page/5/">
+                    <i class="icon icon-angle-left"></i>
+                    上一页
+                </a>
+            </li>
+            
+            
+            <li class="next disabled">
+                <a href="javascript:;">
+                    下一页
+                    <i class="icon icon-angle-right"></i>                    
+                </a>
+            </li>
+            
+        </ul>
+        <div class="total-article bar-right">Page 6 of 6</div>
+        </div>
+    </nav>
+    
+ 	
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -584,33 +455,6 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-
-   
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-
-   
-    
-  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
-  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
-  <script type="text/javascript">
-  var gitalk = new Gitalk({
-    clientID: '383f19b856237c034a38',
-    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
-    repo: 'conjurermaple.github.io',
-    owner: 'ConjurerMaple',
-    admin: ['ConjurerMaple'],
-    id: md5(location.pathname),
-    distractionFreeMode: true
-  })
-  gitalk.render('comments')
-  </script>
-
-      
 
 
 

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>Mybatis学习笔记(三) | maple</title>
+  <meta name="description" content="1. 代码生成器maven 导包12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&amp;lt;dependencies&amp;gt;    &amp;lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-">
+<meta name="keywords" content="框架篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis学习笔记(三)">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/04/07/Mybatis学习笔记-三/index.html">
+<meta property="og:site_name" content="maple博客">
+<meta property="og:description" content="1. 代码生成器maven 导包12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&amp;lt;dependencies&amp;gt;    &amp;lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-07T13:57:56.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mybatis学习笔记(三)">
+<meta name="twitter:description" content="1. 代码生成器maven 导包12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&amp;lt;dependencies&amp;gt;    &amp;lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/04/07/Mybatis学习笔记-三/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://conjurermaple.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">maple</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java &amp; Other</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Chengdu, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架篇/">框架篇</a><span class="category-list-count">33</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/错误积累/">错误积累</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架篇/">框架篇</a><span class="tag-list-count">33</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误积累/">错误积累</a><span class="tag-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 13.25px;">JAVA</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/javascript/" style="font-size: 13.25px;">javascript</a> <a href="/tags/前端/" style="font-size: 13.75px;">前端</a> <a href="/tags/框架篇/" style="font-size: 14px;">框架篇</a> <a href="/tags/错误积累/" style="font-size: 13.5px;">错误积累</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/07/Mybatis学习笔记-三/" class="title">Mybatis学习笔记(三)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-07T13:42:04.000Z" itemprop="datePublished">2019-04-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/07/mybatis学习笔记-二/" class="title">mybatis学习笔记(二)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-07T00:36:41.000Z" itemprop="datePublished">2019-04-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/03/mybatis学习笔记-一/" class="title">mybatis学习笔记(一)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-03T11:03:17.000Z" itemprop="datePublished">2019-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/01/easypoi集成springmvc导入excel文件/" class="title">easypoi集成springmvc导入excel文件</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-01T14:19:41.000Z" itemprop="datePublished">2019-04-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/框架篇/">框架篇</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/31/百度人脸识别集成springmvc实现登录/" class="title">百度人脸识别集成springmvc实现登录</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-31T14:25:08.000Z" itemprop="datePublished">2019-03-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-代码生成器"><span class="toc-number">1.</span> <span class="toc-text">1. 代码生成器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#maven-导包"><span class="toc-number">1.1.</span> <span class="toc-text">maven 导包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-准备代码生成器插件"><span class="toc-number">1.2.</span> <span class="toc-text">1.2  准备代码生成器插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-generatorConfig-xml"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 generatorConfig.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-MyBatis拦截器"><span class="toc-number">2.</span> <span class="toc-text">2. MyBatis拦截器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-实现接口"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 实现接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1拦截器中的方法"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1拦截器中的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-签名"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2 签名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-拦截器的配置"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 拦截器的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-分页插件"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 分页插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-引入这个插件"><span class="toc-number">2.3.1.</span> <span class="toc-text">2.3.1 引入这个插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-插件配置"><span class="toc-number">2.3.2.</span> <span class="toc-text">2.3.2 插件配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-使用分页插件"><span class="toc-number">2.3.3.</span> <span class="toc-text">2.3.3 使用分页插件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-SSM集成"><span class="toc-number">3.</span> <span class="toc-text">3. SSM集成</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Spring与SpringMVC"><span class="toc-number">3.1.</span> <span class="toc-text">3.2 Spring与SpringMVC</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Mybatis学习笔记-三" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mybatis学习笔记(三)
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/04/07/Mybatis学习笔记-三/" class="article-date">
+	  <time datetime="2019-04-07T13:42:04.000Z" itemprop="datePublished">2019-04-07</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/04/07/Mybatis学习笔记-三/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="1-代码生成器"><a href="#1-代码生成器" class="headerlink" title="1. 代码生成器"></a>1. 代码生成器</h1><h2 id="maven-导包"><a href="#maven-导包" class="headerlink" title="maven 导包"></a>maven 导包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;5.1.46&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- https://mvnrepository.com/artifact/org.mybatis/mybatis --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;3.2.1&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.6.1&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.6.1&lt;/version&gt;</span><br><span class="line">        &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;log4j&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;log4j&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.2.14&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- https://mvnrepository.com/artifact/junit/junit --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;4.12&lt;/version&gt;</span><br><span class="line">        &lt;!--&lt;scope&gt;test&lt;/scope&gt;--&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">                &lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-准备代码生成器插件"><a href="#1-2-准备代码生成器插件" class="headerlink" title="1.2  准备代码生成器插件"></a>1.2  准备代码生成器插件</h2><blockquote>
+<p>pom.xml</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> &lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;!--代码生成器插件--&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.3.2&lt;/version&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;!--自定义代码生成器的路径--&gt;</span><br><span class="line">                &lt;!--&lt;configurationFile&gt;yourLocation/mybatis-generator-config.xml&lt;/configurationFile&gt;--&gt;</span><br><span class="line">                &lt;verbose&gt;true&lt;/verbose&gt;</span><br><span class="line">                &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-generatorConfig-xml"><a href="#1-3-generatorConfig-xml" class="headerlink" title="1.3 generatorConfig.xml"></a>1.3 generatorConfig.xml</h2><blockquote>
+<p>默认在资源夹根目录，必须叫这个名称</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line">&lt;!-- 自动生成器的配置(根目录，不做过多介绍)--&gt;</span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    	classPathEntry：可以配置多个，也不配置</span><br><span class="line">    	数据库驱动:这里找到相应的驱动jar包就可以了(注:不同数据库的jar不一样)</span><br><span class="line">    		location:里面的是路径(也可以直接写绝对路径 -&gt; 如:E:\mybatis\mysql-connector-java-5.1.26-bin.jar)</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;classPathEntry   location=&quot;G:\openSource\mysql-connector-java-5.1.26-bin.jar&quot;/&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    	context：用于生成一组对象的环境(至少配置1个，可以配置多个)</span><br><span class="line">    	id:表达唯一的名称</span><br><span class="line">    	targetRuntime：用于指定生成的代码的运行环境(MyBatis3/MyBatis3Simple)</span><br><span class="line">    		MyBatis3:默认值【生成更完整的功能】</span><br><span class="line">    		MyBatis3Simple：不会生成与Example(案例)相关的方法</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;context id=&quot;DB2Tables&quot;   targetRuntime=&quot;MyBatis3Simple&quot; &gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">            用于配置如果生成注释信息(最多可以配置一下)</span><br><span class="line">            suppressAllComments:阻止生成注释 ，默认为false</span><br><span class="line">            suppressDate:阻止生成的注释 时间戳，默认为false</span><br><span class="line">            addRemarkComments：注释是否添加数据库表的备注信息，默认为false</span><br><span class="line">         --&gt;</span><br><span class="line">        &lt;commentGenerator&gt;</span><br><span class="line">            &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/commentGenerator&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">        	这个应该比较清楚，配置连接数据库的基本信息</span><br><span class="line">        --&gt;</span><br><span class="line">        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;</span><br><span class="line">                        connectionURL=&quot;jdbc:mysql:///mybatis&quot;</span><br><span class="line">                        userId=&quot;root&quot; password=&quot;admin&quot;&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">        	用于指定JDBC类型和Java类型如何转换，最多可以配置一个</span><br><span class="line">        	forceBigDecimals:控制是否强制将DECIMAL和NUMERIC类型的JDBC字段转换成Java类型的 BigDecimal</span><br><span class="line">        					 默认为false,一般不需要配置</span><br><span class="line">        --&gt;</span><br><span class="line">        &lt;javaTypeResolver&gt;</span><br><span class="line">            &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;/javaTypeResolver&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--</span><br><span class="line">        	javaModelGenerator:用来控制生成的实体类</span><br><span class="line">	        	targetPackage：生成Model类存放位置(包名)</span><br><span class="line">	        	targetProject：指定目标项目路径(根目录)</span><br><span class="line">        		对应的子属性:</span><br><span class="line">	        		trimStrings：判断是否对数据库查询结果进行trim操作(默认false)</span><br><span class="line">        --&gt;</span><br><span class="line">        &lt;javaModelGenerator targetPackage=&quot;cn.itsource._02_generator.domain&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/javaModelGenerator&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">        	sqlMapGenerator：生成映射文件存放位置(Mapper.xml文件)</span><br><span class="line">        		targetPackage:生成SQL映射文件(XML文件)在哪个包中</span><br><span class="line">        		targetProject:指定目标项目路径(根目录)</span><br><span class="line">        --&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;cn.itsource._02_generator.mapper&quot; targetProject=&quot;src/main/resources&quot;&gt;</span><br><span class="line">        &lt;/sqlMapGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--</span><br><span class="line">        	javaClientGenerator：Java客户端生成器(生成Dao/Mapper的接口)</span><br><span class="line">        						该 标签可选(最多配置一个)，如果不配置，就不会生成Mapper接口</span><br><span class="line">        		type:选择客户端代码生成器</span><br><span class="line">        			MyBatis3</span><br><span class="line">        				ANNOTATEDMAPPER：基于注解的Mapper接口，不会有对应的XML映射文件</span><br><span class="line">        				MIXEDMAPPER:XML和注解混合形式</span><br><span class="line">        				XMLMAPPER：所有方法都在XML中(接口调用依赖XML)</span><br><span class="line">        			MyBatis3Simple</span><br><span class="line">        				ANNOTATEDMAPPER：基于注解的Mapper接口，不会有对应的XML映射文件</span><br><span class="line">        				XMLMAPPER：所有方法都在XML中(接口调用依赖XML)</span><br><span class="line">        		targetPackage：生成Mapper接口存放的包名</span><br><span class="line">        		targetProject：指定目标项目路径</span><br><span class="line">        --&gt;</span><br><span class="line">        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;cn.itsource._02_generator.mapper&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/javaClientGenerator&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">        	table：生成对应表及类名</span><br><span class="line">	        	tableName：对应表名(注:%代表所有)</span><br><span class="line">	        	domainObjectName:对应的类名</span><br><span class="line">        		generatedKey：主键自增的id字段(针对当前 数据库配置MySQL)</span><br><span class="line">        --&gt;</span><br><span class="line">        &lt;table tableName=&quot;employee&quot; domainObjectName=&quot;Employee&quot;&gt;</span><br><span class="line">            &lt;generatedKey column=&quot;id&quot; sqlStatement=&quot;MySql&quot; /&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line"></span><br><span class="line">       &lt;!--</span><br><span class="line">        &lt;table tableName=&quot;%&quot; enableCountByExample=&quot;false&quot; enableUpdateByExample=&quot;false&quot; enableDeleteByExample=&quot;false&quot;</span><br><span class="line">               enableSelectByExample=&quot;false&quot; selectByExampleQueryId=&quot;false&quot; &gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">        --&gt;</span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="2-MyBatis拦截器"><a href="#2-MyBatis拦截器" class="headerlink" title="2. MyBatis拦截器"></a>2. MyBatis拦截器</h1><ul>
+<li>只需要知道语法就可以了</li>
+<li>用于增强功能</li>
+</ul>
+<h2 id="2-1-实现接口"><a href="#2-1-实现接口" class="headerlink" title="2.1 实现接口"></a>2.1 实现接口</h2><h3 id="2-1-1拦截器中的方法"><a href="#2-1-1拦截器中的方法" class="headerlink" title="2.1.1拦截器中的方法"></a>2.1.1拦截器中的方法</h3><ul>
+<li>intercept:拦截的核心方法(在这里面实现相应的功能)</li>
+<li>plugin:必需 return Plugin.wrap(o, this); 代表对于签名(在类上面的注解中)的拦截</li>
+<li>setProperties:获取拦截器配置的参数</li>
+</ul>
+<h3 id="2-1-2-签名"><a href="#2-1-2-签名" class="headerlink" title="2.1.2 签名"></a>2.1.2 签名</h3><ul>
+<li><p>type:对应的类(Executor.class,ResultSetHandler.class,ParameterHandler.class,StatementHandler.class) 但是一般只用 Executor.class</p>
+</li>
+<li><p>method:type类中的方法名，我们一般只用 Executor.class中的update(增删改)与query(查询)</p>
+</li>
+<li><p>args：参数(方法中的参数类型)</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">//我要拦截增删改的功能</span><br><span class="line">@Intercepts(</span><br><span class="line">        //签名</span><br><span class="line">      @Signature(</span><br><span class="line">              type= Executor.class,</span><br><span class="line">              method = &quot;query&quot;,</span><br><span class="line">              args = &#123;MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class&#125;</span><br><span class="line">      )</span><br><span class="line">)</span><br><span class="line">public class HelloInterceptor implements Interceptor &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 拦截器的核心方法(要做的事情是在这里完成的)</span><br><span class="line">     * @param invocation</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public Object intercept(Invocation invocation) throws Throwable &#123;</span><br><span class="line">        System.out.println(&quot;方法:&quot;+invocation.getMethod());</span><br><span class="line">        System.out.println(&quot;对象:&quot;+invocation.getTarget());</span><br><span class="line">        System.out.println(&quot;参数:&quot;+invocation.getArgs());</span><br><span class="line">        //执行相应的方法</span><br><span class="line">        Object result = invocation.proceed();</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 对哪些【签名】进行拦截(放行)</span><br><span class="line">     *  哪些操作(修改与查询)会经过咱们的拦截方法:intercept</span><br><span class="line">     * @param o</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public Object plugin(Object o) &#123;</span><br><span class="line">        return Plugin.wrap(o, this);</span><br><span class="line">       // return o;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">    &lt;Interceptor&gt;</span><br><span class="line">        &lt;param key=&quot;dbType&quot; value=&quot;Oracle&quot;&gt;&lt;/pram&gt;</span><br><span class="line">    &lt;/Interceptor&gt;</span><br><span class="line">    */</span><br><span class="line">    //接收参数</span><br><span class="line">    @Override</span><br><span class="line">    public void setProperties(Properties properties) &#123;</span><br><span class="line">        String dbType = properties.getProperty(&quot;dbType&quot;);</span><br><span class="line">        System.out.println(dbType);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-拦截器的配置"><a href="#2-2-拦截器的配置" class="headerlink" title="2.2 拦截器的配置"></a>2.2 拦截器的配置</h2><ul>
+<li>在mybatis-config.xml中进行配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--插件配置(拦截器配置)--&gt;</span><br><span class="line">&lt;plugins&gt;</span><br><span class="line">    &lt;plugin interceptor=&quot;cn.itsource._02_generator.interceptor.HelloInterceptor&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;dbType&quot; value=&quot;mySql&quot; /&gt;</span><br><span class="line">    &lt;/plugin&gt;</span><br><span class="line">&lt;/plugins&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-3-分页插件"><a href="#2-3-分页插件" class="headerlink" title="2.3 分页插件"></a>2.3 分页插件</h2><blockquote>
+<p>分页插件就是一个拦截器</p>
+</blockquote>
+<h3 id="2-3-1-引入这个插件"><a href="#2-3-1-引入这个插件" class="headerlink" title="2.3.1 引入这个插件"></a>2.3.1 引入这个插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- 分页插件 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.0.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-2-插件配置"><a href="#2-3-2-插件配置" class="headerlink" title="2.3.2 插件配置"></a>2.3.2 插件配置</h3><ul>
+<li>在mybatis-config.xml中进行配置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">    &lt;!--配置分页插件--&gt;</span><br><span class="line">    &lt;plugin interceptor=&quot;com.github.pagehelper.PageInterceptor&quot; /&gt;</span><br><span class="line">&lt;/plugins&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>集成spring的配置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;</span><br><span class="line">  &lt;!-- 注意其他配置 --&gt;</span><br><span class="line">  &lt;property name=&quot;plugins&quot;&gt;</span><br><span class="line">    &lt;array&gt;</span><br><span class="line">      &lt;bean class=&quot;com.github.pagehelper.PageInterceptor&quot;&gt;&lt;/bean&gt;</span><br><span class="line">    &lt;/array&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-3-使用分页插件"><a href="#2-3-3-使用分页插件" class="headerlink" title="2.3.3 使用分页插件"></a>2.3.3 使用分页插件</h3><p>//第一个参数：第几页<br>//第二个参数：每页显示多少条</p>
+<blockquote>
+<p>PageHelper.startPage(1, 10);</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void testPage() throws Exception&#123;</span><br><span class="line">    //分页 pageNum:第几页  pageSize:每页条数</span><br><span class="line">    PageHelper.startPage(1, 10);</span><br><span class="line"></span><br><span class="line">    SqlSession session = MyBatisUtil.openSession();</span><br><span class="line">    EmployeeMapper mapper = session.getMapper(EmployeeMapper.class);</span><br><span class="line">    List&lt;Employee&gt; employees = mapper.selectAll();</span><br><span class="line">    Page page = (Page) employees;</span><br><span class="line">    System.out.println(&quot;第几页:&quot;+page.getPageNum()); //第几页</span><br><span class="line">    System.out.println(&quot;总页数:&quot;+page.getPages()); //总页数</span><br><span class="line">    System.out.println(&quot;总条数:&quot;+page.getTotal()); //总页数</span><br><span class="line">    System.out.println(&quot;结果:&quot;+page.getResult());</span><br><span class="line"></span><br><span class="line">    page.getResult().forEach(e -&gt; System.out.println(e));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="3-SSM集成"><a href="#3-SSM集成" class="headerlink" title="3. SSM集成"></a>3. SSM集成</h1><blockquote>
+<p>SpringMVC,Spring,MyBatis</p>
+</blockquote>
+<ul>
+<li><p>db.properites</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driverClassName=com.mysql.jdbc.Driver</span><br><span class="line">jdbc.url=jdbc:mysql:///mybatis</span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=admin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>applicationContext.xml</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">       xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;</span><br><span class="line">       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd</span><br><span class="line">       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd</span><br><span class="line">&quot;&gt;</span><br><span class="line">  &lt;!--</span><br><span class="line">   db.properties -&gt; datasource -&gt; SqlSessionFactory -&gt;mapper(接口,xml)-&gt;service-&gt;controller</span><br><span class="line">    Spring集成MyBatis (MyBatis操作数据库的对象交给Spring管理)</span><br><span class="line">       1.需要把SqlSessionFactory让Spring来管理</span><br><span class="line">       2.数据源(四大金刚) 3.别名的问题  4.可以找到mapper.xml</span><br><span class="line">  --&gt;</span><br><span class="line">    &lt;context:component-scan base-package=&quot;cn.itsource.ssm.service&quot; /&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!--引入外部的db.properties--&gt;</span><br><span class="line">  &lt;context:property-placeholder location=&quot;classpath:db.properties&quot; /&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!--配置dbcp连接池--&gt;</span><br><span class="line">  &lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot; destroy-method=&quot;close&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;jdbc.driverClassName&#125;&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;url&quot; value=&quot;$&#123;jdbc.url&#125;&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;username&quot; value=&quot;$&#123;jdbc.username&#125;&quot; /&gt;</span><br><span class="line">    &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot; /&gt;</span><br><span class="line">  &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!--</span><br><span class="line">    还记得以前JPA是怎么搞的？ EntityManagerFactoryBean</span><br><span class="line">    猜:MyBatis:是否有一个SqlSessionFactoryBean的对象</span><br><span class="line">    --&gt;</span><br><span class="line">  &lt;bean id=&quot;sessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;</span><br><span class="line">      &lt;!--配置数据源--&gt;</span><br><span class="line">      &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;</span><br><span class="line">      &lt;!--配置别名--&gt;</span><br><span class="line">      &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;cn.itsource.ssm.domain&quot; /&gt;</span><br><span class="line">      &lt;!--扫描 mapper.xml--&gt;</span><br><span class="line">      &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:cn/itsource/ssm/mapper/*.xml&quot; /&gt;</span><br><span class="line">  &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!--配置对应的MapperBean:只能配置一个Mapper,太多的话就很麻烦--&gt;</span><br><span class="line">   &lt;!--</span><br><span class="line">   &lt;bean id=&quot;departmentMapper&quot; class=&quot;org.mybatis.spring.mapper.MapperFactoryBean&quot;&gt;</span><br><span class="line">     &lt;property name=&quot;sqlSessionFactory&quot; ref=&quot;sessionFactory&quot; /&gt;</span><br><span class="line">     &lt;property name=&quot;mapperInterface&quot; value=&quot;cn.itsource.ssm.mapper.DepartmentMapper&quot; /&gt;</span><br><span class="line">   &lt;/bean&gt;</span><br><span class="line">   --&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!--一劳永逸的配置Mapper的方案--&gt;</span><br><span class="line">  &lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;</span><br><span class="line">      &lt;!--扫描的包的配置--&gt;</span><br><span class="line">      &lt;property name=&quot;basePackage&quot; value=&quot;cn.itsource.ssm.mapper&quot; /&gt;</span><br><span class="line">      &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sessionFactory&quot; /&gt;</span><br><span class="line">  &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--配置一个事务对象--&gt;</span><br><span class="line">    &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--事务的注解支持--&gt;</span><br><span class="line">    &lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-Spring与SpringMVC"><a href="#3-2-Spring与SpringMVC" class="headerlink" title="3.2 Spring与SpringMVC"></a>3.2 Spring与SpringMVC</h2><ul>
+<li>applicationContext-mvc.xml</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;</span><br><span class="line">       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd</span><br><span class="line">       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd</span><br><span class="line">&quot;&gt;</span><br><span class="line">    &lt;!--扫描相应的controller--&gt;</span><br><span class="line">    &lt;context:component-scan base-package=&quot;cn.itsource.ssm.controller&quot; /&gt;</span><br><span class="line">    &lt;!--静态资源放行--&gt;</span><br><span class="line">    &lt;mvc:default-servlet-handler /&gt;</span><br><span class="line">    &lt;!--springMVC的注解支持--&gt;</span><br><span class="line">    &lt;mvc:annotation-driven /&gt;</span><br><span class="line">    &lt;!--视图解析器--&gt;</span><br><span class="line">    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--</span><br><span class="line">        如果我们是在SpringMVC中来引入Spring的xml,那么普通的集成运行没有问题</span><br><span class="line">        但是到后期和其它的一些框架集成就无法成功(比如说shiro)</span><br><span class="line">       --&gt;</span><br><span class="line">    &lt;!--&lt;import resource=&quot;classpath:applicationContext.xml&quot; /&gt;--&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>web.xml</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--启动Spring的配置--&gt;</span><br><span class="line">&lt;context-param&gt;</span><br><span class="line">    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">    &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;</span><br><span class="line">&lt;/context-param&gt;</span><br><span class="line">&lt;listener&gt;</span><br><span class="line">    &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;</span><br><span class="line">&lt;/listener&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--启动SpringMVC的配置--&gt;</span><br><span class="line">&lt;servlet&gt;</span><br><span class="line">    &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;</span><br><span class="line">    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</span><br><span class="line">    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</span><br><span class="line">    &lt;init-param&gt;</span><br><span class="line">        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">        &lt;param-value&gt;classpath:applicationContext-mvc.xml&lt;/param-value&gt;</span><br><span class="line">    &lt;/init-param&gt;</span><br><span class="line">&lt;/servlet&gt;</span><br><span class="line">&lt;servlet-mapping&gt;</span><br><span class="line">    &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/&lt;/url-pattern&gt;</span><br><span class="line">&lt;/servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：不要在mvc的配置文件中去引入spring的核心配置文件(有些框【shiro】架就无法使用)</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://conjurermaple.github.io/2019/04/07/Mybatis学习笔记-三/" title="Mybatis学习笔记(三)" target="_blank" rel="external">https://conjurermaple.github.io/2019/04/07/Mybatis学习笔记-三/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://conjurermaple.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://conjurermaple.github.io/" target="_blank"><span class="text-dark">maple</span><small class="ml-1x">Java &amp; Other</small></a></h3>
+        <div>拼命努力的人，生活不会辜负你。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2019/04/07/mybatis学习笔记-二/" title="mybatis学习笔记(二)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Blog by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '383f19b856237c034a38',
+    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
+    repo: 'conjurermaple.github.io',
+    owner: 'ConjurerMaple',
+    admin: ['ConjurerMaple'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+
+
+
+
+</body>
+</html>
