@@ -17,23 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer | maple</title>
-  <meta name="description" content="出现原因：SpringMVC与Jpa集成的时候(有懒加载)就会出现这个问题这是因为你需要序列化对象有一个属性是一类类型，而你使用了Hibernate的延迟加载所以这里是个Hibernate的代理对象。该代理对象有些属性不能被序列化所以会报错。  解决方案：  方式一：在类上加属性：生成的时候把这个字段忽略了：@JsonIgnoreProperties(value={“hibernateLazyIn">
-<meta name="keywords" content="错误积累">
+  <title>layui分页(前后台) | maple</title>
+  <meta name="description" content="前台数据表格加上分页12345678910111213141516171819202122&amp;lt;script&amp;gt;layui.use(&apos;table&apos;, function()&amp;#123;  var table = layui.table;    table.render(&amp;#123;    elem: &apos;#test&apos;    ,url:&apos;/demo/table/user/&apos;    ,cols: [">
+<meta name="keywords" content="框架篇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer">
-<meta property="og:url" content="https://conjurermaple.github.io/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/index.html">
+<meta property="og:title" content="layui分页(前后台)">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/04/22/layui分页-前后台/index.html">
 <meta property="og:site_name" content="maple博客">
-<meta property="og:description" content="出现原因：SpringMVC与Jpa集成的时候(有懒加载)就会出现这个问题这是因为你需要序列化对象有一个属性是一类类型，而你使用了Hibernate的延迟加载所以这里是个Hibernate的代理对象。该代理对象有些属性不能被序列化所以会报错。  解决方案：  方式一：在类上加属性：生成的时候把这个字段忽略了：@JsonIgnoreProperties(value={“hibernateLazyIn">
+<meta property="og:description" content="前台数据表格加上分页12345678910111213141516171819202122&amp;lt;script&amp;gt;layui.use(&apos;table&apos;, function()&amp;#123;  var table = layui.table;    table.render(&amp;#123;    elem: &apos;#test&apos;    ,url:&apos;/demo/table/user/&apos;    ,cols: [">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://conjurermaple.github.io/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/1.png">
-<meta property="og:updated_time" content="2019-03-15T13:06:34.510Z">
+<meta property="og:updated_time" content="2019-04-22T00:32:29.965Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer">
-<meta name="twitter:description" content="出现原因：SpringMVC与Jpa集成的时候(有懒加载)就会出现这个问题这是因为你需要序列化对象有一个属性是一类类型，而你使用了Hibernate的延迟加载所以这里是个Hibernate的代理对象。该代理对象有些属性不能被序列化所以会报错。  解决方案：  方式一：在类上加属性：生成的时候把这个字段忽略了：@JsonIgnoreProperties(value={“hibernateLazyIn">
-<meta name="twitter:image" content="https://conjurermaple.github.io/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/1.png">
+<meta name="twitter:title" content="layui分页(前后台)">
+<meta name="twitter:description" content="前台数据表格加上分页12345678910111213141516171819202122&amp;lt;script&amp;gt;layui.use(&apos;table&apos;, function()&amp;#123;  var table = layui.table;    table.render(&amp;#123;    elem: &apos;#test&apos;    ,url:&apos;/demo/table/user/&apos;    ,cols: [">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/index.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/04/22/layui分页-前后台/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -342,21 +340,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text"></span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前台数据表格加上分页"><span class="toc-number">1.</span> <span class="toc-text">前台数据表格加上分页</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后台数据返回的格式类"><span class="toc-number">2.</span> <span class="toc-text">后台数据返回的格式类</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-layui分页-前后台" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer
+      layui分页(前后台)
     </h1>
   
 
@@ -364,20 +362,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/" class="article-date">
-	  <time datetime="2019-03-15T13:03:37.000Z" itemprop="datePublished">2019-03-15</time>
+	<a href="/2019/04/22/layui分页-前后台/" class="article-date">
+	  <time datetime="2019-04-22T00:28:04.000Z" itemprop="datePublished">2019-04-22</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/错误积累/">错误积累</a>
+    <a class="article-category-link" href="/categories/框架篇/">框架篇</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/错误积累/">错误积累</a>
+	<a class="article-tag-link" href="/tags/框架篇/">框架篇</a>
   </span>
 
 
@@ -390,22 +388,15 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/04/22/layui分页-前后台/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id><a href="#" class="headerlink" title></a><img src="/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/1.png" alt="作者：Z-AI"></h2><p>出现原因：SpringMVC与Jpa集成的时候(有懒加载)就会出现这个问题<br>这是因为你需要序列化对象有一个属性是一类类型，而你使用了Hibernate的延迟加载所以这里是个Hibernate的代理对象。该代理对象有些属性不能被序列化所以会报错。</p>
-<blockquote>
-<p>解决方案：</p>
-<ul>
-<li>方式一：<br>在类上加属性：生成的时候把这个字段忽略了：<br>@JsonIgnoreProperties(value={“hibernateLazyInitializer”,”handler”,”fieldHandler”})</li>
-</ul>
-</blockquote>
-<ul>
-<li>方式二：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">第一步：创建一个新的类(重写com.fasterxml.jackson.databind.ObjectMapper)</span><br><span class="line">package cn.itsource.pss.common;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.annotation.JsonInclude;</span><br><span class="line">import com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line">import com.fasterxml.jackson.databind.SerializationFeature;</span><br><span class="line"></span><br><span class="line">public class CustomMapper extends ObjectMapper &#123;</span><br><span class="line">    public CustomMapper() &#123;</span><br><span class="line">        this.setSerializationInclusion(JsonInclude.Include.NON_NULL);</span><br><span class="line">        // 设置 SerializationFeature.FAIL_ON_EMPTY_BEANS 为 false</span><br><span class="line">        this.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">第二步：在applicationContext-mvc.xml中配置一下即可</span><br><span class="line">&lt;!-- Spring MVC 配置 --&gt;</span><br><span class="line">&lt;mvc:annotation-driven&gt;</span><br><span class="line">    &lt;mvc:message-converters&gt;</span><br><span class="line">        &lt;bean class=&quot;org.springframework.http.converter.json.MappingJackson2HttpMessageConverter&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;supportedMediaTypes&quot;&gt;</span><br><span class="line">                &lt;list&gt;</span><br><span class="line">                    &lt;value&gt;application/json; charset=UTF-8&lt;/value&gt;</span><br><span class="line">                    &lt;value&gt;application/x-www-form-urlencoded; charset=UTF-8&lt;/value&gt;</span><br><span class="line">                &lt;/list&gt;</span><br><span class="line">            &lt;/property&gt;</span><br><span class="line">            &lt;!-- No serializer:配置 objectMapper 为我们自定义扩展后的 CustomMapper,解决了返回对象有关系对象的报错问题 --&gt;</span><br><span class="line">            &lt;property name=&quot;objectMapper&quot;&gt;</span><br><span class="line">                &lt;bean class=&quot;cn.itsource.pss.common.CustomMapper&quot;&gt;&lt;/bean&gt;</span><br><span class="line">            &lt;/property&gt;</span><br><span class="line">        &lt;/bean&gt;</span><br><span class="line">    &lt;/mvc:message-converters&gt;</span><br><span class="line">&lt;/mvc:annotation-driven&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
+        <h1 id="前台数据表格加上分页"><a href="#前台数据表格加上分页" class="headerlink" title="前台数据表格加上分页"></a>前台数据表格加上分页</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">layui.use(<span class="string">'table'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> table = layui.table;</span></span><br><span class="line"><span class="undefined">  </span></span><br><span class="line"><span class="undefined">  table.render(&#123;</span></span><br><span class="line"><span class="javascript">    elem: <span class="string">'#test'</span></span></span><br><span class="line"><span class="javascript">    ,<span class="attr">url</span>:<span class="string">'/demo/table/user/'</span></span></span><br><span class="line"><span class="undefined">    ,cols: [[</span></span><br><span class="line"><span class="javascript">      &#123;<span class="attr">field</span>:<span class="string">'id'</span>, <span class="attr">width</span>:<span class="number">80</span>, <span class="attr">title</span>: <span class="string">'ID'</span>, <span class="attr">sort</span>: <span class="literal">true</span>&#125;</span></span><br><span class="line"><span class="javascript">      ,&#123;<span class="attr">field</span>:<span class="string">'username'</span>, <span class="attr">width</span>:<span class="number">80</span>, <span class="attr">title</span>: <span class="string">'用户名'</span>&#125;</span></span><br><span class="line"><span class="javascript">      ,&#123;<span class="attr">field</span>:<span class="string">'sex'</span>, <span class="attr">width</span>:<span class="number">80</span>, <span class="attr">title</span>: <span class="string">'性别'</span>, <span class="attr">sort</span>: <span class="literal">true</span>&#125;</span></span><br><span class="line"><span class="javascript">      ,&#123;<span class="attr">field</span>:<span class="string">'city'</span>, <span class="attr">width</span>:<span class="number">80</span>, <span class="attr">title</span>: <span class="string">'城市'</span>&#125;</span></span><br><span class="line"><span class="javascript">      ,&#123;<span class="attr">field</span>:<span class="string">'sign'</span>, <span class="attr">title</span>: <span class="string">'签名'</span>, <span class="attr">minWidth</span>: <span class="number">150</span>&#125;</span></span><br><span class="line"><span class="javascript">      ,&#123;<span class="attr">field</span>:<span class="string">'experience'</span>, <span class="attr">width</span>:<span class="number">80</span>, <span class="attr">title</span>: <span class="string">'积分'</span>, <span class="attr">sort</span>: <span class="literal">true</span>&#125;</span></span><br><span class="line"><span class="javascript">      ,&#123;<span class="attr">field</span>:<span class="string">'score'</span>, <span class="attr">width</span>:<span class="number">80</span>, <span class="attr">title</span>: <span class="string">'评分'</span>, <span class="attr">sort</span>: <span class="literal">true</span>&#125;</span></span><br><span class="line"><span class="javascript">      ,&#123;<span class="attr">field</span>:<span class="string">'classify'</span>, <span class="attr">width</span>:<span class="number">80</span>, <span class="attr">title</span>: <span class="string">'职业'</span>&#125;</span></span><br><span class="line"><span class="javascript">      ,&#123;<span class="attr">field</span>:<span class="string">'wealth'</span>, <span class="attr">width</span>:<span class="number">135</span>, <span class="attr">title</span>: <span class="string">'财富'</span>, <span class="attr">sort</span>: <span class="literal">true</span>&#125;</span></span><br><span class="line"><span class="undefined">    ]]</span></span><br><span class="line"><span class="javascript">    ,<span class="attr">page</span>: <span class="literal">true</span><span class="comment">//加上这个前台就有分页条了</span></span></span><br><span class="line"><span class="undefined">  &#125;);</span></span><br><span class="line"><span class="undefined">&#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="后台数据返回的格式类"><a href="#后台数据返回的格式类" class="headerlink" title="后台数据返回的格式类"></a>后台数据返回的格式类</h1><p>后台返回的是这个类就行了，再转为json</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">public class PageList&lt;T&gt; &#123;</span><br><span class="line">    private Integer code = 0;</span><br><span class="line">    private String msg;</span><br><span class="line">    private long count = 0;</span><br><span class="line">    private List&lt;T&gt; data = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    public PageList()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    public PageList(Page&lt;T&gt; page)&#123;</span><br><span class="line">        this.data = page.getResult();</span><br><span class="line">        this.count = page.getTotal();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public PageList(List&lt;T&gt; list) &#123;</span><br><span class="line">        this.data = list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public PageList(PageInfo page)&#123;</span><br><span class="line">        this.data = page.getList();</span><br><span class="line">        this.count = page.getTotal();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Integer getCode() &#123;</span><br><span class="line">        return code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCode(Integer code) &#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getMsg() &#123;</span><br><span class="line">        return msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMsg(String msg) &#123;</span><br><span class="line">        this.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public long getCount() &#123;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCount(long count) &#123;</span><br><span class="line">        this.count = count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public List&lt;T&gt; getData() &#123;</span><br><span class="line">        return data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setData(List&lt;T&gt; data) &#123;</span><br><span class="line">        this.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -415,7 +406,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://conjurermaple.github.io/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/" title="No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/15/No-serializer-found-for-class-org-hibernate-proxy-pojo-javassist-JavassistLazyInitializer/</a>
+      <a href="https://conjurermaple.github.io/2019/04/22/layui分页-前后台/" title="layui分页(前后台)" target="_blank" rel="external">https://conjurermaple.github.io/2019/04/22/layui分页-前后台/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -461,13 +452,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2019/03/21/Spring-SpringMVC-SpringDataJPA-shiro框架集成/" title="Spring+SpringMVC+SpringDataJPA+shiro框架集成"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2019/03/15/could-not-initialize-proxy-no-Session错误/" title="could not initialize proxy - no Session错误"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/04/22/记一次编译找不到符号/" title="记一次编译找不到符号"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
