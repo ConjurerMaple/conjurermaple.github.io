@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>JPA学习笔记(二) | maple</title>
-  <meta name="description" content="一. 主键生成策略1.1 主键设置两种方式 代理主键（没有业务含义，建议使用） 自然主键（有业务含义：手机号，身份证。。）  1.2 四种主键生成策略123@Id@GeneratedValue(strategy = GenerationType.IDENTITY/SEQUENCE/AUTO/TABLE)private Long id; 1.2.1 IDENTITY:自增策略 必须是数字 数据库必需">
+  <title>layui文件上传与表单一起提交 | maple</title>
+  <meta name="description" content="html1234567891011121314151617&amp;lt;form&amp;gt; //form表单里可以写很多......   &amp;lt;div class=&amp;quot;layui-input-inline&amp;quot;&amp;gt;            &amp;lt;div class=&amp;quot;layui-inline&amp;quot;&amp;gt;                &amp;lt;button type=&amp;">
 <meta name="keywords" content="框架篇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JPA学习笔记(二)">
-<meta property="og:url" content="https://conjurermaple.github.io/2019/03/06/JPA学习笔记-二/index.html">
+<meta property="og:title" content="layui文件上传与表单一起提交">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/04/22/layui文件上传与表单一起提交/index.html">
 <meta property="og:site_name" content="maple博客">
-<meta property="og:description" content="一. 主键生成策略1.1 主键设置两种方式 代理主键（没有业务含义，建议使用） 自然主键（有业务含义：手机号，身份证。。）  1.2 四种主键生成策略123@Id@GeneratedValue(strategy = GenerationType.IDENTITY/SEQUENCE/AUTO/TABLE)private Long id; 1.2.1 IDENTITY:自增策略 必须是数字 数据库必需">
+<meta property="og:description" content="html1234567891011121314151617&amp;lt;form&amp;gt; //form表单里可以写很多......   &amp;lt;div class=&amp;quot;layui-input-inline&amp;quot;&amp;gt;            &amp;lt;div class=&amp;quot;layui-inline&amp;quot;&amp;gt;                &amp;lt;button type=&amp;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-06T07:02:32.478Z">
+<meta property="og:updated_time" content="2019-04-22T00:44:18.684Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JPA学习笔记(二)">
-<meta name="twitter:description" content="一. 主键生成策略1.1 主键设置两种方式 代理主键（没有业务含义，建议使用） 自然主键（有业务含义：手机号，身份证。。）  1.2 四种主键生成策略123@Id@GeneratedValue(strategy = GenerationType.IDENTITY/SEQUENCE/AUTO/TABLE)private Long id; 1.2.1 IDENTITY:自增策略 必须是数字 数据库必需">
+<meta name="twitter:title" content="layui文件上传与表单一起提交">
+<meta name="twitter:description" content="html1234567891011121314151617&amp;lt;form&amp;gt; //form表单里可以写很多......   &amp;lt;div class=&amp;quot;layui-input-inline&amp;quot;&amp;gt;            &amp;lt;div class=&amp;quot;layui-inline&amp;quot;&amp;gt;                &amp;lt;button type=&amp;">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://conjurermaple.github.io/2019/03/06/JPA学习笔记-二/index.html">
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/04/22/layui文件上传与表单一起提交/index.html">
   
     <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
   
@@ -340,21 +340,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一-主键生成策略"><span class="toc-number">1.</span> <span class="toc-text">一. 主键生成策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-主键设置两种方式"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 主键设置两种方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-四种主键生成策略"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 四种主键生成策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-IDENTITY-自增策略"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.2.1 IDENTITY:自增策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-SEQUENCE-序列策略"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.2.2 SEQUENCE:序列策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-AUTO-自动-默认"><span class="toc-number">1.2.3.</span> <span class="toc-text">1.2.3 AUTO:自动(默认)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-Table-表策略"><span class="toc-number">1.2.4.</span> <span class="toc-text">1.2.4 Table:表策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-对应的状态"><span class="toc-number">2.</span> <span class="toc-text">二. 对应的状态</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-脏数据更新"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 脏数据更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-持久化对象的OID不允许修改"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 持久化对象的OID不允许修改</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-对象之间的关系"><span class="toc-number">3.</span> <span class="toc-text">三. 对象之间的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-依赖关系"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 依赖关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-关联关系"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 关联关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-多重性"><span class="toc-number">3.2.1.</span> <span class="toc-text">3.2.1 多重性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-导航性"><span class="toc-number">3.2.2.</span> <span class="toc-text">3.2.2 导航性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-3-聚合关系"><span class="toc-number">3.2.3.</span> <span class="toc-text">3.2.3 聚合关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-4-组合关系"><span class="toc-number">3.2.4.</span> <span class="toc-text">3.2.4 组合关系</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四-单向多对一的配置"><span class="toc-number">4.</span> <span class="toc-text">四. 单向多对一的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-注意点"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 注意点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五-二级缓存"><span class="toc-number">5.</span> <span class="toc-text">五. 二级缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-两个命中"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 两个命中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-二级缓存的使用场景"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 二级缓存的使用场景</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#html"><span class="toc-number">1.</span> <span class="toc-text">html</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#javascript"><span class="toc-number">2.</span> <span class="toc-text">javascript</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-JPA学习笔记-二" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-layui文件上传与表单一起提交" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      JPA学习笔记(二)
+      layui文件上传与表单一起提交
     </h1>
   
 
@@ -362,8 +362,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/03/06/JPA学习笔记-二/" class="article-date">
-	  <time datetime="2019-03-06T06:47:12.000Z" itemprop="datePublished">2019-03-06</time>
+	<a href="/2019/04/22/layui文件上传与表单一起提交/" class="article-date">
+	  <time datetime="2019-04-22T00:40:33.000Z" itemprop="datePublished">2019-04-22</time>
 	</a>
 </span>
         
@@ -388,92 +388,15 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/06/JPA学习笔记-二/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/04/22/layui文件上传与表单一起提交/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="一-主键生成策略"><a href="#一-主键生成策略" class="headerlink" title="一. 主键生成策略"></a>一. 主键生成策略</h1><h2 id="1-1-主键设置两种方式"><a href="#1-1-主键设置两种方式" class="headerlink" title="1.1 主键设置两种方式"></a>1.1 主键设置两种方式</h2><ul>
-<li>代理主键（没有业务含义，建议使用）</li>
-<li>自然主键（有业务含义：手机号，身份证。。）</li>
-</ul>
-<h2 id="1-2-四种主键生成策略"><a href="#1-2-四种主键生成策略" class="headerlink" title="1.2 四种主键生成策略"></a>1.2 四种主键生成策略</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Id</span><br><span class="line">@GeneratedValue(strategy = GenerationType.IDENTITY/SEQUENCE/AUTO/TABLE)</span><br><span class="line">private Long id;</span><br></pre></td></tr></table></figure>
-<h3 id="1-2-1-IDENTITY-自增策略"><a href="#1-2-1-IDENTITY-自增策略" class="headerlink" title="1.2.1 IDENTITY:自增策略"></a>1.2.1 IDENTITY:自增策略</h3><ul>
-<li>必须是数字</li>
-<li>数据库必需支持这种策略</li>
-<li>MySQL, SQL Server, DB2, Derby, Sybase, PostgreSQL支持</li>
-<li>效率高</li>
-</ul>
-<h3 id="1-2-2-SEQUENCE-序列策略"><a href="#1-2-2-SEQUENCE-序列策略" class="headerlink" title="1.2.2 SEQUENCE:序列策略"></a>1.2.2 SEQUENCE:序列策略</h3><ul>
-<li>必须是数字</li>
-<li>数据库必需支持这种策略</li>
-<li>Oracle、PostgreSQL、DB2支持</li>
-<li>效率高</li>
-</ul>
-<h3 id="1-2-3-AUTO-自动-默认"><a href="#1-2-3-AUTO-自动-默认" class="headerlink" title="1.2.3 AUTO:自动(默认)"></a>1.2.3 AUTO:自动(默认)</h3><ul>
-<li>默认就是它</li>
-<li>根据方言确定策略(IDENTITY,SEQUENCE)</li>
-</ul>
-<h3 id="1-2-4-Table-表策略"><a href="#1-2-4-Table-表策略" class="headerlink" title="1.2.4 Table:表策略"></a>1.2.4 Table:表策略</h3><ul>
-<li>性能比较低</li>
-<li>兼容所有数据库</li>
-<li>模拟序列的方式</li>
-</ul>
-<h1 id="二-对应的状态"><a href="#二-对应的状态" class="headerlink" title="二. 对应的状态"></a>二. 对应的状态</h1><blockquote>
-<p>临时状态（瞬时状态）,持久状态,删除状态，游离状态</p>
-<ul>
-<li>临时:刚创建，和EntityManager没有关系</li>
-<li>持久:对象和EntityManager发生关系(一级缓存中)</li>
-<li>删除状态(jpa特有的),执行remove(计划删除),将持久状态改为删除状态</li>
-<li>游离:对象和EntityManager解除关系</li>
-</ul>
-</blockquote>
-<h2 id="2-1-脏数据更新"><a href="#2-1-脏数据更新" class="headerlink" title="2.1 脏数据更新"></a>2.1 脏数据更新</h2><blockquote>
-<p>一个持久化状态的对象，如果被修改,就会在提交事务的时候被修改</p>
-</blockquote>
-<h2 id="2-2-持久化对象的OID不允许修改"><a href="#2-2-持久化对象的OID不允许修改" class="headerlink" title="2.2 持久化对象的OID不允许修改"></a>2.2 持久化对象的OID不允许修改</h2><ul>
-<li>n-to-n的错</li>
-</ul>
-<p>dentifier of an instance of cn.itsource._02_state.Employee was altered from 1 to 2</p>
-<h1 id="三-对象之间的关系"><a href="#三-对象之间的关系" class="headerlink" title="三. 对象之间的关系"></a>三. 对象之间的关系</h1><h2 id="3-1-依赖关系"><a href="#3-1-依赖关系" class="headerlink" title="3.1 依赖关系"></a>3.1 依赖关系</h2><ul>
-<li>类与类之间的依赖关系</li>
-<li>controller依赖于service ，service依赖于dao</li>
-</ul>
-<h2 id="3-2-关联关系"><a href="#3-2-关联关系" class="headerlink" title="3.2 关联关系"></a>3.2 关联关系</h2><h3 id="3-2-1-多重性"><a href="#3-2-1-多重性" class="headerlink" title="3.2.1 多重性"></a>3.2.1 多重性</h3><ul>
-<li>一对一 (共享主键,唯一的外键【建议】)</li>
-<li>多对一 (有外键关系,外键在哪边，哪边就是多方)</li>
-<li>一对多 (同上)</li>
-<li>多对多 (中间表)</li>
-</ul>
-<h3 id="3-2-2-导航性"><a href="#3-2-2-导航性" class="headerlink" title="3.2.2 导航性"></a>3.2.2 导航性</h3><ul>
-<li>单向与双向</li>
-<li>只用于类(对象)，和表没有关系</li>
-</ul>
-<h3 id="3-2-3-聚合关系"><a href="#3-2-3-聚合关系" class="headerlink" title="3.2.3 聚合关系"></a>3.2.3 聚合关系</h3><p>就是双向的多对一，一对多</p>
-<h3 id="3-2-4-组合关系"><a href="#3-2-4-组合关系" class="headerlink" title="3.2.4 组合关系"></a>3.2.4 组合关系</h3><p>就是强聚合(整体与部分不可分割)</p>
-<h1 id="四-单向多对一的配置"><a href="#四-单向多对一的配置" class="headerlink" title="四. 单向多对一的配置"></a>四. 单向多对一的配置</h1><blockquote>
-<p>ProductDir.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//产品类别</span><br><span class="line">@Entity</span><br><span class="line">@Table(name = &quot;t_productdir&quot;)</span><br><span class="line">public class ProductDir &#123;</span><br><span class="line"></span><br><span class="line">    @Id</span><br><span class="line">    @GeneratedValue</span><br><span class="line">    private Long id;</span><br><span class="line">    private String name;</span><br><span class="line">    //省略getter,setter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>Product.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//产品</span><br><span class="line">@Entity</span><br><span class="line">@Table(name = &quot;t_product&quot;)</span><br><span class="line">public class Product &#123;</span><br><span class="line"></span><br><span class="line">    @Id</span><br><span class="line">    @GeneratedValue</span><br><span class="line">    private Long id;</span><br><span class="line">    private String name;</span><br><span class="line">    </span><br><span class="line">    //外键在哪边，哪边就是多方</span><br><span class="line">    @ManyToOne(fetch = FetchType.LAZY)</span><br><span class="line">    @JoinColumn(name=&quot;dir_id&quot;)</span><br><span class="line">    private ProductDir dir;</span><br><span class="line">    //省略getter,setter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="4-1-注意点"><a href="#4-1-注意点" class="headerlink" title="4.1 注意点"></a>4.1 注意点</h2><ul>
-<li>先保存一方，再保存多方(性能更高)</li>
-<li>可以配置懒加载提高性能</li>
-<li>no-session,会话(entityManager)关闭还去拿出数据</li>
-</ul>
-<h1 id="五-二级缓存"><a href="#五-二级缓存" class="headerlink" title="五. 二级缓存"></a>五. 二级缓存</h1><h2 id="5-1-两个命中"><a href="#5-1-两个命中" class="headerlink" title="5.1 两个命中"></a>5.1 两个命中</h2><ul>
-<li>一级缓存命中:同一个EntityManagerFactory，同一个EntityManager,同一个OID</li>
-<li>二级缓存命中:同一个EntityManagerFactory，不同EntityManager,同一个OID</li>
-</ul>
-<h2 id="5-2-二级缓存的使用场景"><a href="#5-2-二级缓存的使用场景" class="headerlink" title="5.2 二级缓存的使用场景"></a>5.2 二级缓存的使用场景</h2><ul>
-<li>读取大于修改；</li>
-<li>对数据要有独享控制,数据不会被第三方修改；</li>
-<li>可以容忍出现无效数据,非关键数据（不是财务数据等）</li>
-<li>数据量不能超过内存容量,数据量特别巨大，此时不适合于二级缓存(钝化)</li>
-</ul>
-
+        <h1 id="html"><a href="#html" class="headerlink" title="html"></a>html</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;form&gt; //form表单里可以写很多</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">   &lt;div class=&quot;layui-input-inline&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;layui-inline&quot;&gt;</span><br><span class="line">                &lt;button type=&quot;button&quot;</span><br><span class="line"> class=&quot;layui-btn layui-btn-danger&quot; id=&quot;test7&quot;&gt;&lt;i class=&quot;layui-icon&quot;&gt;&lt;/i&gt;上传logo&lt;/button&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        ....</span><br><span class="line"></span><br><span class="line">         &lt;div class=&quot;layui-input-inline login-btn&quot; style=&quot;width: 85%&quot;&gt;</span><br><span class="line">            &lt;button type=&quot;submit&quot; lay-submit lay-filter=&quot;sub&quot; id=&quot;formBtn&quot; class=&quot;layui-btn&quot;&gt;注册&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="javascript"><a href="#javascript" class="headerlink" title="javascript"></a>javascript</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">form.on(&apos;submit(sub)&apos;, function(data) &#123;</span><br><span class="line">           return false;</span><br><span class="line">       &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">//序列化表单</span><br><span class="line">   $.fn.extend(&#123;</span><br><span class="line">       serializeObject: function () &#123;</span><br><span class="line">           var o = &#123;&#125;;</span><br><span class="line">           var a = this.serializeArray();</span><br><span class="line">           $.each(a, function () &#123;</span><br><span class="line">               if (this.name != &quot;file&quot;) &#123;//排除文件上传</span><br><span class="line">                   if (o[this.name]) &#123;</span><br><span class="line">                       if (!o[this.name].push) &#123;</span><br><span class="line">                           o[this.name] = [o[this.name]];</span><br><span class="line">                       &#125;</span><br><span class="line">                       o[this.name].push(this.value || &apos;&apos;);</span><br><span class="line">                   &#125; else &#123;</span><br><span class="line">                       o[this.name] = this.value || &apos;&apos;;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;);</span><br><span class="line">           return o;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   //设定文件大小限制</span><br><span class="line">   layui.use(&apos;upload&apos;, function() &#123;</span><br><span class="line">       var $ = layui.jquery, upload = layui.upload;</span><br><span class="line">       upload.render(&#123;</span><br><span class="line">           elem: &apos;#test7&apos;</span><br><span class="line">           , url: &apos;/tenant/regsave&apos;,</span><br><span class="line">           auto:false,</span><br><span class="line">           accept:&apos;file&apos;,</span><br><span class="line">           multiple:false,</span><br><span class="line">           type:&apos;post&apos;,</span><br><span class="line">           bindAction:&apos;#formBtn&apos;</span><br><span class="line">           , size: 500 ,//限制文件大小，单位 KB</span><br><span class="line">           before:function (obj) &#123;</span><br><span class="line">               this.data=$(&quot;#editForm&quot;).serializeObject(); //根据表单的id获取数据</span><br><span class="line">           &#125;</span><br><span class="line">           ,done: function(res)&#123;</span><br><span class="line">               console.log(res)</span><br><span class="line">               if (res.success) &#123;</span><br><span class="line">                   layer.msg(&apos;注册成功&apos;);</span><br><span class="line">                   //清空表单</span><br><span class="line">                   //跳转倒套餐页面</span><br><span class="line">                   window.location.href=&apos;/buymeal&apos;</span><br><span class="line">                   $(&quot;#editForm&quot;)[0].reset(); //重置表单</span><br><span class="line">                   return ;</span><br><span class="line">               &#125;</span><br><span class="line">               layer.msg(&apos;添加失败&apos;);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line"></span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
@@ -482,7 +405,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://conjurermaple.github.io/2019/03/06/JPA学习笔记-二/" title="JPA学习笔记(二)" target="_blank" rel="external">https://conjurermaple.github.io/2019/03/06/JPA学习笔记-二/</a>
+      <a href="https://conjurermaple.github.io/2019/04/22/layui文件上传与表单一起提交/" title="layui文件上传与表单一起提交" target="_blank" rel="external">https://conjurermaple.github.io/2019/04/22/layui文件上传与表单一起提交/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -528,13 +451,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2019/03/07/JPA学习笔记-三/" title="JPA学习笔记(三)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2019/03/04/JPA学习笔记-一/" title="JPA学习笔记(一)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/04/22/layui之selectM插件使用-多选下拉框/" title="layui之selectM插件使用(多选下拉框)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
