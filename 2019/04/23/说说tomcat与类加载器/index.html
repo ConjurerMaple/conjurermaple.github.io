@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>说说tomcat与类加载器 | maple</title>
+  <meta name="description" content="思考一下为啥我们JSP修改后不需要重启？它的热更新是怎么实现的？如果我们一个tomcat里面跑了10个SSM架构的项目，怎样节约内存？接下来我们一起来看一下。 再次认识TomcatTomcat是我们从一开始接触Java Web就认识的一个web服务器，它是由Java语言编写的，主要的文件夹就是bin,conf,lib,logs,webapps这5个文件夹 —————————————————————">
+<meta name="keywords" content="其他">
+<meta property="og:type" content="article">
+<meta property="og:title" content="说说tomcat与类加载器">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/04/23/说说tomcat与类加载器/index.html">
+<meta property="og:site_name" content="maple博客">
+<meta property="og:description" content="思考一下为啥我们JSP修改后不需要重启？它的热更新是怎么实现的？如果我们一个tomcat里面跑了10个SSM架构的项目，怎样节约内存？接下来我们一起来看一下。 再次认识TomcatTomcat是我们从一开始接触Java Web就认识的一个web服务器，它是由Java语言编写的，主要的文件夹就是bin,conf,lib,logs,webapps这5个文件夹 —————————————————————">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/23/说说tomcat与类加载器/1.bmp">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/23/说说tomcat与类加载器/2.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/23/说说tomcat与类加载器/3.png">
+<meta property="og:updated_time" content="2019-04-23T11:25:29.260Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="说说tomcat与类加载器">
+<meta name="twitter:description" content="思考一下为啥我们JSP修改后不需要重启？它的热更新是怎么实现的？如果我们一个tomcat里面跑了10个SSM架构的项目，怎样节约内存？接下来我们一起来看一下。 再次认识TomcatTomcat是我们从一开始接触Java Web就认识的一个web服务器，它是由Java语言编写的，主要的文件夹就是bin,conf,lib,logs,webapps这5个文件夹 —————————————————————">
+<meta name="twitter:image" content="https://conjurermaple.github.io/2019/04/23/说说tomcat与类加载器/1.bmp">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/04/23/说说tomcat与类加载器/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://conjurermaple.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">maple</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java &amp; Other</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Chengdu, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架篇/">框架篇</a><span class="category-list-count">37</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/错误积累/">错误积累</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/其他/">其他</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架篇/">框架篇</a><span class="tag-list-count">37</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误积累/">错误积累</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 13.25px;">JAVA</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/javascript/" style="font-size: 13.25px;">javascript</a> <a href="/tags/其他/" style="font-size: 13.5px;">其他</a> <a href="/tags/前端/" style="font-size: 13.75px;">前端</a> <a href="/tags/框架篇/" style="font-size: 14px;">框架篇</a> <a href="/tags/错误积累/" style="font-size: 13.75px;">错误积累</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/23/HashMap底层原理分析/" class="title">HashMap底层原理分析</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-23T11:44:36.000Z" itemprop="datePublished">2019-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/23/localhost与127-0-0-1的区别/" class="title">localhost与127.0.0.1的区别</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-23T11:29:09.000Z" itemprop="datePublished">2019-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/23/说说tomcat与类加载器/" class="title">说说tomcat与类加载器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-23T11:06:21.000Z" itemprop="datePublished">2019-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/23/堆栈的简单理解/" class="title">堆栈的简单理解</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-23T11:04:15.000Z" itemprop="datePublished">2019-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/22/centos下mysql启动失败/" class="title">centos下mysql启动失败（MySQL Daemon failed to start）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-22T12:36:04.000Z" itemprop="datePublished">2019-04-22</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#再次认识Tomcat"><span class="toc-number">1.</span> <span class="toc-text">再次认识Tomcat</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tomcat的类加载器"><span class="toc-number">2.</span> <span class="toc-text">Tomcat的类加载器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP"><span class="toc-number">3.</span> <span class="toc-text">JSP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#双亲委托机制的破坏"><span class="toc-number">4.</span> <span class="toc-text">双亲委托机制的破坏</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-说说tomcat与类加载器" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      说说tomcat与类加载器
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/04/23/说说tomcat与类加载器/" class="article-date">
+	  <time datetime="2019-04-23T11:06:21.000Z" itemprop="datePublished">2019-04-23</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/其他/">其他</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/04/23/说说tomcat与类加载器/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>思考一下为啥我们JSP修改后不需要重启？它的热更新是怎么实现的？<br>如果我们一个tomcat里面跑了10个SSM架构的项目，怎样节约内存？接下来我们一起来看一下。</p>
+<h1 id="再次认识Tomcat"><a href="#再次认识Tomcat" class="headerlink" title="再次认识Tomcat"></a>再次认识Tomcat</h1><p>Tomcat是我们从一开始接触Java Web就认识的一个web服务器，它是由Java语言编写的，主要的文件夹就是bin,conf,lib,logs,webapps这5个文件夹</p>
+<p>————————————————————————————————————————————————————————————————————————————————————————————————</p>
+<ul>
+<li>Bin，是我们启动，关闭tomcat的命令所在的文件夹</li>
+<li><p>Conf，是我们tomcat相应配置所在的地方，在我们最早学习部署的时候，就有一种直接在conf中修改server.xml以及session过期时间之类的。</p>
+</li>
+<li><p>Lib，是tomcat所需依赖所在的文件夹，在之前5.x的版本中，并不直接是lib文件夹，而是分成了3个，common,server和shared三个文件夹，在下面我们来详细说一下这3个被移除掉的东西对于现在的我们还有什么意义。</p>
+</li>
+</ul>
+<ul>
+<li><p>Logs，是tomcat运行中的日志记录，当我们需要排查线上问题时，很多时候会需要通过查阅日志进行错误定位。</p>
+</li>
+<li><p>Webapps，这个我们应该是最熟悉的，因为我们部署项目都是扔到webapps里面然后启动tomcat</p>
+</li>
+</ul>
+<h1 id="Tomcat的类加载器"><a href="#Tomcat的类加载器" class="headerlink" title="Tomcat的类加载器"></a>Tomcat的类加载器</h1><p> Tomcat也是使用Java编写的一个web服务器，需要依赖Java环境，也就是说它的运行是需要基于JVM的，而用到JVM也就必然会使用类加载器来进行类加载。<br> <img src="/2019/04/23/说说tomcat与类加载器/1.bmp" alt="作者：maple"></p>
+<blockquote>
+<p>前三个就是JVM中原生的类加载器</p>
+</blockquote>
+<p> 讲解每个类加载器的作用前，先说一下tomcat 5.x的架构，便于我们理解。<br>  在tomcat 5.x的时候，并不是一个lib包，而是common,server和shared这三个文件夹，按照双亲委托机制，不同的类加载器负责不同的范围，上图的Common类加载器负责/common/<em>，Catalina类加载器负责/server/</em>，Shared类加载器负责/shared/*，而WebAppClassLoader就是我们webapps文件夹下每个项目对应的类加载器了。</p>
+<ul>
+<li><p>/common/*中的类可以被tomcat和所有的web应用程序共同使用。</p>
+<ul>
+<li><p>/server/*中的类可以被tomcat使用，而对web应用程序不可见。</p>
+<ul>
+<li>/shared/*中的类可以被web应用程序共同使用，而对tomcat不可见。</li>
+</ul>
+</li>
+</ul>
+<p>看到这里，上面问的第三个问题，如果有10个SSM架构的项目，怎么节约内存。答案就是可以通过把SSM的jar包放到/shared/文件夹中，整个tomcat运行只有这一份，所有web项目共用它来实现。<br>  那么问题又来了，现在没这些文件夹，只有一个lib包了，又该怎么办。</p>
+<p>  Lib包现在相当于是common，我们把jar包放到common中虽然可以达到效果，但感觉会很混乱，因为这里面有tomcat运行所必须的依赖。所以我们需要把shared用上。</p>
+<p>  我们打开conf/Catalina.properties文件，可以看到这么一个默认的配置。<br><img src="/2019/04/23/说说tomcat与类加载器/2.png" alt="作者：maple"></p>
+<p>其中common.loader已经有值了，而server.loader和shared.loader是没有值的。对应上面我们说到的3个文件夹，想必各位应该是知道这每项代表的意思了。</p>
+</li>
+</ul>
+<pre><code>那么我们可以直接在tomcat中建立shared文件夹，将需要共享的jar包放到文件夹中，然后配置shared.loader的值为文件夹的路径，就可以用上了。
+</code></pre><h1 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h1><p>  在我们开发过程中，如果使用的tomcat（或者其他一些主流的web服务器）和jsp的话，我们习惯于修改jsp之后直接切换到浏览器进行一次刷新，看改动是否生效，并不会去重启项目，这就和我们前面说到的JasperLoader相关了。</p>
+<pre><code>WebAppClassLoader是每个web项目有一个，如我们举例所说的10个项目，那么就有10个WebAppClassLoader，但JasperLoader就不止于此了。
+
+我们有一个jsp文件，就有一个JasperLoader。
+</code></pre><p>为什么需要这么多？</p>
+<pre><code>我们的JSP，大家都知道本质上是个Servlet，也就是以字节码文件的形式存在。在JSP文件被编译后，我们会得到一个同名_jsp.class文件，然后被类加载器加载到JVM中使用。当服务器检测到JSP被修改后，会替换掉该JSP当前的JasperLoader实例，然后当再次访问到这个JSP页面时，触发它的编译和类加载操作，此时就会再次创建一个JasperLoader用来加载JSP编译得出的字节码文件。
+</code></pre><h1 id="双亲委托机制的破坏"><a href="#双亲委托机制的破坏" class="headerlink" title="双亲委托机制的破坏"></a>双亲委托机制的破坏</h1><p>双亲委托机制并不是强制的要求，只是作为一种推荐的方式，在面对一些特殊的情况下，可能需要破坏这种机制。</p>
+<pre><code>这里所说的破坏并不见的是一种贬义的行为，换成突破二字可能会更好。
+
+双亲委托机制存在一种缺陷，基础类加载器只能加载自己指定范围内的类，对于用户提供的类是没法加载的，以至于如果基础类需要用到用户类，那就无法加载。比如JDBC，我们都知道这是Java提供了一个规范，由不同的厂商去实现，这个规范通过接口体现，作为基础类，而厂商的实现是驱动包，放在我们项目的依赖包中。
+
+我们可以使用DriverManager.getConnection(url,user,password)直接去获取连接，而不手动去做贾琏欲执事中的第一步，使用Class.forName()去加载驱动。这样一来，DriverClassLoader会自动去寻找并加载驱动。如果严格按照双亲委托机制，DriverManager是java.sql包中的，属于BootStrapClassLoader的范围，它只能看到这个文件夹中的类，而我们的驱动包是不在这里面的，就无法找到类，也就没法去加载了。那实际是怎么处理的呢？
+</code></pre><p><img src="/2019/04/23/说说tomcat与类加载器/3.png" alt="作者：maple"></p>
+<p>我们可以看到这是getConnection重载的方法，我们直接传入URL,user和password实际就是重载的这个方法。在这里我们可以看到获取了调用者的类加载器，并且判断了callerCL为null。同学们想一下，会有类没有类加载器吗？为null并不是说它没有类加载器，而是因为它的类加载器是BootStrapClassLoader，这是由C++语言写的，无法用Java对象表示。好，既然知道你是<br>BootStrapClassLoader加载的了，那我就给你替换掉，替换成当前线程的线程上下文类加载器。这个类是在线程创建的时候，从父线程继承或者默认直接取ApplicationClassLoader。换成<br>ApplicationClassLoader了，那我们项目依赖的驱动包是不是也就很轻松的可以扫描并加载了？当然，如果你本身调用者所属的类加载器就是Application Class Loader那都不用去线程中取了。</p>
+<pre><code>那为什么说这是对双亲委托机制的破坏呢？因为我们一向是从下至上的请求加载，而这次BootStrapClassLoader范围内的基础类直接请求了很底端的ApplicationClassLoader去加载，逆向打通了加载的顺序。
+
+这里只是用JDBC举了个例子，各位可以自己想想，是不是其他由Java提供规范，而不同厂商提供实现的技术也会是这种实现的原理呢？
+</code></pre>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://conjurermaple.github.io/2019/04/23/说说tomcat与类加载器/" title="说说tomcat与类加载器" target="_blank" rel="external">https://conjurermaple.github.io/2019/04/23/说说tomcat与类加载器/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://conjurermaple.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://conjurermaple.github.io/" target="_blank"><span class="text-dark">maple</span><small class="ml-1x">Java &amp; Other</small></a></h3>
+        <div>拼命努力的人，生活不会辜负你。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/04/23/localhost与127-0-0-1的区别/" title="localhost与127.0.0.1的区别"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/04/23/堆栈的简单理解/" title="堆栈的简单理解"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Blog by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '383f19b856237c034a38',
+    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
+    repo: 'conjurermaple.github.io',
+    owner: 'ConjurerMaple',
+    admin: ['ConjurerMaple'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+
+
+
+
+</body>
+</html>

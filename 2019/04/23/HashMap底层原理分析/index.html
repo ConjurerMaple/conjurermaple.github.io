@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>HashMap底层原理分析 | maple</title>
+  <meta name="description" content="定义Map集合即key-value的集合，HashMap为Map接口的实现，表示无序，散列的key-value集合。HashMap是我们使用非常多的Collection，它是基于哈希表的 Map 接口的实现，以key-value的形式存在。在HashMap中，key-value总是会当做一个整体来处理，系统会根据hash算法来来计算key-value的存储位置，可以通过key快速地存、取value">
+<meta name="keywords" content="其他">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashMap底层原理分析">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/04/23/HashMap底层原理分析/index.html">
+<meta property="og:site_name" content="maple博客">
+<meta property="og:description" content="定义Map集合即key-value的集合，HashMap为Map接口的实现，表示无序，散列的key-value集合。HashMap是我们使用非常多的Collection，它是基于哈希表的 Map 接口的实现，以key-value的形式存在。在HashMap中，key-value总是会当做一个整体来处理，系统会根据hash算法来来计算key-value的存储位置，可以通过key快速地存、取value">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-23T11:51:00.458Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HashMap底层原理分析">
+<meta name="twitter:description" content="定义Map集合即key-value的集合，HashMap为Map接口的实现，表示无序，散列的key-value集合。HashMap是我们使用非常多的Collection，它是基于哈希表的 Map 接口的实现，以key-value的形式存在。在HashMap中，key-value总是会当做一个整体来处理，系统会根据hash算法来来计算key-value的存储位置，可以通过key快速地存、取value">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/04/23/HashMap底层原理分析/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://conjurermaple.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">maple</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java &amp; Other</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Chengdu, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架篇/">框架篇</a><span class="category-list-count">37</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/错误积累/">错误积累</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/其他/">其他</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架篇/">框架篇</a><span class="tag-list-count">37</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误积累/">错误积累</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 13.25px;">JAVA</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/javascript/" style="font-size: 13.25px;">javascript</a> <a href="/tags/其他/" style="font-size: 13.5px;">其他</a> <a href="/tags/前端/" style="font-size: 13.75px;">前端</a> <a href="/tags/框架篇/" style="font-size: 14px;">框架篇</a> <a href="/tags/错误积累/" style="font-size: 13.75px;">错误积累</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/23/HashMap底层原理分析/" class="title">HashMap底层原理分析</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-23T11:44:36.000Z" itemprop="datePublished">2019-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/23/localhost与127-0-0-1的区别/" class="title">localhost与127.0.0.1的区别</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-23T11:29:09.000Z" itemprop="datePublished">2019-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/23/说说tomcat与类加载器/" class="title">说说tomcat与类加载器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-23T11:06:21.000Z" itemprop="datePublished">2019-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/23/堆栈的简单理解/" class="title">堆栈的简单理解</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-23T11:04:15.000Z" itemprop="datePublished">2019-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/22/centos下mysql启动失败/" class="title">centos下mysql启动失败（MySQL Daemon failed to start）</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-22T12:36:04.000Z" itemprop="datePublished">2019-04-22</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#定义"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HashMap存储示意图"><span class="toc-number">2.</span> <span class="toc-text">HashMap存储示意图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#底层代码实现"><span class="toc-number">3.</span> <span class="toc-text">底层代码实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Put方法"><span class="toc-number">4.</span> <span class="toc-text">Put方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Get方法"><span class="toc-number">5.</span> <span class="toc-text">Get方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-HashMap底层原理分析" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HashMap底层原理分析
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/04/23/HashMap底层原理分析/" class="article-date">
+	  <time datetime="2019-04-23T11:44:36.000Z" itemprop="datePublished">2019-04-23</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/其他/">其他</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/04/23/HashMap底层原理分析/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>Map集合即key-value的集合，HashMap为Map接口的实现，表示无序，散列的key-value集合。<br>HashMap是我们使用非常多的Collection，它是基于哈希表的 Map 接口的实现，以key-value的形式存在。在HashMap中，key-value总是会当做一个整体来处理，系统会根据hash算法来来计算key-value的存储位置，可以通过key快速地存、取value。</p>
+<h1 id="HashMap存储示意图"><a href="#HashMap存储示意图" class="headerlink" title="HashMap存储示意图"></a>HashMap存储示意图</h1><p>Jdk1.8中，HashMap底层基于数组、链表、红黑树实现。在HashMap中，初始化一个数组长度为16的数组。在创建一个map对象后调用put方法，传入key值及value值，此时将key值进行hash运算得到的hash值作为该entry键值对在数组中的索引位置。此时确定该位置后，首先去判断该位置是否为null，如果为null，则将entry存储在该位置，如果不为null，此时将entry以链表的方式存储在数组中。当链表长度大于8时，将链表结构转为红黑树继续存储entry。</p>
+<h1 id="底层代码实现"><a href="#底层代码实现" class="headerlink" title="底层代码实现"></a>底层代码实现</h1><p>HashMap提供了4个构造函数：<br>      HashMap()：构造一个具有默认初始容量 (16) 和默认加载因子 (0.75) 的空 HashMap。<br>      HashMap(int initialCapacity)：构造一个带指定初始容量和默认加载因子 (0.75) 的空 HashMap。<br>      HashMap(int initialCapacity, float loadFactor)：构造一个带指定初始容量和加载因子的空 HashMap。<br>      HashMap(Map&lt;? extends K, ? extends V&gt; m)：传入一个map以构造一个新的map，使用默认加载因子（0.75）<br> 在这里提到了两个参数：初始容量，加载因子。这两个参数是影响HashMap性能的重要参数，其中容量表示哈希表中桶的数量，初始容量是创建哈希表时的容量，加载因子是哈希表在其容量自动增加之前可以达到多满的一种尺度，它衡量的是一个散列表的空间的使用程度，负载因子越大表示散列表的装填程度越高，反之愈小。对于使用链表法的散列表来说，查找一个元素的平均时间是O(1+a)，因此如果负载因子越大，对空间的利用更充分，然而后果是查找效率的降低；如果负载因子太小，那么散列表的数据将过于稀疏，对空间造成严重浪费。系统默认负载因子为0.75，一般情况下我们是无需修改的。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt; implements Map&lt;K,V&gt;, Cloneable, Serializable &#123;</span><br><span class="line">    // 序列号</span><br><span class="line">    private static final long serialVersionUID = 362498820763181265L;   </span><br><span class="line">    // 默认的初始容量是16</span><br><span class="line">    static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4;   </span><br><span class="line">    // 最大容量</span><br><span class="line">    static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;</span><br><span class="line">    // 默认的负载因子</span><br><span class="line">    static final float DEFAULT_LOAD_FACTOR = 0.75f;</span><br><span class="line">    // 当桶(bucket)上的结点数大于这个值时会转成红黑树</span><br><span class="line">    static final int TREEIFY_THRESHOLD = 8; (jdk1.8以后才有)</span><br><span class="line">    // 当桶(bucket)上的结点数小于这个值时树转链表</span><br><span class="line">    static final int UNTREEIFY_THRESHOLD = 6;</span><br><span class="line">    // 桶中结构转化为红黑树对应的table的最小大小</span><br><span class="line">    static final int MIN_TREEIFY_CAPACITY = 64;</span><br><span class="line">    // 存储元素的数组，总是2的幂次倍</span><br><span class="line">    transient Node&lt;k,v&gt;[] table;</span><br><span class="line">    // 存放具体元素的集</span><br><span class="line">    transient Set&lt;map.entry&lt;k,v&gt;&gt; entrySet;</span><br><span class="line">    // 存放元素的个数，注意这个不等于数组的长度。</span><br><span class="line">    transient int size;</span><br><span class="line">    // 每次扩容和更改map结构的计数器</span><br><span class="line">    transient int modCount;   </span><br><span class="line">    // 临界值 当实际大小(容量*填充因子)超过临界值时，会进行扩容</span><br><span class="line">    int threshold;</span><br><span class="line">    // 负载因子</span><br><span class="line">    final float loadFactor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 在类中定义的全局变量中<br>   数组默认初始化的容量为2的4次方，最大容量为2的30次方，都必须为2的幂次；<br>负载因子为0.75，以此来作为判断是否需要进行数组是否需要扩容的重要依据。在创建map对象时，如果没有指定初始容量大小以及负载因子，则使用默认的全局变量，其中负载因子不能大于1，否则就没有了意义。<br>   TREEIFY_THRESHOLD该参数作为链表是否转化为红黑树的依据，在存储entry键值对的过程中,如果链表的长度过长，会导致在取值的过程中，遍历链表的深度过深，浪费性能，因此，hashmap底层判断链表长度是否大于8，大于8后将链表转化为红黑树，而当红黑树节点小于6时，则转化为链表。</p>
+<h1 id="Put方法"><a href="#Put方法" class="headerlink" title="Put方法"></a>Put方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">  public V put(K key, V value) &#123;  </span><br><span class="line">        return putVal(hash(key), key, value, false, true);  </span><br><span class="line">    &#125;  </span><br><span class="line">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line">                   boolean evict) &#123;</span><br><span class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</span><br><span class="line">                //检测table是否为空，如果为空，则使用扩容函数进行初始化</span><br><span class="line">        if ((tab = table) == null || (n = tab.length) == 0)</span><br><span class="line">            n = (tab = resize()).length;</span><br><span class="line">                //如果通过hash值取模得到的桶为空，则直接把新生成的节点放入该桶</span><br><span class="line">        if ((p = tab[i = (n - 1) &amp; hash]) == null)</span><br><span class="line">            tab = newNode(hash, key, value, null);</span><br><span class="line">        else &#123;//以下为该桶不为空的逻辑</span><br><span class="line">            Node&lt;K,V&gt; e; K k;</span><br><span class="line">                        //判断桶的第一个元素的key值是否相同（hash值相同，且能equals）</span><br><span class="line">                        //如果相同，则返回当前元素（函数末尾进行统一处理）</span><br><span class="line">            if (p.hash == hash &amp;&amp;</span><br><span class="line">                ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                e = p;</span><br><span class="line">            else if (p instanceof TreeNode)//桶元素采用的是红黑树结构</span><br><span class="line">                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">            else &#123;//桶元素采用的是链表结构</span><br><span class="line">                for (int binCount = 0; ; ++binCount) &#123;</span><br><span class="line">                                        //如果遍历到了链表末端，则直接在链表末端插入新元素</span><br><span class="line">                    if ((e = p.next) == null) &#123;</span><br><span class="line">                        p.next = newNode(hash, key, value, null);</span><br><span class="line">                                                //插入之后，检查是否达到了转成红黑树结构的标准</span><br><span class="line">                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</span><br><span class="line">                            treeifyBin(tab, hash);</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                                        //如果在遍历过程中，发现了key值相同，则返回当前元素（函数末尾进行统一处理）</span><br><span class="line">                    if (e.hash == hash &amp;&amp;</span><br><span class="line">                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                        break;</span><br><span class="line">                    p = e;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">                        //处理相同元素的情况</span><br><span class="line">            if (e != null) &#123; // existing mapping for key</span><br><span class="line">                V oldValue = e.value;</span><br><span class="line">                                //如果onlyIfAbsent为ture，则在oldValue为空时才替换</span><br><span class="line">                                //否则直接替换</span><br><span class="line">                if (!onlyIfAbsent || oldValue == null)</span><br><span class="line">                    e.value = value;</span><br><span class="line">                afterNodeAccess(e);</span><br><span class="line">                return oldValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ++modCount;//修改次数+1</span><br><span class="line">                //map的size加1，然后判断是否达到了threshold，否则进行扩容</span><br><span class="line">                //threshold由Node[] table的长度及loadFactor控制</span><br><span class="line">        if (++size &gt; threshold)</span><br><span class="line">            resize();</span><br><span class="line">                //执行回调函数</span><br><span class="line">        afterNodeInsertion(evict);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>putVal方法的主要逻辑是这样的：</p>
+<ul>
+<li>1、如果数组还没有初始化（数组长度是0），则先初始化</li>
+<li>2、通过hash方法计算key的hash值，进而计算得到应该放置到数组的位置</li>
+<li>3、如果该位置为空，则直接放置此处</li>
+<li>4、如果该位置不为空，而且元素是红黑树，则插入到其中</li>
+<li>5、如果是链表，则遍历链表，如果找到相等的元素则替换，否则插入到链表尾部</li>
+<li>6、如果链表的长度大于或等于8，则将链表转成红黑树</li>
+</ul>
+</blockquote>
+<h1 id="Get方法"><a href="#Get方法" class="headerlink" title="Get方法"></a>Get方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public V get(Object key) &#123;</span><br><span class="line">        Node&lt;K,V&gt; e;</span><br><span class="line">        return (e = getNode(hash(key), key)) == null ? null : e.value;</span><br><span class="line">&#125;</span><br><span class="line">final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</span><br><span class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</span><br><span class="line">                //如果table不为空，则再进行查询操作</span><br><span class="line">        if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;</span><br><span class="line">            (first = tab[(n - 1) &amp; hash]) != null) &#123;</span><br><span class="line">                        //先检查第一个元素是否key相同</span><br><span class="line">            if (first.hash == hash &amp;&amp; // always check first node</span><br><span class="line">                ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                return first;</span><br><span class="line">            if ((e = first.next) != null) &#123;</span><br><span class="line">                                //如果为红黑树结构，则走红黑树的查询逻辑</span><br><span class="line">                if (first instanceof TreeNode)</span><br><span class="line">                    return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</span><br><span class="line">                do &#123;//否则遍历链表</span><br><span class="line">                    if (e.hash == hash &amp;&amp;</span><br><span class="line">                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                        return e;</span><br><span class="line">                &#125; while ((e = e.next) != null);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>getVal方法执行逻辑如下：<br>1.判断表是否为空或者待查找的桶不为空<br>2.首先检查待查找的桶的第一个元素是否是要找的元素，如果是直接返回<br>3.桶内红黑树，则调用getTreeNode()查找红黑树<br>4.桶内是链表，遍历链表寻找节点</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在hashmap中，并没有在构造方法中初始化数组，而是在调用put方法时，初始化数组。此时判断数组长度是否为空，如果为空则使用默认的容量大小，初始化一个长度为16的数组；如果不为空则根据当前数组长度以及负载因子的乘积，确定是否需要对数组进行扩容，调用resize方法，扩容以后数组长度为当前数组长度的两倍，此时需要对链表和红黑树进行拆分，包括每一次新增，删除等操作都会红黑树结构进行重新的调整，因此时损耗行能的，这里不做过多的讲解。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://conjurermaple.github.io/2019/04/23/HashMap底层原理分析/" title="HashMap底层原理分析" target="_blank" rel="external">https://conjurermaple.github.io/2019/04/23/HashMap底层原理分析/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://conjurermaple.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://conjurermaple.github.io/" target="_blank"><span class="text-dark">maple</span><small class="ml-1x">Java &amp; Other</small></a></h3>
+        <div>拼命努力的人，生活不会辜负你。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2019/04/23/localhost与127-0-0-1的区别/" title="localhost与127.0.0.1的区别"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Blog by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '383f19b856237c034a38',
+    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
+    repo: 'conjurermaple.github.io',
+    owner: 'ConjurerMaple',
+    admin: ['ConjurerMaple'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+
+
+
+
+</body>
+</html>
