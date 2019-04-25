@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>redis学习总结 | maple</title>
+  <meta name="description" content="redis是什么Redis 是一个高性能的开源的、C语言写的Nosql（非关系型数据库），数据保存在内存中。Redis 是以key-value形式存储的Nosql，和传统的关系型数据库不一样。不一定遵循传统数据库的一些基本要求，比如说，不遵循sql标准，事务，表结构等等，非关系型数据库严格上不是一种数据库，应该是一种数据结构化存储方法的集合。 数据结构:数组,list,set,map,tree等等">
+<meta name="keywords" content="其他">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis学习总结">
+<meta property="og:url" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/index.html">
+<meta property="og:site_name" content="maple博客">
+<meta property="og:description" content="redis是什么Redis 是一个高性能的开源的、C语言写的Nosql（非关系型数据库），数据保存在内存中。Redis 是以key-value形式存储的Nosql，和传统的关系型数据库不一样。不一定遵循传统数据库的一些基本要求，比如说，不遵循sql标准，事务，表结构等等，非关系型数据库严格上不是一种数据库，应该是一种数据结构化存储方法的集合。 数据结构:数组,list,set,map,tree等等">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/1.bmp">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/2.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/3.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/4.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/5.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/6.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/7.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/8.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/9.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/10.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/11.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/12.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/13.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/14.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/15.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/16.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/17.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/18.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/19.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/20.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/21.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/22.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/23.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/24.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/25.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/26.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/27.png">
+<meta property="og:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/28.png">
+<meta property="og:updated_time" content="2019-04-25T11:56:53.201Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redis学习总结">
+<meta name="twitter:description" content="redis是什么Redis 是一个高性能的开源的、C语言写的Nosql（非关系型数据库），数据保存在内存中。Redis 是以key-value形式存储的Nosql，和传统的关系型数据库不一样。不一定遵循传统数据库的一些基本要求，比如说，不遵循sql标准，事务，表结构等等，非关系型数据库严格上不是一种数据库，应该是一种数据结构化存储方法的集合。 数据结构:数组,list,set,map,tree等等">
+<meta name="twitter:image" content="https://conjurermaple.github.io/2019/04/25/redis学习总结/1.bmp">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://conjurermaple.github.io/2019/04/25/redis学习总结/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="maple博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://conjurermaple.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">maple</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java &amp; Other</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Chengdu, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索">
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech>
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架篇/">框架篇</a><span class="category-list-count">37</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/错误积累/">错误积累</a><span class="category-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/其他/">其他</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架篇/">框架篇</a><span class="tag-list-count">37</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误积累/">错误积累</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JAVA/" style="font-size: 13.25px;">JAVA</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/javascript/" style="font-size: 13.25px;">javascript</a> <a href="/tags/其他/" style="font-size: 13.5px;">其他</a> <a href="/tags/前端/" style="font-size: 13.75px;">前端</a> <a href="/tags/框架篇/" style="font-size: 14px;">框架篇</a> <a href="/tags/错误积累/" style="font-size: 13.75px;">错误积累</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">38</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/25/redis学习总结/" class="title">redis学习总结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-25T10:51:17.000Z" itemprop="datePublished">2019-04-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/23/HashMap底层原理分析/" class="title">HashMap底层原理分析</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-23T11:44:36.000Z" itemprop="datePublished">2019-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/23/localhost与127-0-0-1的区别/" class="title">localhost与127.0.0.1的区别</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-23T11:29:09.000Z" itemprop="datePublished">2019-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/23/说说tomcat与类加载器/" class="title">说说tomcat与类加载器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-23T11:06:21.000Z" itemprop="datePublished">2019-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/其他/">其他</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/04/23/堆栈的简单理解/" class="title">堆栈的简单理解</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-04-23T11:04:15.000Z" itemprop="datePublished">2019-04-23</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#redis是什么"><span class="toc-number">1.</span> <span class="toc-text">redis是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#redis特点"><span class="toc-number">2.</span> <span class="toc-text">redis特点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mysql、memcached、redis比较"><span class="toc-number">3.</span> <span class="toc-text">mysql、memcached、redis比较</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#redis使用场景"><span class="toc-number">4.</span> <span class="toc-text">redis使用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#windows下的安装和使用"><span class="toc-number">5.</span> <span class="toc-text">windows下的安装和使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux下安装和使用"><span class="toc-number">6.</span> <span class="toc-text">Linux下安装和使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#redis操作"><span class="toc-number">7.</span> <span class="toc-text">redis操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#对value为string类型的常用操作"><span class="toc-number">7.1.</span> <span class="toc-text">对value为string类型的常用操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对key的常用操作"><span class="toc-number">7.2.</span> <span class="toc-text">对key的常用操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对list集合的常用操作"><span class="toc-number">7.3.</span> <span class="toc-text">对list集合的常用操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对set集合常用操作"><span class="toc-number">7.4.</span> <span class="toc-text">对set集合常用操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对hash类型的常用操作"><span class="toc-number">7.5.</span> <span class="toc-text">对hash类型的常用操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#redis事务（弱事务）"><span class="toc-number">8.</span> <span class="toc-text">redis事务（弱事务）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#订阅-发布"><span class="toc-number">9.</span> <span class="toc-text">订阅/发布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设置密码"><span class="toc-number">10.</span> <span class="toc-text">设置密码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#java操作redis"><span class="toc-number">11.</span> <span class="toc-text">java操作redis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#jedis简单操作"><span class="toc-number">11.1.</span> <span class="toc-text">jedis简单操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置连接池"><span class="toc-number">11.2.</span> <span class="toc-text">配置连接池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jedis数据结构操作"><span class="toc-number">11.3.</span> <span class="toc-text">jedis数据结构操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jedis排序"><span class="toc-number">11.4.</span> <span class="toc-text">Jedis排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jedis事务"><span class="toc-number">11.5.</span> <span class="toc-text">Jedis事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis持久化配置"><span class="toc-number">11.6.</span> <span class="toc-text">Redis持久化配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#淘汰策略"><span class="toc-number">11.7.</span> <span class="toc-text">淘汰策略</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-redis学习总结" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      redis学习总结
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/04/25/redis学习总结/" class="article-date">
+	  <time datetime="2019-04-25T10:51:17.000Z" itemprop="datePublished">2019-04-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/其他/">其他</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/04/25/redis学习总结/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="redis是什么"><a href="#redis是什么" class="headerlink" title="redis是什么"></a>redis是什么</h1><p>Redis 是一个高性能的开源的、C语言写的Nosql（非关系型数据库），数据保存在内存中。<br>Redis 是以key-value形式存储的Nosql，和传统的关系型数据库不一样。不一定遵循传统数据库的一些基本要求，比如说，不遵循sql标准，事务，表结构等等，非关系型数据库严格上不是一种数据库，应该是一种数据结构化存储方法的集合。</p>
+<p>数据结构:数组,list,set,map,tree等等<br>redis给我们提供了一堆方法,调用特定方法就能把数据保存为特定数据结构.</p>
+<h1 id="redis特点"><a href="#redis特点" class="headerlink" title="redis特点"></a>redis特点</h1><p>1.数据保存在内存，存取速度快，并发能力强<br>2.它支持存储的value类型相对memcached更多，包括string(字符串)、list(链表)、set(集合)、 zset(sorted set –有序集合)和hash（哈希类型）。<br>3.redis的出现，很大程度补偿了memcached这类key/value存储的不足，在部分场合可以对关系数据库（如MySQL）起到很好的补充作用。<br>4.它提供了Java，C/C++，C#，PHP，JavaScript等客户端，使用很方便。<br>5.Redis支持集群（主从同步）。数据可以主服务器向任意数量从的从服务器上同步，从服务器可以是关联其他从服务器的主服务器。<br>6.支持持久化，可以将数据保存在硬盘的文件中<br>7.支持订阅/发布（subscribe/publish）功能 QQ群</p>
+<h1 id="mysql、memcached、redis比较"><a href="#mysql、memcached、redis比较" class="headerlink" title="mysql、memcached、redis比较"></a>mysql、memcached、redis比较</h1><table>
+<thead>
+<tr>
+<th></th>
+<th>mysql</th>
+<th>redis</th>
+<th>memcached</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>类型</td>
+<td>关系型</td>
+<td>非关系型</td>
+<td>非关系型</td>
+</tr>
+<tr>
+<td>存储位置</td>
+<td>磁盘</td>
+<td>磁盘和内存</td>
+<td>内存</td>
+</tr>
+<tr>
+<td>存储过期</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>读写性能</td>
+<td>低</td>
+<td>非常高</td>
+<td>非常高</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>存储过期:存储数据时设置一个有效期,时间到了就没了<br>场景:订单,vip,短信验证码,游戏道具,优惠券,红包等等</p>
+</blockquote>
+<blockquote>
+<p>Memcached和Redis的相同点和不同点? </p>
+<ul>
+<li>相同点:<br>都是key-value类型Nosql,都存放数据到内存中,读写效率高,而且都支持存储过期.</li>
+<li>不同点:<br>redis相较于Memcached还支持持久化到磁盘,数据安全更高.<br>redis相较于Memcached支持value类型更多.</li>
+</ul>
+</blockquote>
+<h1 id="redis使用场景"><a href="#redis使用场景" class="headerlink" title="redis使用场景"></a>redis使用场景</h1><ul>
+<li>中央缓存</li>
+</ul>
+<p>经常查询数据，放到读速度很快的空间(内存)，以便下次访问减少时间。减轻压力，减少访问时间.而redis就是存放在内存中的。<br>Hibernte二级缓存,mybatis二级缓存,这些缓存默认都不支持在集群环境使用.redis中央缓存就OK.</p>
+<ul>
+<li>计数器应用</li>
+</ul>
+<p>网站通常需要统计注册用户数，网站总浏览次数等等<br>新浪微博转发数、点赞数</p>
+<ul>
+<li>实时防攻击系统</li>
+</ul>
+<p>暴力破解:使用工具不间断尝试各种密码进行登录。防：ip(账号)—&gt;num,到达5次以后自动锁定IP,30分钟后解锁</p>
+<p>解决方案：<br><br>&emsp; 1、存数据库</p>
+<p>&emsp; 2、static Map&lt;String,int&gt; longinFailNumMap;<br>  Map存储空间有限，大批量就不行，并且断电以后数据丢失。</p>
+<p>  问题:<br><br>    &emsp;  1、每次查询数据库,查询速度慢，多次写 内存<br><br>   &emsp; 2、断电会丢失数据,多个节点,不能共用   redis集群，容量可以无限大，可以共享数据、并且支持过期  </p>
+<ul>
+<li><p>排行榜<br><br>总积分榜，今日积分榜，周积分，月积分，季度积分</p>
+</li>
+<li><p>设定有效期的应用<br><br>&emsp;设定一个数据，到一定的时间失效。 自动解锁，购物券</p>
+<ul>
+<li><p>自动去重应用<br><br>因为set堆放的是一堆不重复值的集合。所以可以做全局去重的功能。为什么不用JVM自带的Set进行去重？因为我们的系统一般都是集群部署，使用JVM自带的Set，比较麻烦，难道为了一个做一个全局去重，再起一个公共服务，太麻烦了。</p>
+</li>
+<li><p>队列<br><br>构建队列系统 使用 list 可以构建队列系统，使用 sorted set 甚至可以构建有优先级的队列系统。<br>秒杀：可以把名额放到内存队列（redis）,内存就能处理高并发访问。</p>
+</li>
+</ul>
+</li>
+<li><p>消息订阅系统<br><br>Pub/Sub 构建实时消息系统 Redis 的 Pub/Sub 系统可以构建实时的消息系统，比如很多用 Pub/Sub 构建的实时聊天系统 的例子。<br>比如QQ群消息</p>
+</li>
+</ul>
+<h1 id="windows下的安装和使用"><a href="#windows下的安装和使用" class="headerlink" title="windows下的安装和使用"></a>windows下的安装和使用</h1><p>直接在官网下载绿色版</p>
+<ul>
+<li><p>目录结构<br><br><br><img src="/2019/04/25/redis学习总结/1.bmp" alt="作者：maple"></p>
+</li>
+<li><p>启动redis服务<br><br>&emsp;1、直接双击redis-server.exe(这是不带配置文件启动)</p>
+<p>  &emsp; 2、redis-server.exe redis.conf（带配置文件启动）</p>
+</li>
+</ul>
+<h1 id="Linux下安装和使用"><a href="#Linux下安装和使用" class="headerlink" title="Linux下安装和使用"></a>Linux下安装和使用</h1><ul>
+<li>1下载redis源码<br>wget <a href="http://download.redis.io/releases/redis-3.0.6.tar.gz" target="_blank" rel="noopener">http://download.redis.io/releases/redis-3.0.6.tar.gz</a><br>或者使用ftp上传redis-3.0.6.tar.gz</li>
+<li>2安装redis<br><br>tar xf redis-3.0.6.tar.gz    //解压<br><br>cd redis-3.0.6<br>//不需要配置参数  不需要执行<br>./configure<br>make &amp;&amp; make install//编译&amp;&amp;安装</li>
+<li><p>3将redis设置为系统服务<br>cp (redis源码目录)utils/redis_init_script /etc/init.d/redis<br><br>vim /etc/init.d/redis //修改红框处的代码</p>
+</li>
+<li><p>4修改redis.conf配置文件<br>mkdir /etc/redis //创建/etc/redis目录<br><br>cp redis.conf /etc/redis/redis.conf <br><br>vim /etc/redis.conf<br><br>//将redis配置文件复制到redis<br><br>//设置为守护进程,以后台方式运行<br><br>使用service redis start命令启动redis服务.</p>
+</li>
+<li><p>5 将redis服务设置为开机启动<br><br>chkconfig –-add redis<br><br>chkconfig –level 35 redis on</p>
+</li>
+</ul>
+<h1 id="redis操作"><a href="#redis操作" class="headerlink" title="redis操作"></a>redis操作</h1><ul>
+<li>使用redis-cli客户端操作redis<br><br>redis是一个key-value的Nosql,我们能操作就只有String类型key以及各种类型value.但是一定要注意我们添加的一般都是字符串,只是会组织为特定数据结构.</li>
+</ul>
+<p>set(key ,map,set)==&gt;set(key ,1),set(key ,”2”)</p>
+<h2 id="对value为string类型的常用操作"><a href="#对value为string类型的常用操作" class="headerlink" title="对value为string类型的常用操作"></a>对value为string类型的常用操作</h2><p>set key value//将字符串值value关联到key<br><br>get key       //返回key关联的字符串值</p>
+<p><img src="/2019/04/25/redis学习总结/2.png" alt="作者：maple"></p>
+<p>mset //同时设置一个或多个 key-value 对<br><br>mget //返回所有(一个或多个)给定 key 的值</p>
+<p><img src="/2019/04/25/redis学习总结/3.png" alt="作者：maple"></p>
+<p>incr key //将 key 中储存的数字值增1(key不存在,则初始化为0,再加1)<br><br>decr key //将 key 中储存的数字值减1(key不存在,则初始化为0,再减1)<br><br>incrBy key num//自增多少<br><br>decrBy key num//自减多少<br></p>
+<p><img src="/2019/04/25/redis学习总结/4.png" alt="作者：maple"></p>
+<h2 id="对key的常用操作"><a href="#对key的常用操作" class="headerlink" title="对key的常用操作"></a>对key的常用操作</h2><p>keys *  //获取所有key列表<br><br>del key  //删除key<br><br>expire key xx //设置key的过期时间(xx秒后过期)<br><br>ttl key //查看key的过期时间<br></p>
+<p>select 0-15 选择库  默认16个数据库<br><br>flushall //清空整个redis服务器数据，所有的数据库全部清空<br><br>flushdb  //清除当前库，redis中默认有16个数据库，名称分别为0,1,2.。。15<br></p>
+<p><img src="/2019/04/25/redis学习总结/5.png" alt="作者：maple"></p>
+<h2 id="对list集合的常用操作"><a href="#对list集合的常用操作" class="headerlink" title="对list集合的常用操作"></a>对list集合的常用操作</h2><p>  redis怎么实现栈和队列?<br><br> 都用list,控制一边进同一边出就是栈,一边进另一边出就是队列.<br><br>list集合可以看成是一个左右排列的队列(列表)<br><br>lpush key value //将一个或多个值 value 插入到列表 key 的表头(最左边)<br><br>rpush key value //将一个或多个值 value 插入到列表 key 的表尾(最右边)</p>
+<p><img src="/2019/04/25/redis学习总结/6.png" alt="作者：maple"></p>
+<p>lpop key //移除并返回列表 key 的头(最左边)元素。<br><br>rpop key //移除并返回列表 key 的尾(最右边)元素。</p>
+<p><img src="/2019/04/25/redis学习总结/7.png" alt="作者：maple"></p>
+<p>lrange key start stop//返回列表 key 中指定区间内的元素，查询所有的stop为-1即可<br></p>
+<p>lrem key count value//根据count值移除列表key中与参数 value 相等的元素count &gt; 0 : 从表头开始向表尾搜索，移除与 value 相等的元素，数量为 count 。count &lt; 0 : 从表尾开始向表头搜索，移除与 value 相等的元素，数量为 count 的绝对值。count = 0 : 移除表中所有与 value 相等的值。</p>
+<p><img src="/2019/04/25/redis学习总结/8.png" alt="作者：maple"></p>
+<p>lindex key index //返回列表 key 中，下标为 index 的元素<br><br>ltrim key start stop //对一个列表进行修剪</p>
+<p><img src="/2019/04/25/redis学习总结/9.png" alt="作者：maple"></p>
+<h2 id="对set集合常用操作"><a href="#对set集合常用操作" class="headerlink" title="对set集合常用操作"></a>对set集合常用操作</h2><p>set集合是一个无序的不含重复值的队列<br></p>
+<p>sadd  key member //将一个或多个 member 元素加入到集合 key 当中，已经存在于集合的 member 元素将被忽略<br></p>
+<p>srem key member//移除集合 key 中的一个或多个 member 元素，不存在的 member 元素会被忽略<br>smembers key    //返回集合 key 中的所有成员。</p>
+<p><img src="/2019/04/25/redis学习总结/10.png" alt="作者：maple"></p>
+<h2 id="对hash类型的常用操作"><a href="#对hash类型的常用操作" class="headerlink" title="对hash类型的常用操作"></a>对hash类型的常用操作</h2><p>hash类型类似于php的数组<br></p>
+<p>hset key name value//添加一个name=&gt;value键值对到key这个hash类型<br><br>例如: HSET sit redis xx<br></p>
+<p>hget key name //获取hash类型的name键对应的值<br>例如:HGET sit redis<br></p>
+<p>hmset key name1 key1 name2 key2 //批量添加<br>name=&gt;value键值对到key这个hash类型<br><br>hmget key name1 name2//批量获取hash类型的键对应的值<br><br>hkeys //返回哈希表 key 中的所有键<br><br>hvals //返回哈希表 key 中的所有值<br><br>hgetall //返回哈希表 key 中，所有的键和值<br><br>将user:1(name:zhangsan,age:18,sex:nv)的信息保存在hash表.<br><br><img src="/2019/04/25/redis学习总结/11.png" alt="作者：maple"></p>
+<h1 id="redis事务（弱事务）"><a href="#redis事务（弱事务）" class="headerlink" title="redis事务（弱事务）"></a>redis事务（弱事务）</h1><p>multi  //标记一个事务块的开始。<br><br>exec   //执行所有事务块内的命令。</p>
+<p><img src="/2019/04/25/redis学习总结/12.png" alt="作者：maple"><br>discard //取消事务，放弃执行事务块内的所有命令。<br><br>Redis的事务在执行exec指令时,才批量执行操作,没有回滚操作</p>
+<h1 id="订阅-发布"><a href="#订阅-发布" class="headerlink" title="订阅/发布"></a>订阅/发布</h1><p>SUBSCRIBE channel [channel …] //订阅给定的一个或多个频道的信息。<br><br>PUBLISH channel message //将信息 message 发送到指定的频道 channel 。<br><br>新开一个客户端订阅tv频道</p>
+<p><img src="/2019/04/25/redis学习总结/13.png" alt="作者：maple"><br>发布nihao!消息到tv频道</p>
+<p><img src="/2019/04/25/redis学习总结/14.png" alt="作者：maple"></p>
+<p>订阅tv频道的客户端可以收到nihao!消息</p>
+<p><img src="/2019/04/25/redis学习总结/15.png" alt="作者：maple"></p>
+<h1 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h1><ul>
+<li>通过配置文件设置密码–长久设置<br><br>在配置文件redis.conf中增加一行代码<br><br>requirepass 123456</li>
+</ul>
+<p>将密码123456设置到配置文件中,redis启动时加载该文件,即可启用密码</p>
+<p>重新启动服务端<br><br>鉴权<br><br>AUTH 123456  //输入密码进行认证</p>
+<blockquote>
+<p>注意:启动要带配置文件，前面已经介绍过了</p>
+</blockquote>
+<h1 id="java操作redis"><a href="#java操作redis" class="headerlink" title="java操作redis"></a>java操作redis</h1><p> 原来mysql需要使用jdbc,现在需要redis的一个java客户端jedis。<br>jedis是客户端，而reids是服务器。使用jedis这个java客户端操作redis数据库。</p>
+<h2 id="jedis简单操作"><a href="#jedis简单操作" class="headerlink" title="jedis简单操作"></a>jedis简单操作</h2><ul>
+<li><p>导包<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.5.2&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.2&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试</p>
+</li>
+</ul>
+<p><img src="/2019/04/25/redis学习总结/16.png" alt="作者：maple"><br><img src="/2019/04/25/redis学习总结/17.png" alt="作者：maple"></p>
+<h2 id="配置连接池"><a href="#配置连接池" class="headerlink" title="配置连接池"></a>配置连接池</h2><p>通过jedis连接池，简单操作redis数据库</p>
+<p><img src="/2019/04/25/redis学习总结/18.png" alt="作者：maple"><br><img src="/2019/04/25/redis学习总结/19.png" alt="作者：maple"></p>
+<h2 id="jedis数据结构操作"><a href="#jedis数据结构操作" class="headerlink" title="jedis数据结构操作"></a>jedis数据结构操作</h2><ul>
+<li>先抽取一个工具类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span>  JedisUtil &#123;</span><br><span class="line">INSTANCE;</span><br><span class="line"><span class="comment">//连接池是单例....</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> JedisPool pool = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line"><span class="comment">//1 创建连接池配置对象</span></span><br><span class="line">JedisPoolConfig config = <span class="keyword">new</span> JedisPoolConfig();</span><br><span class="line"><span class="comment">//2 进行配置-四个配置</span></span><br><span class="line">config.setMaxIdle(<span class="number">2</span>);<span class="comment">//最小连接(空闲最大连接)</span></span><br><span class="line">config.setMaxTotal(<span class="number">10</span>);<span class="comment">//最大连接数</span></span><br><span class="line">config.setMaxWaitMillis(<span class="number">2</span>*<span class="number">1000</span>);<span class="comment">//最大等待时间</span></span><br><span class="line">config.setTestOnBorrow(<span class="keyword">true</span>);<span class="comment">//获取连接时测试连接是否畅通</span></span><br><span class="line">          <span class="comment">//3 通过配置对象创建连接池对象</span></span><br><span class="line">pool = <span class="keyword">new</span> JedisPool(config,<span class="string">"127.0.0.1"</span>,<span class="number">6379</span>,<span class="number">2</span>*<span class="number">1000</span>,<span class="string">"root"</span>);</span><br><span class="line">      &#125;</span><br><span class="line"><span class="comment">//获取连接</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Jedis <span class="title">getJedis</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">return</span> pool.getResource();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//释放连接</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">closeJedis</span><span class="params">(Jedis jedis)</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span> (jedis != <span class="keyword">null</span>) &#123;</span><br><span class="line">            jedis.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>key操作</li>
+</ul>
+<p><img src="/2019/04/25/redis学习总结/20.png" alt="作者：maple"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testJedisStringOper</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    Jedis jedis = JeditUtil.INSTANCE.getJedis();</span><br><span class="line">    <span class="comment">//清空当前数据库</span></span><br><span class="line">    jedis.flushDB();</span><br><span class="line">    System.out.println(<span class="string">"name这个key是否存在:"</span>+jedis.exists(<span class="string">"name"</span>));<span class="comment">//false</span></span><br><span class="line">    jedis.set(<span class="string">"name"</span>,<span class="string">"songsong"</span>);</span><br><span class="line">    System.out.println(<span class="string">"name的值:"</span>+jedis.get(<span class="string">"name"</span>));<span class="comment">//songsong</span></span><br><span class="line">    System.out.println(<span class="string">"所有的Key:"</span>+jedis.keys(<span class="string">"*"</span>));<span class="comment">//[name]</span></span><br><span class="line">    jedis.del(<span class="string">"name"</span>);</span><br><span class="line">    System.out.println(<span class="string">"所有的Key:"</span>+jedis.keys(<span class="string">"*"</span>));<span class="comment">//[]</span></span><br><span class="line"></span><br><span class="line">    JeditUtil.INSTANCE.closeJedis(jedis);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>String操作</li>
+</ul>
+<p><img src="/2019/04/25/redis学习总结/21.png" alt="作者：maple"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void testJedisString() throws Exception&#123;</span><br><span class="line">    Jedis jedis = JeditUtil.INSTANCE.getJedis();</span><br><span class="line">    //清空当前数据库</span><br><span class="line">    jedis.flushDB();</span><br><span class="line">    jedis.set(&quot;name&quot;,&quot;songsong&quot;);</span><br><span class="line">    System.out.println(&quot;name的值:&quot;+jedis.get(&quot;name&quot;));//songsong</span><br><span class="line">    jedis.append(&quot;name&quot;,&quot;123456&quot;);</span><br><span class="line">    System.out.println(&quot;追加之后的name的值:&quot;+jedis.get(&quot;name&quot;));//songsong123456</span><br><span class="line">    </span><br><span class="line">    JeditUtil.INSTANCE.closeJedis();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>List操作</li>
+</ul>
+<p><img src="/2019/04/25/redis学习总结/22.png" alt="作者：maple"></p>
+<ul>
+<li>Set操作</li>
+</ul>
+<p><img src="/2019/04/25/redis学习总结/23.png" alt="作者：maple"></p>
+<ul>
+<li>hash操作</li>
+</ul>
+<p><img src="/2019/04/25/redis学习总结/24.png" alt="作者：maple"></p>
+<h2 id="Jedis排序"><a href="#Jedis排序" class="headerlink" title="Jedis排序"></a>Jedis排序</h2><p><img src="/2019/04/25/redis学习总结/25.png" alt="作者：maple"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testJedisList</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    Jedis jedis = JeditUtil.INSTANCE.getJedis();</span><br><span class="line">    <span class="comment">//清空当前数据库</span></span><br><span class="line">    jedis.flushDB();</span><br><span class="line">    jedis.lpush(<span class="string">"nums"</span>,<span class="string">"12"</span>,<span class="string">"14"</span>,<span class="string">"6"</span>,<span class="string">"9"</span>,<span class="string">"10"</span>,<span class="string">"13"</span>);</span><br><span class="line">    System.out.println(<span class="string">"nums原始的位置:"</span>+jedis.lrange(<span class="string">"nums"</span>,<span class="number">0</span>,-<span class="number">1</span>));</span><br><span class="line">    System.out.println(<span class="string">"nums排序之后的值 升序:"</span>+jedis.sort(<span class="string">"nums"</span>));</span><br><span class="line"></span><br><span class="line">    SortingParams sortingParams = <span class="keyword">new</span> SortingParams();</span><br><span class="line">    sortingParams.desc();</span><br><span class="line">    System.out.println(<span class="string">"nums排序之后的值:"</span>+jedis.sort(<span class="string">"nums"</span>,sortingParams));</span><br><span class="line"></span><br><span class="line">    jedis.lpush(<span class="string">"letters"</span>,<span class="string">"a"</span>,<span class="string">"d"</span>,<span class="string">"f"</span>,<span class="string">"c"</span>,<span class="string">"k"</span>,<span class="string">"e"</span>);</span><br><span class="line">    SortingParams sortingParams1 = <span class="keyword">new</span> SortingParams();</span><br><span class="line">    sortingParams1.alpha();</span><br><span class="line">    System.out.println(<span class="string">"字母排序:"</span>+jedis.sort(<span class="string">"letters"</span>,sortingParams1));</span><br><span class="line"></span><br><span class="line">    JeditUtil.INSTANCE.closeJedis(jedis);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Jedis事务"><a href="#Jedis事务" class="headerlink" title="Jedis事务"></a>Jedis事务</h2><p><img src="/2019/04/25/redis学习总结/26.png" alt="作者：maple"><br><img src="/2019/04/25/redis学习总结/27.png" alt="作者：maple"></p>
+<h2 id="Redis持久化配置"><a href="#Redis持久化配置" class="headerlink" title="Redis持久化配置"></a>Redis持久化配置</h2><p><img src="/2019/04/25/redis学习总结/28.png" alt="作者：maple"></p>
+<p>Redis 提供了两种不同级别的持久化方式：RDB和AOF,可以通过修改redis.conf来进行配置.</p>
+<ul>
+<li><p>RDB模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RDB 持久化可以在指定的时间间隔内生成数据集的时间点快照,默认开启该模式.</span><br><span class="line">如何关闭 rdb 模式:</span><br><span class="line">save &quot;&quot;</span><br><span class="line"># save 900 1        //至少在900秒的时间段内至少有一次改变存储同步一次</span><br><span class="line"># save xxx</span><br><span class="line"># save 60 10000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AOF追加模式</p>
+</li>
+</ul>
+<p>AOF 持久化记录服务器执行的所有写操作命令，并在服务器启动时，通过重新执行这些命令来还原数据集,默认关闭该模式。<br></p>
+<p>如何开启aof模式:</p>
+<p>appendonly yes         //yes 开启,no 关闭</p>
+<p> appendfsync always //每次有新命令时就执行一次fsync </p>
+<p>这里我们启用 everysec</p>
+<p>appendfsync everysec //每秒 fsync 一次</p>
+<p> appendfsync no      //从不fsync(交给操作系统来处理,可能很久才执行一次fsync)</p>
+<p>如果满足保存策略，就会把内存的数据保存到rdb数据文件，还来不及保存那部分数据存放到更新日志中。掉点重新加载时，把两个数据做一个并集。</p>
+<h2 id="淘汰策略"><a href="#淘汰策略" class="headerlink" title="淘汰策略"></a>淘汰策略</h2><ul>
+<li>为什么要淘汰数据</li>
+</ul>
+<p>淘汰一些数据，达到redis数据都是有效的,确保内容优化。选择合适的淘汰策略进行淘汰</p>
+<ul>
+<li>怎么淘汰</li>
+</ul>
+<p>淘汰一些数据，达到redis数据都是有效的。选择合适的淘汰策略进行淘汰。<br></p>
+<p>volatile-lru：从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用的数据淘汰<br></p>
+<p>volatile-ttl：从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰<br></p>
+<p>volatile-random：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰<br></p>
+<p>allkeys-lru：从数据集（server.db[i].dict）中挑选最近最少使用的数据淘汰<br></p>
+<p>allkeys-random：从数据集（server.db[i].dict）中任意选择数据淘汰<br></p>
+<p>no-enviction（驱逐）：禁止驱逐数据<br></p>
+<p>redis 确定驱逐某个键值对后，会删除这个数据并，并将这个数据变更消息发布到本地（AOF 持久化）和从机（主从连接）。</p>
+<p>当redis存放的数据到达配置的最大内容后,会按照配置淘汰策略进行淘汰.</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://conjurermaple.github.io/2019/04/25/redis学习总结/" title="redis学习总结" target="_blank" rel="external">https://conjurermaple.github.io/2019/04/25/redis学习总结/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://conjurermaple.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://conjurermaple.github.io/" target="_blank"><span class="text-dark">maple</span><small class="ml-1x">Java &amp; Other</small></a></h3>
+        <div>拼命努力的人，生活不会辜负你。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2019/04/23/HashMap底层原理分析/" title="HashMap底层原理分析"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Weibo" data-toggle="tooltip" data-placement="top"><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Twitter" data-toggle="tooltip" data-placement="top"><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://conjurermaple.github.io/" target="_blank" title="Behance" data-toggle="tooltip" data-placement="top"><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Blog by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '383f19b856237c034a38',
+    clientSecret: '3c5af0c14dc49f28b8fa01e36028f68d30b0ab31',
+    repo: 'conjurermaple.github.io',
+    owner: 'ConjurerMaple',
+    admin: ['ConjurerMaple'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+
+
+
+
+</body>
+</html>
